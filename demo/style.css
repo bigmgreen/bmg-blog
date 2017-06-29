@@ -1,7 +1,11 @@
 .hello {
     font-size: 20px;
+    position: relative;
+    color: #000;
+    float: right;
 }
 
 body {
     background-image: url(logo.jpg);
+    background-repeat: no-repeat;
 }

@@ -5,7 +5,7 @@ import meImg from './user.jpg';
 function component () {
     var el =  document.createElement('div');
 
-    el.innerHTML = _.join(['hello', 'webpack'], ' ');
+    el.innerHTML = _.join(['hello', 'webpack', 'watch U', 'webpack-dev-server running', 'hot'], ' ');
     el.classList.add('hello');
 
     var img = new Image();
