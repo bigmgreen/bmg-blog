@@ -4,19 +4,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ROOT_PATH = path.resolve(__dirname);
 const C_PATH = path.resolve(ROOT_PATH, 'components');
-const LIB_PATH = path.resolve(C_PATH, 'lib');
+const NODE_MODULES_PATH = path.resolve(ROOT_PATH, 'node_modules');
 const BUILD_PATH = path.resolve(C_PATH, 'dist');
 
 module.exports = {
     entry: {
-        button: path.resolve(C_PATH, LIB_PATH, 'button/button.jsx'),
         example: path.resolve(C_PATH, 'example.jsx')
     },
     output: {
         path: BUILD_PATH,
-        filename: '[name][hash:5].js'
+        filename: '[name].[chunkhash:3].js'
     },
     resolve: {
+        modules: [NODE_MODULES_PATH],
         extensions: ['.js', '.jsx']
     },
     module: {
@@ -42,29 +42,15 @@ module.exports = {
             }
         ]
     },
-    externals: {
-        'react': 'window.React',
-        'react-dom': 'window.ReactDOM'
-    },
     devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
             title: '组件展示列表',
-            filename: 'example.html',
-            template: path.resolve(C_PATH, 'example.html'),
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                removeScriptTypeAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                removeAttributeQuotes: true
-            }
+            filename: 'example.html'
         })
     ],
     devServer: {
-        contentBase: [path.join(BUILD_PATH, "dist"), path.resolve(ROOT_PATH, 'node_modules')],
-        open: true,
-        hot: true
+        contentBase: BUILD_PATH,
+        open: true
     }
 };

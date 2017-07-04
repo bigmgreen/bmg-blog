@@ -6,7 +6,8 @@
   "scripts": {
     "b": "webpack --config --progress webpack.config.js",
     "s": "webpack-dev-server --open",
-    "cs": "webpack-dev-server --config webpack.components.js"
+    "cs": "webpack-dev-server --config webpack.components.js",
+    "cs_b": "webpack --config webpack.components.js"
   },
   "author": "",
   "license": "ISC",
