@@ -4,40 +4,75 @@ import React, {Component} from 'react';
 export default class Input extends Component {
     constructor(props) {
         super(props);
-        this.wrapClassName = props.wrapClassName;
-        this.inputClassName = props.inputClassName;
-        this.errorClassName = props.errorClassName;
-
-        this.handleInput = this.handleInput.bind(this);
-
+        this._handleInput = this._handleInput.bind(this);
         this.state = {
-            value:''
+            value: ''
         }
     }
 
-    handleInput(e, pattern) {
-
-        let value = e.target.value;
-        let reg = new RegExp(pattern);
-
-        if (reg.test(value) === false) {
-            value = value.substring(0, value.length - 1);
-        }
-        value = value.replace(/[\u4e00-\u9fa5]/g,'');
-
+    _handleInput(e, pattern, chineseFilter) {
+        let value = this._getValue(e.target.value, this._getRegExp(pattern), chineseFilter);
         this.setState({
             value: value
         });
     }
 
+    _getValue(value, reg, zh) {
+        console.log(reg)
+        if (reg && (reg.test(value) === false)) {
+            value = value.substring(0, value.length - 1);
+        }
+
+        if ((typeof zh === 'undefined') || zh) {
+            value = value.replace(/[\u4e00-\u9fa5]/g, '');
+        }
+
+        return value;
+    }
+
+    _getRegExp(reg) {
+        if (reg instanceof RegExp) {
+            return reg;
+        } else if (typeof reg === 'String') {
+            return new RegExp(reg);
+        }
+    }
+
     render() {
         return (
-            <div className={this.wrapClassName}>
-                <input className={this.inputClassName}
+            <div className={this.props.wrapClassName}>
+                <input className={this.props.inputClassName}
                        value={this.state.value}
-                       onInput={e=>this.handleInput(e, this.props.pattern)}/>
-                <span className={this.errorClassName}/>
+                       onInput={e=>this._handleInput(e, this.props.pattern, this.props.chineseFilter)}
+                       maxLength={this.props.maxLength}
+                />
+                <span className={this.props.errorClassName}/>
             </div>
+        );
+    }
+}
+
+export class NumberInput extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+
+        let reg = null;
+        if (this.props.numberType === 'float') {
+            reg = new RegExp('^\\d+\\.?(\\d{1,' + (this.props.decimalPlaces || 2) + '})?$');
+        } else {
+            reg = /^(0|[1-9]\d*)$/;
+        }
+
+        return (
+            <Input
+                wrapClassName={this.props.wrapClassName}
+                inputClassName={this.props.inputClassName}
+                errorClassName={this.props.errorClassName}
+                pattern={reg}
+            />
         );
     }
 }

@@ -50,6 +50,7 @@ module.exports = {
         })
     ],
     devServer: {
+        inline:true,
         contentBase: BUILD_PATH,
         open: true
     }

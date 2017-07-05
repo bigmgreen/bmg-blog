@@ -1,24 +1,66 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Button from './lib/button/button';
-import Input from './lib/input/input';
+import Input,{NumberInput} from './lib/input/input';
 
 const App = () => {
     return (
         <div>
             {/*  其他组件依次向下罗列   */}
-            <Button
-                type="submit"
-                onClick={()=>{alert('你点击了按钮~')}}
-                className="hello"
-                name="提交"
-            />
-            <Input
-                wrapClassName="wrap"
-                inputClassName="wrap-input"
-                errorClassName="wrap-error"
-                pattern="^\d+\.?(\d{1,2})?$"
-            />
+            <div>
+                <Button
+                    type="submit"
+                    onClick={()=>{alert('你点击了按钮~')}}
+                    className="hello"
+                    name="提交"
+                />
+                <p>点击事件绑定</p>
+            </div>
+            <div>
+                <Input
+                    wrapClassName="wrap"
+                    inputClassName="wrap-input"
+                    errorClassName="wrap-error"
+                    pattern={/^\d+$/g}
+                />
+                <p>不使用pattern属性</p>
+            </div>
+            <div>
+                <Input
+                    wrapClassName="wrap"
+                    inputClassName="wrap-input"
+                    errorClassName="wrap-error"
+                    pattern={/^\d+$/g}
+                />
+                <p>使用pattern属性</p>
+            </div>
+            <div>
+                <NumberInput
+                    wrapClassName="wrap"
+                    inputClassName="wrap-input"
+                    errorClassName="wrap-error"
+                />
+                <p>只能输入多个数字，或者一个0</p>
+            </div>
+            <div>
+                <NumberInput
+                    wrapClassName="wrap"
+                    inputClassName="wrap-input"
+                    errorClassName="wrap-error"
+                    numberType="float"
+                />
+                <p>可以输入小数，但没有指定小数位数decimalPlaces的值，默认为15</p>
+            </div>
+            <div>
+                <NumberInput
+                    wrapClassName="wrap"
+                    inputClassName="wrap-input"
+                    errorClassName="wrap-error"
+                    numberType="float"
+                    decimalPlaces="1"
+                />
+                <p>可以输入小数，指定小数位数decimalPlaces的值为大于等于1</p>
+            </div>
         </div>
     )
 };
