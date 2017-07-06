@@ -21,7 +21,15 @@ const App = () => {
                     wrapClassName="wrap"
                     inputClassName="wrap-input"
                     errorClassName="wrap-error"
-                    pattern={/^\d+$/g}
+                    maxLength="5"
+                />
+                <p>使用maxLength属性</p>
+            </div>
+            <div>
+                <Input
+                    wrapClassName="wrap"
+                    inputClassName="wrap-input"
+                    errorClassName="wrap-error"
                 />
                 <p>不使用pattern属性</p>
             </div>
@@ -32,7 +40,17 @@ const App = () => {
                     errorClassName="wrap-error"
                     pattern={/^\d+$/g}
                 />
-                <p>使用pattern属性</p>
+                <p>使用pattern属性（只能输入数字），不进行汉字过滤</p>
+            </div>
+            <div>
+                <Input
+                    wrapClassName="wrap"
+                    inputClassName="wrap-input"
+                    errorClassName="wrap-error"
+                    pattern={/^\d+$/g}
+                    isChineseFilter={true}
+                />
+                <p>使用pattern属性（只能输入数字），进行汉字过滤</p>
             </div>
             <div>
                 <NumberInput

@@ -13,7 +13,7 @@ module.exports = {
     },
     output: {
         path: BUILD_PATH,
-        filename: '[name].[chunkhash:3].js'
+        filename: '[name].js'
     },
     resolve: {
         modules: [NODE_MODULES_PATH],

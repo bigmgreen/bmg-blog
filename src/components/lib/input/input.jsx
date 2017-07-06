@@ -18,12 +18,11 @@ export default class Input extends Component {
     }
 
     _getValue(value, reg, zh) {
-        console.log(reg)
         if (reg && (reg.test(value) === false)) {
             value = value.substring(0, value.length - 1);
         }
 
-        if ((typeof zh === 'undefined') || zh) {
+        if (zh) {
             value = value.replace(/[\u4e00-\u9fa5]/g, '');
         }
 
@@ -33,7 +32,7 @@ export default class Input extends Component {
     _getRegExp(reg) {
         if (reg instanceof RegExp) {
             return reg;
-        } else if (typeof reg === 'String') {
+        } else if (typeof reg === 'string') {
             return new RegExp(reg);
         }
     }
@@ -43,7 +42,7 @@ export default class Input extends Component {
             <div className={this.props.wrapClassName}>
                 <input className={this.props.inputClassName}
                        value={this.state.value}
-                       onInput={e=>this._handleInput(e, this.props.pattern, this.props.chineseFilter)}
+                       onInput={e=>this._handleInput(e, this.props.pattern, this.props.isChineseFilter)}
                        maxLength={this.props.maxLength}
                 />
                 <span className={this.props.errorClassName}/>
@@ -73,6 +72,7 @@ export class NumberInput extends Component {
                 wrapClassName={this.props.wrapClassName}
                 inputClassName={this.props.inputClassName}
                 errorClassName={this.props.errorClassName}
+                isChineseFilter={true}
                 pattern={reg}
             />
         );
