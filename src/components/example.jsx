@@ -40,7 +40,7 @@ const App = () => {
                     inputClassName="wrap-input"
                     errorClassName="wrap-error"
                 />
-                <p>只能输入多个数字，或者一个0</p>
+                <p>整数：只能输入多个数字，或者一个0</p>
             </div>
             <div>
                 <NumberInput
@@ -49,7 +49,7 @@ const App = () => {
                     errorClassName="wrap-error"
                     numberType="float"
                 />
-                <p>可以输入小数，但没有指定小数位数decimalPlaces的值，默认为15</p>
+                <p>小数：可以输入小数，但没有指定小数位数decimalPlaces的值，默认为15</p>
             </div>
             <div>
                 <NumberInput
@@ -57,9 +57,9 @@ const App = () => {
                     inputClassName="wrap-input"
                     errorClassName="wrap-error"
                     numberType="float"
-                    decimalPlaces="1"
+                    decimalPlaces="2"
                 />
-                <p>可以输入小数，指定小数位数decimalPlaces的值为大于等于1</p>
+                <p>小数：可以输入小数，指定小数位数decimalPlaces的值为大于等于1</p>
             </div>
         </div>
     )

@@ -60,8 +60,10 @@ export class NumberInput extends Component {
     render() {
 
         let reg = null;
+        let index = null;
         if (this.props.numberType === 'float') {
-            reg = new RegExp('^\\d+\\.?(\\d{1,' + (this.props.decimalPlaces || 2) + '})?$');
+            index = [1, this.props.decimalPlaces || 15].join();
+            reg = new RegExp('^\\d+\\.?(\\d{' + index + '})?$');
         } else {
             reg = /^(0|[1-9]\d*)$/;
         }
