@@ -1,3 +1,4 @@
+import './example.css';
 import React from 'react';
 import {render} from 'react-dom';
 import Button from './lib/button/button';
@@ -5,9 +6,9 @@ import Input,{NumberInput} from './lib/input/input';
 
 const App = () => {
     return (
-        <div>
+        <ul>
             {/*  其他组件依次向下罗列   */}
-            <div>
+            <li>
                 <Button
                     type="submit"
                     onClick={()=>{alert('你点击了按钮~')}}
@@ -15,8 +16,8 @@ const App = () => {
                     name="提交"
                 />
                 <p>点击事件绑定</p>
-            </div>
-            <div>
+            </li>
+            <li>
                 <Input
                     wrapClassName="wrap"
                     inputClassName="wrap-input"
@@ -24,16 +25,16 @@ const App = () => {
                     maxLength="5"
                 />
                 <p>使用maxLength属性</p>
-            </div>
-            <div>
+            </li>
+            <li>
                 <Input
                     wrapClassName="wrap"
                     inputClassName="wrap-input"
                     errorClassName="wrap-error"
                 />
                 <p>不使用pattern属性</p>
-            </div>
-            <div>
+            </li>
+            <li>
                 <Input
                     wrapClassName="wrap"
                     inputClassName="wrap-input"
@@ -41,8 +42,8 @@ const App = () => {
                     pattern={/^\d+$/g}
                 />
                 <p>使用pattern属性（只能输入数字），不进行汉字过滤</p>
-            </div>
-            <div>
+            </li>
+            <li>
                 <Input
                     wrapClassName="wrap"
                     inputClassName="wrap-input"
@@ -51,16 +52,16 @@ const App = () => {
                     isChineseFilter={true}
                 />
                 <p>使用pattern属性（只能输入数字），进行汉字过滤</p>
-            </div>
-            <div>
+            </li>
+            <li>
                 <NumberInput
                     wrapClassName="wrap"
                     inputClassName="wrap-input"
                     errorClassName="wrap-error"
                 />
                 <p>整数：只能输入多个数字，或者一个0</p>
-            </div>
-            <div>
+            </li>
+            <li>
                 <NumberInput
                     wrapClassName="wrap"
                     inputClassName="wrap-input"
@@ -68,8 +69,8 @@ const App = () => {
                     numberType="float"
                 />
                 <p>小数：可以输入小数，但没有指定小数位数decimalPlaces的值，默认为15</p>
-            </div>
-            <div>
+            </li>
+            <li>
                 <NumberInput
                     wrapClassName="wrap"
                     inputClassName="wrap-input"
@@ -78,8 +79,8 @@ const App = () => {
                     decimalPlaces="2"
                 />
                 <p>小数：可以输入小数，指定小数位数decimalPlaces的值为大于等于1</p>
-            </div>
-        </div>
+            </li>
+        </ul>
     )
 };
 
@@ -87,9 +88,9 @@ const App = () => {
     "use strict";
 
     let body = doc.body;
-    let div = doc.createElement('div');
-    div.id = 'app';
-    body.insertBefore(div, body.firstChild);
+    let article = doc.createElement('article');
+    article.id = 'app';
+    body.insertBefore(article, body.firstChild);
 
 })(document);
 

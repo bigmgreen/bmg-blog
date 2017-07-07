@@ -17,7 +17,7 @@ export default class Input extends Component {
         });
     }
 
-    _getValue(value, reg, zh) {
+    static _getValue(value, reg, zh) {
         if (reg && (reg.test(value) === false)) {
             value = value.substring(0, value.length - 1);
         }
@@ -29,7 +29,7 @@ export default class Input extends Component {
         return value;
     }
 
-    _getRegExp(reg) {
+    static _getRegExp(reg) {
         if (reg instanceof RegExp) {
             return reg;
         } else if (typeof reg === 'string') {
