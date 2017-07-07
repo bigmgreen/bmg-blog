@@ -8,6 +8,8 @@ export default class Input extends Component {
         this.state = {
             value: ''
         }
+
+        this._oldValue = '';
     }
 
     _handleInput(e, pattern, chineseFilter) {
@@ -17,19 +19,25 @@ export default class Input extends Component {
         });
     }
 
-    static _getValue(value, reg, zh) {
+    _getValue(value, reg, zh) {
         if (reg && (reg.test(value) === false)) {
             value = value.substring(0, value.length - 1);
+
+            if (reg.test(value) === false) {
+                return this._oldValue;
+            }
         }
 
         if (zh) {
             value = value.replace(/[\u4e00-\u9fa5]/g, '');
         }
 
+        this._oldValue = value;
+
         return value;
     }
 
-    static _getRegExp(reg) {
+    _getRegExp(reg) {
         if (reg instanceof RegExp) {
             return reg;
         } else if (typeof reg === 'string') {
