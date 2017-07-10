@@ -20,7 +20,7 @@
 
 ## 写在最后~  这里只是提供思路，写法不需要认同，看着不爽就fork自己改吧！嘿嘿嘿~
 
-[查看使用示例](../../dist/example.js)
+[查看使用示例](https://github.com/bigmgreen/bmg-blog/blob/master/src/components/example.jsx)
 
 # Input组件
 #### String wrapClassName:div元素class（无默认值）
