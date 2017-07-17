@@ -3,9 +3,6 @@ html,body {
     margin: 0;
     font-family: "Microsoft YaHei UI";
     font-size: 16px;
-    background:-webkit-linear-gradient(left,#88cfc3,#329e8c 30%,#096e5d);
-    background:-moz-linear-gradient(left,#88cfc3,#329e8c 30%,#096e5d);
-    background:linear-gradient(left,#88cfc3,#329e8c 30%,#096e5d);
 }
 
 article {
@@ -19,6 +16,6 @@ li {
     list-style: none;
     padding: 20px 0;
     border-radius: 5px;
-    border: 1px solid #ff0000;
+    border: 1px solid #ccc;
     margin-top: 10px;
 }
