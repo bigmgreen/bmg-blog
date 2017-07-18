@@ -4,8 +4,8 @@
   "description": "bmg博客源码",
   "main": "app.js",
   "scripts": {
-    "b": "webpack --config --progress webpack.config.js",
-    "s": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "dev_b": "webpack --config webpack.dev.js",
     "cs": "webpack-dev-server --config webpack.components.js",
     "cs_b": "webpack --config webpack.components.js"
   },

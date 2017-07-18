@@ -1,0 +1,29 @@
+html,
+body {
+    font-size: 14px;
+    color: #333;
+    min-width: 1200px;
+    background-color: #f2f2f2;
+    line-height: 1;
+}
+
+html,
+body,
+p,
+div,
+input {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+input,
+button {
+    vertical-align: middle;
+    outline: none;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #666;
+    box-shadow: 0 0 0 1000px #F9F9F9 inset !important;
+}

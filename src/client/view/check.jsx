@@ -1,4 +1,3 @@
-import './check.css';
 import React,{Component} from 'react';
 
 export default class Check extends Component {
@@ -9,17 +8,14 @@ export default class Check extends Component {
     render () {
         var check = this.props;
         return (
-            <label
-                className={check.wrapClassName}
-                htmlFor={check.id}>
+            <label htmlFor={check.id}>
                 <input
-                    className={check.inputClassName}
                     type="checkbox"
                     id={check.id}
                     name={check.name || check.id}
                     value="on"
                 />
-                <span className={check.textClassName}>{check.text}</span>
+                <span>{check.text}</span>
             </label>
         );
     }

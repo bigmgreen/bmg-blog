@@ -1,0 +1,133 @@
+/*   面板  start   */
+.panel {
+    width: 500px;
+    margin: 15% auto 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    min-height: 400px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #eee;
+    position: relative;
+    overflow: hidden;
+}
+
+.panel-title {
+    font-size: 18px;
+    text-align: left;
+    line-height: 3;
+    padding-left: 20px;
+}
+
+.panel:after,
+.panel:before {
+    content: '';
+    background-color: #f2f2f2;
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    box-shadow: 0 0 10px #eee;
+    transition: transform .5s ease-out;
+}
+
+.panel:after {
+    bottom: -10px;
+    left: -20px;
+}
+
+.panel:before {
+    top: -10px;
+    right: -20px;
+}
+
+.panel:hover:after,
+.panel:hover:before {
+    transition: transform .5s ease-out;
+    transform: scale(1.5);
+}
+
+/*   面板  end   */
+
+/*   输入组件  start   */
+.input-wrap {
+    margin-top: 20px;
+    position: relative;
+    height: 68px;
+}
+
+.input-wrap .input {
+    font-size: 18px;
+    line-height: 3;
+    outline: none;
+    border: 0 none;
+    background-color: transparent;
+    width: 100%;
+    text-align: center;
+    transition: font-size .3s;
+}
+
+.input-wrap .input:focus {
+    font-size: 22px;
+    transition: font-size .3s;
+}
+
+.input-wrap:hover:after {
+    transform: scaleX(10) skewX(-70deg);
+    transition: transform .3s linear;
+}
+
+.input-wrap:after {
+    content: '';
+    display: block;
+    width: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    bottom: 0;
+    height: 1px;
+    transform: scaleX(50) skewX(-70deg);
+    transition: transform .3s ease-out;
+}
+
+/*   输入组件  end   */
+
+/*   记住七天  start   */
+.check-wrap {
+    display: block;
+    text-align: left;
+    padding-left: 125px;
+    line-height: 4;
+}
+
+.check-wrap .check {
+    /* TODO */
+}
+
+.check-wrap .text {
+    margin-left: 0.5em;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+/*   记住七天  end   */
+
+/*   按钮  start   */
+.btn {
+    width: 50%;
+    line-height: 2;
+    background-color: rgba(68, 224, 26, 0.7);
+    border: 0 none;
+    cursor: pointer;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 18px;
+    transition: opacity .5s ease;
+}
+
+.btn:hover {
+    opacity: .7;
+    transition: opacity .5s ease;
+}
+
+/*   按钮  end   */

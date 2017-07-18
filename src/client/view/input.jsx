@@ -1,4 +1,3 @@
-import './input.css';
 import React, {Component} from 'react';
 
 export default class Input extends Component {
@@ -49,11 +48,9 @@ export default class Input extends Component {
         return (
             <div className={this.props.wrapClassName}>
                 <input className={this.props.inputClassName}
-                       type={this.props.type || 'text'}
                        value={this.state.value}
-                       placeholder={this.props.placeholder}
                        onInput={e=>this._handleInput(e, this.props.pattern, this.props.isChineseFilter)}
-                       maxLength={this.props.maxLength || 20}
+                       maxLength={this.props.maxLength}
                 />
                 <span className={this.props.errorClassName}/>
             </div>
