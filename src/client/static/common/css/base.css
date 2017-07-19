@@ -1,7 +1,7 @@
 /*   面板  start   */
 .panel {
     width: 500px;
-    margin: 15% auto 0;
+    margin: 20px auto 0;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.5);
     min-height: 400px;
@@ -9,6 +9,7 @@
     box-shadow: 0 0 10px #eee;
     position: relative;
     overflow: hidden;
+    padding-bottom: 30px;
 }
 
 .panel-title {
@@ -60,17 +61,19 @@
 .input-wrap .input {
     font-size: 18px;
     line-height: 3;
+    height: 54px;
     outline: none;
     border: 0 none;
     background-color: transparent;
     width: 100%;
     text-align: center;
-    transition: font-size .3s;
+    transition: font-size .3s, height .3s;
 }
 
 .input-wrap .input:focus {
     font-size: 22px;
-    transition: font-size .3s;
+    transition: font-size .3s, height .3s;
+    height: 66px;
 }
 
 .input-wrap:hover:after {
@@ -84,10 +87,12 @@
     width: 5px;
     background-color: rgba(0, 0, 0, 0.2);
     margin: 0 auto;
-    bottom: 0;
     height: 1px;
     transform: scaleX(50) skewX(-70deg);
     transition: transform .3s ease-out;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
 }
 
 /*   输入组件  end   */
@@ -98,6 +103,7 @@
     text-align: left;
     padding-left: 125px;
     line-height: 4;
+    cursor: pointer;
 }
 
 .check-wrap .check {
@@ -131,3 +137,20 @@
 }
 
 /*   按钮  end   */
+
+/*   图片验证码   start   */
+
+.verify-code-wrap{
+    position: relative;
+}
+
+.verify-code {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    top: 10px;
+    right: 80px;
+    cursor: pointer;
+}
+
+/*   图片验证码   end   */

@@ -39,7 +39,7 @@ const App = () => {
                     alert('你点击了按钮~')
                 }}
                 className="btn"
-                name="提交"
+                name="登录"
             />
         </form>
     );

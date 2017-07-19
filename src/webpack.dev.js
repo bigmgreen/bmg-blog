@@ -9,7 +9,8 @@ const BUILD_PATH = path.resolve(C_PATH, 'dist');
 
 module.exports = {
     entry: {
-        login: path.resolve(C_PATH, 'view', 'login.jsx')
+        // login: path.resolve(C_PATH, 'view', 'login.jsx')
+        register: path.resolve(C_PATH, 'view', 'register.jsx')
     },
     output: {
         path: BUILD_PATH,
@@ -50,15 +51,20 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     plugins: [
+        // new HtmlWebpackPlugin({
+        //     title: '登录',
+        //     filename: 'login.html'
+        // })
         new HtmlWebpackPlugin({
-            title: '登录',
-            filename: 'login.html'
+            title: '注册',
+            filename: 'register.html'
         })
     ],
     devServer: {
         inline: true,
         contentBase: BUILD_PATH,
-        openPage: 'login.html',
+        // openPage: 'login.html',
+        openPage: 'register.html',
         open: true
     }
 };

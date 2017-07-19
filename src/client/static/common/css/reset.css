@@ -5,6 +5,7 @@ body {
     min-width: 1200px;
     background-color: #f2f2f2;
     line-height: 1;
+    font-family: "Microsoft YaHei";
 }
 
 html,
@@ -21,6 +22,14 @@ input,
 button {
     vertical-align: middle;
     outline: none;
+}
+
+input::-webkit-input-placeholder {
+    color: rgba(51, 40, 40, 0.5);
+    font-size: 12px;
+    letter-spacing: 1px;
+    position: relative;
+    top: 16px;
 }
 
 input:-webkit-autofill {
