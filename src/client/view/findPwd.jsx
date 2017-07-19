@@ -10,13 +10,7 @@ const App = () => {
     return (
         <form className="panel"
         >
-            <header className="panel-title">注册</header>
-            <Input
-                wrapClassName="input-wrap"
-                inputClassName="input"
-                errorClassName="error"
-                placeholder="邀请码__请和站长联系_1043943494"
-            />
+            <header className="panel-title">密码找回</header>
             <Input
                 wrapClassName="input-wrap"
                 inputClassName="input"
@@ -28,20 +22,6 @@ const App = () => {
                 inputClassName="input"
                 errorClassName="error"
                 placeholder="邮箱__bigmgreen@163.com"
-            />
-            <Input
-                wrapClassName="input-wrap"
-                inputClassName="input"
-                errorClassName="error"
-                type="password"
-                placeholder="密码__123abc+-*/"
-            />
-            <Input
-                wrapClassName="input-wrap"
-                inputClassName="input"
-                errorClassName="error"
-                type="password"
-                placeholder="确认密码__123abc+-*/"
             />
             <VerifyCode
                 src="http://fanyi.baidu.com/static/translation/img/header/logo_cbfea26.png"
@@ -59,7 +39,7 @@ const App = () => {
                     alert('你点击了按钮~')
                 }}
                 className="btn"
-                name="注册"
+                name="找回"
             />
         </form>
     );

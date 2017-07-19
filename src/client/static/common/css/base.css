@@ -129,6 +129,7 @@
     color: #fff;
     font-size: 18px;
     transition: opacity .5s ease;
+    letter-spacing: 6px;
 }
 
 .btn:hover {

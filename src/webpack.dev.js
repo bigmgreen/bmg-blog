@@ -9,8 +9,9 @@ const BUILD_PATH = path.resolve(C_PATH, 'dist');
 
 module.exports = {
     entry: {
-        // login: path.resolve(C_PATH, 'view', 'login.jsx')
-        register: path.resolve(C_PATH, 'view', 'register.jsx')
+        // login: path.resolve(C_PATH, 'view', 'login.jsx'),
+        // register: path.resolve(C_PATH, 'view', 'register.jsx'),
+        findPwd: path.resolve(C_PATH, 'view', 'findPwd.jsx')
     },
     output: {
         path: BUILD_PATH,
@@ -54,17 +55,22 @@ module.exports = {
         // new HtmlWebpackPlugin({
         //     title: '登录',
         //     filename: 'login.html'
-        // })
+        // }),
+        // new HtmlWebpackPlugin({
+        //     title: '注册',
+        //     filename: 'register.html'
+        // }),
         new HtmlWebpackPlugin({
-            title: '注册',
-            filename: 'register.html'
+            title: '密码找回',
+            filename: 'findPwd.html'
         })
     ],
     devServer: {
         inline: true,
         contentBase: BUILD_PATH,
         // openPage: 'login.html',
-        openPage: 'register.html',
+        // openPage: 'register.html',
+        openPage: 'findPwd.html',
         open: true
     }
 };
