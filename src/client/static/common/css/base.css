@@ -1,3 +1,11 @@
+/*  容器  start    */
+.section {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/*  容器  end    */
+
 /*   面板  start   */
 .panel {
     width: 500px;
@@ -141,7 +149,7 @@
 
 /*   图片验证码   start   */
 
-.verify-code-wrap{
+.verify-code-wrap {
     position: relative;
 }
 

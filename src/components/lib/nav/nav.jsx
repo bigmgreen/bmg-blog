@@ -8,11 +8,11 @@ export default class Nav extends Component {
 
     render () {
         return (
-            <ul>
+            <ul className={this.props.anchorClassName}>
                 {this.props.item.map((item, index)=> {
                     return (
                         <li key={index}>
-                            <a href={item.url}>{item.text}</a>
+                            <a href={item.href}>{item.text}</a>
                         </li>
                     );
                 })}

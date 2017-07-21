@@ -8,7 +8,7 @@ export  default class Logo extends Component {
 
     render () {
         return (
-            <div>
+            <div className={this.props.anchorClassName}>
                 <a href={this.props.href}><img src={this.props.src} alt={this.props.alt}/></a>
             </div>
         );

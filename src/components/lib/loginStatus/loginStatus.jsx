@@ -33,7 +33,7 @@ export default class LoginStatus extends Component {
 
     render() {
         return (
-            <div>{this._showByState(this.props)}</div>
+            <div className={this.props.anchorClassName}>{this._showByState(this.props)}</div>
         );
     }
 }
@@ -55,10 +55,10 @@ class OffLine extends Component {
     render() {
         var off = this.props;
         return (
-            <span>
+            <div>
                 <a href={off.login}>{off.loginText || '登录'}</a>
                 <a href={off.register}>{off.registerText || '注册'}</a>
-            </span>
+            </div>
         );
     }
 }
@@ -81,11 +81,11 @@ class OnLine extends Component {
     render() {
         var on = this.props;
         return (
-            <span>
+            <div>
                 <span>{on.welcome}</span>
-                <span>{this.props.userName}</span>
+                <strong>{this.props.userName}</strong>
                 <a href={on.exit}>{on.exitText}</a>
-            </span>
+            </div>
         );
     }
 }

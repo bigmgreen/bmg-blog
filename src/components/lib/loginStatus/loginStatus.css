@@ -1,0 +1,8 @@
+.login-status {
+    line-height: 3em;
+    text-align: right;
+}
+
+.login-status a{
+    margin-left: 1em;
+}

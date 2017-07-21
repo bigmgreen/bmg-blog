@@ -1,0 +1,16 @@
+.banner {
+    font-size: 0;
+    margin-top: 10px;
+}
+
+.banner a {
+    border-bottom: 0 none;
+    height: 200px;
+    overflow: hidden;
+}
+
+.banner a,
+.banner img {
+    display: block;
+    width: 100%;
+}

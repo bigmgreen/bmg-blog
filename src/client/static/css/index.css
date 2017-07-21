@@ -1,0 +1,21 @@
+.top {
+    background-color: #fff;
+}
+
+.main {
+    font-size: 0;
+    margin: 10px 0;
+}
+
+.main .left{
+    display: inline-block;
+    width: 840px;
+    background-color: #fff;
+}
+.main .right{
+    background-color: #fff;
+    display: inline-block;
+    width: 350px;
+    margin-left: 10px;
+    font-size: 14px;
+}

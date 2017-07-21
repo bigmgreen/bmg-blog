@@ -1,0 +1,19 @@
+.type {
+    padding:0 20px 20px;
+    box-sizing: border-box;
+    line-height: 2;
+}
+
+.type dl {
+    padding-left: 3em;
+}
+
+.type dt {
+    margin-left: -3em;
+    display: inline-block;
+}
+
+.type dd {
+    display: inline-block;
+    padding: 0 5px;
+}

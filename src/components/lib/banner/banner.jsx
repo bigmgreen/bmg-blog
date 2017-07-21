@@ -9,7 +9,7 @@ export default class Banner extends Component {
     render () {
         const banner = this.props;
         return (
-            <div>
+            <div className={banner.anchorClassName}>
                 <a href={banner.href}><img src={banner.src} alt={banner.alt}/></a>
             </div>
         );

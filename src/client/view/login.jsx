@@ -5,7 +5,6 @@ import {render} from 'react-dom';
 import  Input from '../../components/lib/input/input';
 import  Check from '../../components/lib/check/check';
 import Button from '../../components/lib/button/button';
-import '../static/css/login.css';
 
 const App = () => {
     return (

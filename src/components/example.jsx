@@ -138,19 +138,19 @@ const App = () => {
                 <Nav
                     item={[
                         {
-                            url: 'baidu.com',
+                            href: 'baidu.com',
                             text: '首页'
                         },
                         {
-                            url: 'baidu.com',
+                            href: 'baidu.com',
                             text: 'html5'
                         },
                         {
-                            url: 'baidu.com',
+                            href: 'baidu.com',
                             text: 'angular'
                         },
                         {
-                            url: 'baidu.com',
+                            href: 'baidu.com',
                             text: 'react'
                         }
                     ]}

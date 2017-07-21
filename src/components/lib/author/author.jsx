@@ -20,11 +20,9 @@ export default class Author extends Component {
     render() {
         const author = this.props;
         return (
-            <div>
+            <div className={author.anchorClassName}>
                 <h3>{author.title}</h3>
-                <div>
-                    <img src={author.src} alt={author.alt}/>
-                </div>
+                <img src={author.src} alt={author.alt}/>
                 {this._getInfoList(author.infos)}
             </div>
         );

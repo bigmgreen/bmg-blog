@@ -17,7 +17,7 @@ export default class Types extends Component {
     render () {
         const types = this.props;
         return (
-            <div>
+            <div className={types.anchorClassName}>
                 <dl>
                     <dt>{types.title}：</dt>
                     {this._getTypesByItems(types.items)}

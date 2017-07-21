@@ -1,0 +1,36 @@
+.author {
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.author h3 {
+    font-weight: normal;
+    padding: 0 10px;
+}
+
+.author div {
+    line-height: 2em;
+    padding: 0 10px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.author img {
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin: 10px auto;
+    border-radius: 50%;
+    box-shadow: 0 0 0 #eee;
+}
+
+
+.author div span{
+    display: inline-block;
+    vertical-align: top;
+}
+.author div span:last-child {
+    display: inline-block;
+    width: 18em;
+    white-space: normal;
+}

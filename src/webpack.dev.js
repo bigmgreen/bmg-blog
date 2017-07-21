@@ -11,7 +11,8 @@ module.exports = {
     entry: {
         // login: path.resolve(C_PATH, 'view', 'login.jsx'),
         // register: path.resolve(C_PATH, 'view', 'register.jsx'),
-        findPwd: path.resolve(C_PATH, 'view', 'findPwd.jsx')
+        // findPwd: path.resolve(C_PATH, 'view', 'findPwd.jsx'),
+        index: path.resolve(C_PATH, 'view', 'index.jsx'),
     },
     output: {
         path: BUILD_PATH,
@@ -60,17 +61,22 @@ module.exports = {
         //     title: '注册',
         //     filename: 'register.html'
         // }),
+        // new HtmlWebpackPlugin({
+        //     title: '密码找回',
+        //     filename: 'findPwd.html'
+        // }),
         new HtmlWebpackPlugin({
-            title: '密码找回',
-            filename: 'findPwd.html'
-        })
+            title: '首页',
+            filename: 'index.html'
+        }),
     ],
     devServer: {
         inline: true,
         contentBase: BUILD_PATH,
         // openPage: 'login.html',
         // openPage: 'register.html',
-        openPage: 'findPwd.html',
+        // openPage: 'findPwd.html',
+        openPage: 'index.html',
         open: true
     }
 };
