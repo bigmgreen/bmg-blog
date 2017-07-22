@@ -1,15 +1,15 @@
 import '../static/common/css/reset.css';
 import '../static/common/css/base.css';
-import '../static/css/index.css';
+import '../static/css/detail.css';
 import React from 'react';
 import {render} from 'react-dom';
 import Header from '../../components/lib/header/header';
 import Footer from '../../components/lib/footer/footer';
 import LoginStatus from '../../components/lib/loginStatus/loginStatus';
-import Banner from '../../components/lib/banner/banner';
 import Author from '../../components/lib/author/author';
 import Types from '../../components/lib/types/types';
-import Article from '../../components/lib/article/article';
+import Crumbs from '../../components/lib/crumbs/crumbs';
+import Content from '../../components/lib/content/content';
 
 const App = () => {
     return (
@@ -54,77 +54,29 @@ const App = () => {
                 </div>
             </div>
             <div className="section">
-                <Banner
-                    anchorClassName="banner"
-                    href="https://www.baidu.com/"
-                    src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"
-                    alt="banner图片"
-                />
                 <div className="main">
                     <div className="left">
-                        <Article
+                        <Crumbs
+                            anchorClassName="crumbs"
+                            title="你现在的位置："
                             item={[
                                 {
-                                    anchorClassName: 'article-style',
-                                    figureClassName: "figure",
-                                    footerClassName: "article-footer",
-                                    href: "#",
-                                    type: "html5",
-                                    title: "星球大战",
-                                    src: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",
-                                    alt: "bmg",
-                                    content: "星球大战星球大战球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大",
-                                    dateStr: "2015-1-1",
-                                    markCount: "2017",
-                                    browserCount: "2017",
-                                    commentCount: "2017",
+                                    name:'首页',
+                                    href: '#'
                                 },
                                 {
-                                    anchorClassName: 'article-style',
-                                    figureClassName: "figure",
-                                    footerClassName: "article-footer",
-                                    href: "#",
-                                    type: "html5",
-                                    title: "星球大战",
-                                    src: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",
-                                    alt: "bmg",
-                                    content: "星球大战星球大战球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大",
-                                    dateStr: "2015-1-1",
-                                    markCount: "2017",
-                                    browserCount: "2017",
-                                    commentCount: "2017",
-                                },
-                                {
-                                    anchorClassName: 'article-style',
-                                    figureClassName: "figure",
-                                    footerClassName: "article-footer",
-                                    href: "#",
-                                    type: "html5",
-                                    title: "星球大战",
-                                    src: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",
-                                    alt: "bmg",
-                                    content: "星球大战星球大战球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大",
-                                    dateStr: "2015-1-1",
-                                    markCount: "2017",
-                                    browserCount: "2017",
-                                    commentCount: "2017",
-                                },
-                                {
-                                    anchorClassName: 'article-style',
-                                    figureClassName: "figure",
-                                    footerClassName: "article-footer",
-                                    href: "#",
-                                    type: "html5",
-                                    title: "星球大战",
-                                    src: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",
-                                    alt: "bmg",
-                                    content: "星球大战星球大战球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大",
-                                    dateStr: "2015-1-1",
-                                    markCount: "2017",
-                                    browserCount: "2017",
-                                    commentCount: "2017",
-                                },
+                                    name:'详情页',
+                                    href: '#'
+                                }
                             ]}
+                        />
+                        <Content
+                            anchorClassName="content"
+                            title="星球大战"
+                            content="星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战"
+                            dateTime="2017-01-01"
+                            markCount="2017"
+                            browserCount="2017"
                         />
                     </div>
                     <div className="right">

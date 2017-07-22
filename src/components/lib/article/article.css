@@ -1,0 +1,67 @@
+.article-style {
+    display: block;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+a.article-style:hover {
+    color: #333;
+    border-bottom: 0 none;
+}
+
+.article-style .figure {
+    font-size: 14px;
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+    height: 170px;
+    overflow: hidden;
+}
+
+.article-style h4{
+    line-height: 2;
+    font-weight: normal;
+}
+
+.article-style h4 span{
+    color: #999999;
+}
+
+.article-style .figure img {
+    display: block;
+    width: 100%;
+}
+.article-style .figure +div {
+    display: inline-block;
+    font-size: 14px;
+    width: 500px;
+    vertical-align: top;
+}
+
+.article-style .figure +div {
+    box-sizing: border-box;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.article-style .figure +div p {
+    text-indent: 2em;
+    line-height: 1.2;
+    height: 7em;
+    overflow: hidden;
+}
+
+.article-style .article-footer {
+    position: absolute;
+    bottom: 20px;
+    white-space: nowrap;
+}
+
+.article-style .article-footer span{
+    font-size: 12px;
+    color: #999999;
+    margin-right: 3em;
+}
