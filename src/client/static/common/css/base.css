@@ -3,7 +3,9 @@
     width: 1200px;
     margin: 0 auto;
 }
-
+.top {
+    background-color: #fff;
+}
 /*  容器  end    */
 
 /*   面板  start   */
@@ -11,13 +13,14 @@
     width: 500px;
     margin: 20px auto 0;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #fff;
     min-height: 400px;
     border-radius: 5px;
     box-shadow: 0 0 10px #eee;
     position: relative;
     overflow: hidden;
     padding-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .panel-title {
