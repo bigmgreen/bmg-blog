@@ -10,6 +10,8 @@ import Author from '../../components/lib/author/author';
 import Types from '../../components/lib/types/types';
 import Crumbs from '../../components/lib/crumbs/crumbs';
 import Content from '../../components/lib/content/content';
+import Share from '../../components/lib/share/share';
+import Comment from '../../components/lib/comment/comment';
 
 const App = () => {
     return (
@@ -61,11 +63,11 @@ const App = () => {
                             title="你现在的位置："
                             item={[
                                 {
-                                    name:'首页',
+                                    name: '首页',
                                     href: '#'
                                 },
                                 {
-                                    name:'详情页',
+                                    name: '详情页',
                                     href: '#'
                                 }
                             ]}
@@ -77,6 +79,55 @@ const App = () => {
                             dateTime="2017-01-01"
                             markCount="2017"
                             browserCount="2017"
+                            prev="#"
+                            prevTitle="星球大战"
+                            next="#"
+                            nextTitle="星球大战"
+                        />
+                        <Share
+                            anchorClassName="share"
+                            item={
+                                [
+                                    {
+                                        text: '微信好友',
+                                        url: 'baidu.com'
+                                    },
+                                    {
+                                        text: '微博',
+                                        url: 'baidu.com'
+                                    },
+                                    {
+                                        text: 'QQ好友',
+                                        url: 'baidu.com'
+                                    },
+                                    {
+                                        text: '微信朋友圈',
+                                        url: 'baidu.com'
+                                    }
+                                ]
+                            }
+                        />
+                        <Comment
+                            anchorClassName="comment"
+                            pageClassName="page"
+                            commentCount="2017"
+                            pageCount="10"
+                            commentItem={[
+                                {
+                                    critics:'zx',
+                                    dateStr:'2017-01-01',
+                                    ok:2017,
+                                    no:2017,
+                                    content:'abcdefg'
+                                },
+                                {
+                                    critics:'zx',
+                                    dateStr:'2017-01-01',
+                                    ok:2017,
+                                    no:2017,
+                                    content:'abcdefg'
+                                }
+                            ]}
                         />
                     </div>
                     <div className="right">

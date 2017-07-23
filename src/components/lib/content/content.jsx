@@ -19,6 +19,10 @@ export default class Content extends Component {
                     <span>{con.dateTime}</span>
                     <span><Mark />（{con.markCount}）</span>
                     <span>（{con.browserCount}）浏览</span>
+                    <ul>
+                        <li><a href={con.prev}>上一篇：{con.prevTitle}</a></li>
+                        <li><a href={con.next}>下一篇：{con.nextTitle}</a></li>
+                    </ul>
                 </footer>
             </article>
         );

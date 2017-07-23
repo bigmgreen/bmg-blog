@@ -1,1 +1,20 @@
 
+.share {
+    float: right;
+    margin-right: 50px;
+}
+.share li {
+    display: inline-block;
+}
+.share a {
+    display: inline-block;
+    padding: 10px;
+    font-size: 14px;
+    border-bottom:0 none !important;
+    transition: background-color .3s;
+}
+
+.share a:hover {
+    background-color: rgba(78, 64, 64, 0.08);
+    transition: background-color .3s;
+}

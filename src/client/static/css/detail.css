@@ -21,25 +21,3 @@
     margin-left: 10px;
     font-size: 14px;
 }
-
-.content {
-    font-size: 14px;
-    padding: 20px 50px;
-}
-.content h3 {
-    text-align: center;
-}
-.content p{
-    text-indent: 2em;
-    line-height: 1.2;
-}
-
-.content footer {
-    line-height: 4em;
-}
-
-.content footer > span{
-    display: inline-block;
-    width: 30%;
-    text-align: center;
-}

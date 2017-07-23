@@ -1,0 +1,50 @@
+.comment {
+    font-size: 14px;
+    padding: 10px;
+    width: 750px;
+    margin: 20px auto 0;
+    box-sizing: border-box;
+}
+
+.comment h4 {
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.comment h4 + div {
+    overflow: hidden;
+}
+
+.comment textarea {
+    width: 730px;
+    box-sizing: border-box;
+    padding: 20px;
+    display: block;
+    margin: 0 auto;
+    height: 200px;
+}
+
+.comment .btn {
+    float: right;
+    margin-top: 10px;
+    width: 60px;
+}
+
+.comment li {
+    margin-top: 50px;
+}
+
+.comment li p {
+    text-indent: 2em;
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+.comment strong + span {
+    float: right;
+}
+
+.comment .page{
+    padding: 20px;
+    text-align: center;
+}
