@@ -6,17 +6,20 @@ export default class Input extends Component {
         super(props);
         this._handleInput = this._handleInput.bind(this);
         this.state = {
-            value: ''
-        }
+            value: '',
+            error: '',
+        };
 
         this._oldValue = '';
     }
 
+    componentWillReceiveProps(newProps) {
+        this.setState(newProps);
+    }
+
     _handleInput(e, pattern, chineseFilter) {
         let value = this._getValue(e.target.value, this._getRegExp(pattern), chineseFilter);
-        this.setState({
-            value: value
-        });
+        this.props.onChange(value);
     }
 
     _getValue(value, reg, zh) {
@@ -49,13 +52,15 @@ export default class Input extends Component {
         return (
             <div className={this.props.wrapClassName}>
                 <input className={this.props.inputClassName}
+                       id={this.props.id}
+                       name={this.props.name || this.props.id}
                        type={this.props.type || 'text'}
                        value={this.state.value}
                        placeholder={this.props.placeholder}
                        onInput={e=>this._handleInput(e, this.props.pattern, this.props.isChineseFilter)}
                        maxLength={this.props.maxLength || 20}
                 />
-                <span className={this.props.errorClassName}/>
+                <span className={this.props.errorClassName}>{this.state.error}</span>
             </div>
         );
     }

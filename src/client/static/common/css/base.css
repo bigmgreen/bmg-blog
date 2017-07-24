@@ -3,9 +3,11 @@
     width: 1200px;
     margin: 0 auto;
 }
+
 .top {
     background-color: #fff;
 }
+
 /*  容器  end    */
 
 /*   面板  start   */
@@ -24,10 +26,20 @@
 }
 
 .panel-title {
-    font-size: 18px;
+    font-size: 14px;
     text-align: left;
     line-height: 3;
     padding-left: 20px;
+    height: 54px;
+    color: #999999;
+}
+
+.panel-title a {
+    color: #333333;
+}
+
+.panel-title a:hover {
+    color: #5bd21a;
 }
 
 .panel:after,

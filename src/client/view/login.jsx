@@ -1,97 +1,117 @@
-import '../static/common/css/reset.css';
-import '../static/common/css/base.css';
-import React from 'react';
-import {render} from 'react-dom';
-import Header from '../../components/lib/header/header';
-import Footer from '../../components/lib/footer/footer';
+import React, {Component} from 'react';
+import Main from '../app';
 import  Input from '../../components/lib/input/input';
 import  Check from '../../components/lib/check/check';
 import Button from '../../components/lib/button/button';
 
-const App = () => {
-    return (
-        <div>
-            <div className="top">
-                <div className="section">
-                    <Header
-                        anchorClassName='header'
-                        logoClassName='logo'
-                        navClassName='nav'
-                        href="https://www.baidu.com/"
-                        src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"
-                        alt="logo图片"
-                        item={[
-                            {
-                                href: 'baidu.com',
-                                text: '首页'
-                            },
-                            {
-                                href: 'baidu.com',
-                                text: 'html5'
-                            },
-                            {
-                                href: 'baidu.com',
-                                text: 'angular'
-                            },
-                            {
-                                href: 'baidu.com',
-                                text: 'react'
-                            }
-                        ]}
+class App extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            name: '',
+            nameError: '',
+            pwd: '',
+            pwdError: '',
+            remember7Day: true
+        };
+    }
+
+    render() {
+
+        return (
+            <Main>
+                <form className="panel"
+                >
+                    <header className="panel-title"><a href="register.html">去注册</a>或<a href="findPwd.html">找回密码</a>
+                    </header>
+                    <Input
+                        wrapClassName="input-wrap"
+                        inputClassName="input"
+                        errorClassName="error"
+                        placeholder="请输入用户名"
+                        value={this.state.name}
+                        error={this.state.nameError}
+                        name="userName"
+                        onChange={(value)=> {
+                            this.setState({
+                                name: value,
+                                nameError: ''
+                            })
+                        }}
                     />
-                </div>
-            </div>
-            <form className="panel"
-            >
-                <header className="panel-title">登录</header>
-                <Input
-                    wrapClassName="input-wrap"
-                    inputClassName="input"
-                    errorClassName="error"
-                    placeholder="请输入用户名"
-                />
-                <Input
-                    wrapClassName="input-wrap"
-                    inputClassName="input"
-                    errorClassName="error"
-                    type="password"
-                    placeholder="请输入密码"
-                />
-                <Check
-                    wrapClassName="check-wrap"
-                    inputClassName="check"
-                    textClassName="text"
-                    text="记住登录七天"
-                    name="check"
-                    id="check"
-                />
-                <Button
-                    type="submit"
-                    onClick={()=> {
-                        alert('你点击了按钮~')
-                    }}
-                    className="btn"
-                    name="登录"
-                />
-            </form>
-            <Footer
-                anchorClassName="footer"
-                desc="2017 bmg 未知备案号"
-            />
-        </div>
-    );
-};
+                    <Input
+                        wrapClassName="input-wrap"
+                        inputClassName="input"
+                        errorClassName="error"
+                        type="password"
+                        placeholder="请输入密码"
+                        value={this.state.pwd}
+                        error={this.state.pwdError}
+                        name="password"
+                        onChange={(value)=> {
+                            this.setState({
+                                pwd: value,
+                                pwdError: ''
+                            })
+                        }}
+                    />
+                    <Check
+                        wrapClassName="check-wrap"
+                        inputClassName="check"
+                        textClassName="text"
+                        text="记住登录七天"
+                        name="remember7Day"
+                        onChange={(value)=> {
+                            this.setState({
+                                remember7Day: value,
+                            })
+                        }}
+                    />
+                    <Button
+                        type="button"
+                        onClick={()=> {
+                            const isValidatePass = this._validate(this.state);
+                            if (isValidatePass) {
 
-((doc)=> {
-    "use strict";
+                                {/*     网络请求  start    */}
+                                fetch('/login', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: new FormData(document.querySelector('form'))
+                                });
+                                {/*     网络请求  end    */}
+                            }
+                        }}
+                        className="btn"
+                        name="登录"
+                    />
+                </form>
+            </Main>
+        );
+    }
 
-    let body = doc.body;
-    let article = doc.createElement('article');
-    article.id = 'app';
-    body.insertBefore(article, body.firstChild);
+    _validate({name, pwd}) {
+        const nameIsNull = (name === '');
+        const pwdIsNull = (pwd === '');
 
-})(document);
+        if (nameIsNull) {
+            this.setState({
+                nameError: '用户名不能为空'
+            });
+            return false;
+        }
 
-const app = document.getElementById('app');
+        if (pwdIsNull) {
+            this.setState({
+                pwdError: '密码不能为空'
+            });
+            return false;
+        }
 
-render(<App />, app);
+        return true;
+    }
+}
+Main.run(App);

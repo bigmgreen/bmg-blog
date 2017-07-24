@@ -15,9 +15,12 @@ export default class Check extends Component {
                 <input
                     className={check.inputClassName}
                     type="checkbox"
+                    defaultChecked
                     id={check.id}
                     name={check.name || check.id}
-                    value="on"
+                    onChange={(e)=>{
+                        this.props.onChange(e.target.checked);
+                    }}
                 />
                 <span className={check.textClassName}>{check.text}</span>
             </label>

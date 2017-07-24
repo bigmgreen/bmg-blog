@@ -13,9 +13,9 @@ export default class Header extends Component {
         return (
             <div className={header.anchorClassName}>
                 <Logo anchorClassName={header.logoClassName}
-                      href={header.href}
+                      href='index.html'
                       src={header.src}
-                      alt={header.alt}
+                      alt='logo图片'
                 />
                 <Nav anchorClassName={header.navClassName} item={header.item}/>
             </div>
