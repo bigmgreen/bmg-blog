@@ -141,27 +141,6 @@
 
 /*   记住七天  end   */
 
-/*   按钮  start   */
-.btn {
-    width: 50%;
-    line-height: 2;
-    background-color: rgba(68, 224, 26, 0.7);
-    border: 0 none;
-    cursor: pointer;
-    margin-top: 20px;
-    color: #fff;
-    font-size: 18px;
-    transition: opacity .5s ease;
-    letter-spacing: 6px;
-}
-
-.btn:hover {
-    opacity: .7;
-    transition: opacity .5s ease;
-}
-
-/*   按钮  end   */
-
 /*   图片验证码   start   */
 
 .verify-code-wrap {

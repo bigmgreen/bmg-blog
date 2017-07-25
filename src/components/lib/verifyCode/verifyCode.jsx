@@ -30,11 +30,12 @@ export default class VerifyCode extends Component {
                 <Input {...this.props}/>
                 <img
                     className={code.imgClassName}
-                    src={this._getNewSrc(this.state.src)}
+                    src={this.state.src}
                     alt={code.alt}
                     onClick={e=>this._onClick(e)}
                 />
             </div>
         );
     }
+
 }

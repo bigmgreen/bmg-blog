@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Main from '../app';
-import  Input from '../../components/lib/input/input';
-import  Check from '../../components/lib/check/check';
+import Input from '../../components/lib/input/input';
+import Check from '../../components/lib/check/check';
 import Button from '../../components/lib/button/button';
 
 class App extends Component {
@@ -9,11 +9,12 @@ class App extends Component {
         super(props)
 
         this.state = {
-            name: '',
-            nameError: '',
+            userName: '',
+            userNameError: '',
             pwd: '',
             pwdError: '',
-            remember7Day: true
+            remember7Day: true,
+            error: ''
         };
     }
 
@@ -30,13 +31,13 @@ class App extends Component {
                         inputClassName="input"
                         errorClassName="error"
                         placeholder="请输入用户名"
-                        value={this.state.name}
-                        error={this.state.nameError}
+                        value={this.state.userName}
+                        error={this.state.userNameError}
                         name="userName"
                         onChange={(value)=> {
                             this.setState({
-                                name: value,
-                                nameError: ''
+                                userName: value,
+                                userNameError: ''
                             })
                         }}
                     />
@@ -48,7 +49,7 @@ class App extends Component {
                         placeholder="请输入密码"
                         value={this.state.pwd}
                         error={this.state.pwdError}
-                        name="password"
+                        name="pwd"
                         onChange={(value)=> {
                             this.setState({
                                 pwd: value,
@@ -69,20 +70,35 @@ class App extends Component {
                         }}
                     />
                     <Button
+                        error={this.state.error}
                         type="button"
                         onClick={()=> {
                             const isValidatePass = this._validate(this.state);
                             if (isValidatePass) {
 
-                                {/*     网络请求  start    */}
+                                {/*     网络请求  start    */
+                                }
                                 fetch('/login', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
                                     body: new FormData(document.querySelector('form'))
+                                }).then((res)=> {
+                                    return res.json();
+                                }).then((data)=> {
+                                    if (data.code === 0) {
+                                        window.location.href = 'index.html';
+                                    } else {
+                                        this.setState(data);
+                                    }
+                                }).catch((err)=> {
+                                    if (err) {
+                                        console.log(err);
+                                    }
                                 });
-                                {/*     网络请求  end    */}
+                                {/*     网络请求  end    */
+                                }
                             }
                         }}
                         className="btn"
@@ -93,13 +109,13 @@ class App extends Component {
         );
     }
 
-    _validate({name, pwd}) {
-        const nameIsNull = (name === '');
+    _validate({userName, pwd}) {
+        const userNameIsNull = (userName === '');
         const pwdIsNull = (pwd === '');
 
-        if (nameIsNull) {
+        if (userNameIsNull) {
             this.setState({
-                nameError: '用户名不能为空'
+                userNameError: '用户名不能为空'
             });
             return false;
         }

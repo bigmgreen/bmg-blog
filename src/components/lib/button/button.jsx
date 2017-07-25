@@ -14,13 +14,16 @@ export default class Button extends Component {
 
     render() {
         return (
-            <button
-                onClick={(e) => this.handleClick(e)}
-                type={this.props.type}
-                className={this.classNameText}
-            >
-                {this.props.name}
-            </button>
+            <div className={this.props.anchorClassName + ' btn-wrap'}>
+                <span className={this.props.errorClassName}>{this.props.error}</span>
+                <button
+                    onClick={(e) => this.handleClick(e)}
+                    type={this.props.type}
+                    className={this.classNameText}
+                >
+                    {this.props.name}
+                </button>
+            </div>
         );
     }
 }

@@ -8,6 +8,7 @@ export default class Input extends Component {
         this.state = {
             value: '',
             error: '',
+            name: this.props.name || this.props.id
         };
 
         this._oldValue = '';
@@ -15,6 +16,17 @@ export default class Input extends Component {
 
     componentWillReceiveProps(newProps) {
         this.setState(newProps);
+    }
+
+    componentDidUpdate() {
+        const _inputHasNoFocus = (document.activeElement.nodeName.toUpperCase() !== 'INPUT');
+        if (_inputHasNoFocus) {
+            const _input = this.refs[this.state.name];
+            const isError = (this.state.error !== '');
+            if (isError) {
+                _input.focus();
+            }
+        }
     }
 
     _handleInput(e, pattern, chineseFilter) {
@@ -51,14 +63,16 @@ export default class Input extends Component {
     render() {
         return (
             <div className={this.props.wrapClassName}>
-                <input className={this.props.inputClassName}
-                       id={this.props.id}
-                       name={this.props.name || this.props.id}
-                       type={this.props.type || 'text'}
-                       value={this.state.value}
-                       placeholder={this.props.placeholder}
-                       onInput={e=>this._handleInput(e, this.props.pattern, this.props.isChineseFilter)}
-                       maxLength={this.props.maxLength || 20}
+                <input
+                    ref={this.state.name}
+                    className={this.props.inputClassName}
+                    id={this.props.id}
+                    name={this.state.name}
+                    type={this.props.type || 'text'}
+                    value={this.state.value}
+                    placeholder={this.props.placeholder}
+                    onInput={e=>this._handleInput(e, this.props.pattern, this.props.isChineseFilter)}
+                    maxLength={this.props.maxLength || 20}
                 />
                 <span className={this.props.errorClassName}>{this.state.error}</span>
             </div>
@@ -89,6 +103,25 @@ export class NumberInput extends Component {
                 errorClassName={this.props.errorClassName}
                 isChineseFilter={true}
                 pattern={reg}
+            />
+        );
+    }
+}
+
+export class EmailInput extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+
+        /* TODO  需要一个过滤输入的正则表达式   */
+
+        return (
+            <Input
+                {...this.props}
+                isChineseFilter={true}
+                pattern='/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/'
             />
         );
     }
