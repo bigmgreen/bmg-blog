@@ -17,7 +17,11 @@ export default class Header extends Component {
                       src={header.src}
                       alt='logo图片'
                 />
-                <Nav anchorClassName={header.navClassName} item={header.item}/>
+                <Nav
+                    onNavClick={this.props.onNavClick}
+                    anchorClassName={header.navClassName}
+                    item={header.item}
+                />
             </div>
         );
     }

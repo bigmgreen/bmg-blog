@@ -1,14 +1,30 @@
 import './article.css';
 import React, {Component} from 'react';
+import Spinner from '../spinner/spinner';
 import Fmt from '../fmt/fmt';
 
 export default class Article extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            items: [],
+            page: {
+                type: 0,
+                currentPage: 0
+            },
+            text: '加载更多',
+            isGetData: true
+        };
+
     }
 
-    getItem (item) {
-        return item.map((article, index)=> {
+    componentWillReceiveProps(newProps) {
+        this.setState(newProps);
+    }
+
+    _getItem(items) {
+        return items.map((article, index)=> {
             return (
                 <a key={index} href={article.href} className={article.anchorClassName}>
                     <Figure
@@ -32,10 +48,57 @@ export default class Article extends Component {
         });
     }
 
+    _getData(url, param) {
+        if (this.state.isGetData === false) {
+            return false;
+        }
+
+        Spinner.show();
+        fetch(url,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(param),
+                cache: 'no-cache'
+            })
+            .then((res)=> {
+                return res.json();
+            })
+            .then((data)=> {
+                let items = data.items;
+                const dataIsNull = (items.length === 0);
+                if (dataIsNull) {
+                    this.setState({
+                        text: '没有更多数据了',
+                        isGetData: false
+                    });
+                } else {
+                    this.setState({
+                        items: this.state.items.concat(data.items)
+                    });
+                }
+                Spinner.hide();
+            })
+            .catch((err)=> {
+                if (err) {
+                    console.log(err);
+                }
+                Spinner.hide();
+            });
+    }
+
     render() {
-        const article = this.props;
         return (
-            <div>{this.getItem(article.item)}</div>
+            <div>
+                {this._getItem(this.state.items)}
+                <span ref="loadData"
+                      className="load"
+                      onClick={this._getData.bind(this, this.props.url, this.state.page)}
+                >{this.state.text}</span>
+            </div>
         );
     }
 }

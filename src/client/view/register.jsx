@@ -26,7 +26,7 @@ class App extends Component {
 
     render() {
         return (
-            <Main>
+            <Main top={false}>
                 <form className="panel"
                 >
                     <header className="panel-title"><a href="login.html">去登录</a>或<a href="findPwd.html">找回密码</a>

@@ -9,7 +9,12 @@ export default class Types extends Component {
     _getTypesByItems (items) {
         return items.map((item, index)=>{
             return (
-                <dd key={index}><a href={item.href}>{item.name}({item.count})</a></dd>
+                <dd
+                    onClick={e=>{this.props.onTypesClick(item.type, 0)}}
+                    key={index}
+                >
+                    <a href="javascript:void(0);">{item.name}({item.count})</a>
+                </dd>
             );
         })
     }

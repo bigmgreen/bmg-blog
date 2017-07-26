@@ -69,3 +69,19 @@ a.article-style:hover {
     color: #999999;
     margin-right: 3em;
 }
+
+.load {
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+    display: block;
+    line-height: 4em;
+    transition: color .3s;
+}
+
+.load:hover {
+    transition: color .3s;
+    color: #5bd21a;
+}

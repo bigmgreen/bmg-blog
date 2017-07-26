@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import './static/common/css/reset.css';
 import './static/common/css/base.css';
+import './static/common/css/animate.min.css';
 import Logo from './static/common/img/logo.png';
 import Header from '../components/lib/header/header';
 import Footer from '../components/lib/footer/footer';
@@ -10,43 +11,57 @@ import Promise from 'promise-polyfill';
 import 'whatwg-fetch';
 
 export default class Main extends Component {
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            header: {
+                userName:'',
+                nav: []
+            }
+        };
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState(newProps);
+    }
+
+    _getTop(isTopShow) {
+        if (isTopShow === false) {
+            return null;
+        }
+        return (
+            <LoginStatus
+                anchorClassName="login-status"
+                offLine={{
+                    login: 'login.html',
+                    loginText: '登录',
+                    register: 'register.html',
+                    registerText: '注册'
+                }}
+                onLine={{
+                    welcome: '欢迎您',
+                    exit: '/exit',
+                    exitText: '退出',
+                    userName: this.state.header.userName
+                }}
+            />
+        );
+    }
+
     render() {
         return (
             <div>
                 <div className="top">
                     <div className="section">
-                        <LoginStatus
-                            anchorClassName="login-status"
-                            offLine={{
-                                login: 'login.html',
-                                loginText: '登录',
-                                register: 'register.html',
-                                registerText: '注册'
-                            }}
-                        />
+                        {this._getTop(this.props.top)}
                         <Header
                             anchorClassName='header'
                             logoClassName='logo'
                             navClassName='nav'
                             src={Logo}
-                            item={[
-                                {
-                                    href: 'baidu.com',
-                                    text: '首页'
-                                },
-                                {
-                                    href: 'baidu.com',
-                                    text: 'html5'
-                                },
-                                {
-                                    href: 'baidu.com',
-                                    text: 'angular'
-                                },
-                                {
-                                    href: 'baidu.com',
-                                    text: 'react'
-                                }
-                            ]}
+                            item={this.state.header.nav}
+                            onNavClick={this.props.onNavClick}
                         />
                     </div>
                 </div>

@@ -11,8 +11,8 @@ export default class Nav extends Component {
             <ul className={this.props.anchorClassName}>
                 {this.props.item.map((item, index)=> {
                     return (
-                        <li key={index}>
-                            <a href={item.href}>{item.text}</a>
+                        <li onClick={e=>{this.props.onNavClick(item.type, 0)}} key={index}>
+                            <a href="javascript:void(0);">{item.text}</a>
                         </li>
                     );
                 })}
