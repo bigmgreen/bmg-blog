@@ -38,7 +38,7 @@ class App extends Component {
         };
     }
 
-    _getData(type = 0, currentPage = 0) {
+    _getData(type = 'all', currentPage = 0) {
         Spinner.show();
         fetch('/index',
             {
@@ -69,7 +69,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this._getData();
+        this._getData(location.search.split('=')[1]);
     }
 
     render() {

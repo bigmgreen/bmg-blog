@@ -1,0 +1,46 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>
+Created by FontForge 20120731 at Thu Jul 27 15:34:11 2017
+ By admin
+</metadata>
+<defs>
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face 
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    panose-1="2 0 6 3 0 0 0 0 0 0"
+    ascent="896"
+    descent="-128"
+    x-height="792"
+    bbox="44 -127 956 802"
+    underline-thickness="0"
+    underline-position="0"
+    unicode-range="U+0078-E633"
+  />
+<missing-glyph 
+ />
+    <glyph glyph-name=".notdef" 
+ />
+    <glyph glyph-name=".notdef" 
+ />
+    <glyph glyph-name=".null" horiz-adv-x="0" 
+ />
+    <glyph glyph-name="nonmarkingreturn" horiz-adv-x="341" 
+ />
+    <glyph glyph-name="x" unicode="x" horiz-adv-x="1001" 
+d="M281 543q-27 -1 -53 -1h-83q-18 0 -36.5 -6t-32.5 -18.5t-23 -32t-9 -45.5v-76h912v41q0 16 -0.5 30t-0.5 18q0 13 -5 29t-17 29.5t-31.5 22.5t-49.5 9h-133v-97h-438v97zM955 310v-52q0 -23 0.5 -52t0.5 -58t-10.5 -47.5t-26 -30t-33 -16t-31.5 -4.5q-14 -1 -29.5 -0.5
+t-29.5 0.5h-32l-45 128h-439l-44 -128h-29h-34q-20 0 -45 1q-25 0 -41 9.5t-25.5 23t-13.5 29.5t-4 30v167h911zM163 247q-12 0 -21 -8.5t-9 -21.5t9 -21.5t21 -8.5q13 0 22 8.5t9 21.5t-9 21.5t-22 8.5zM316 123q-8 -26 -14 -48q-5 -19 -10.5 -37t-7.5 -25t-3 -15t1 -14.5
+t9.5 -10.5t21.5 -4h37h67h81h80h64h36q23 0 34 12t2 38q-5 13 -9.5 30.5t-9.5 34.5q-5 19 -11 39h-368zM336 498v228q0 11 2.5 23t10 21.5t20.5 15.5t34 6h188q31 0 51.5 -14.5t20.5 -52.5v-227h-327z" />
+    <glyph glyph-name="dianzan" unicode="&#xe633;" 
+d="M189 341q11 0 18 6t7 16.5t-7 17t-18 6.5q-1 0 -1 -0.5v-0.5h-62q-2 1 -5 1q-15 0 -25.5 -10.5t-10.5 -25.5v-442q0 -15 10.5 -25t25.5 -10h6h60h1v0h1v0q10 0 17 6t7 16t-7 16t-17 6v0h-61v423h61v0v0zM928 391q-13 14 -47 15h-249q29 67 33 138.5t-23 128.5
+q-12 25 -37 39.5t-50 14.5q-82 -1 -102 -107q-8 -43 -33.5 -93.5t-70 -93t-93.5 -48.5v-512h491l8 1q2 0 12 -0.5t14 0t12 1t13.5 2.5t10.5 5q8 5 13 12t6.5 12t4.5 18.5t5 18.5q69 298 88 384q10 44 -6 64zM795 -63v0q-4 -10 -13 -16q-6 -4 -14 -5h-4h-465v427
+q42 16 81 52.5t67 86.5q22 38 31 62.5t18 65.5q10 44 24 58.5t35 14.5q23 0 43 -23t25 -83q2 -30 -5 -62.5t-20 -69t-14 -41.5q-5 -19 7 -31q10 -9 49 -9h220q25 2 28 -21q4 -25 -93 -406zM267 -127v0v0h-1h1z" />
+    <glyph glyph-name="dianzan1" unicode="&#xe60f;" 
+d="M190 424q11 0 18.5 7.5t7.5 18t-7.5 18t-18.5 7.5h-67q-14 0 -24.5 -10.5t-10.5 -26.5v-433q0 -15 10.5 -25t24.5 -10h67q10 0 17 7.5t7 17.5t-7 17.5t-17 8.5h-51l2 401zM926 462q-26 45 -81 45h-210q23 67 23 130q0 42 -10 83q-9 35 -36.5 58.5t-64.5 23.5
+q-42 0 -69 -31t-27 -75v-10q-2 -80 -59 -139t-138 -69v-507h520q23 0 48 16q25 17 37 42q5 9 5 11l77 344q1 5 1 13q3 35 -16 65zM266 -29q-3 0 0 0q-3 0 0 0z" />
+  </font>
+</defs></svg>

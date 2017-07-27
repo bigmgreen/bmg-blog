@@ -1,0 +1,11 @@
+.mark {
+    cursor: pointer;
+}
+
+.iconfont {
+    cursor: pointer;
+}
+
+.iconfont + input {
+    display: none;
+}

@@ -1,5 +1,5 @@
 .crumbs {
-    line-height: 2;
+    line-height: 4;
     padding: 0 20px;
 }
 
@@ -11,7 +11,4 @@
 .crumbs dd {
     display: inline-block;
     font-size: 14px;
-}
-
-.crumbs a {
 }

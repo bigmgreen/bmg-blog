@@ -17,7 +17,7 @@ export default class Crumbs extends Component {
         const crumbs = this.props;
         return (
             <dl className={crumbs.anchorClassName}>
-                <dt>{crumbs.title}：</dt>
+                <dt>{crumbs.title}</dt>
                 {this._getDd(crumbs.item)}
             </dl>
         );

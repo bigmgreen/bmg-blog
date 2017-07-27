@@ -20,7 +20,8 @@ export default class Header extends Component {
                 <Nav
                     onNavClick={this.props.onNavClick}
                     anchorClassName={header.navClassName}
-                    item={header.item}
+                    items={header.items}
+                    jump={this.props.jump}
                 />
             </div>
         );

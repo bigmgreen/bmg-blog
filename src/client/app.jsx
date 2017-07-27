@@ -60,8 +60,9 @@ export default class Main extends Component {
                             logoClassName='logo'
                             navClassName='nav'
                             src={Logo}
-                            item={this.state.header.nav}
+                            items={this.state.header.nav}
                             onNavClick={this.props.onNavClick}
+                            jump={this.props.jump}
                         />
                     </div>
                 </div>

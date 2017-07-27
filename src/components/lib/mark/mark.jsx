@@ -1,3 +1,4 @@
+import './web-font/iconfont.css';
 import './mark.css';
 import React,{Component} from 'react';
 
@@ -8,8 +9,13 @@ export default class Mark extends Component {
         this._handleChange = this._handleChange.bind(this);
 
         this.state = {
-            checked: props.checked || false
+            checked: false,
+            markCount: 0
         }
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState(newProps);
     }
 
     _handleChange (e) {
@@ -22,24 +28,26 @@ export default class Mark extends Component {
 
     _showByState (state) {
         if (state) {
-            return '已点赞';
+            return <i className="iconfont icon-dianzan1"></i>;
         } else {
-            return '点赞';
+            return <i className="iconfont icon-dianzan"></i>;
         }
     }
 
     render() {
-        var mark = this.props;
+        var mark = this.state;
+        console.log(mark)
         return (
-            <label htmlFor={mark.id}>
+            <label className={this.props.className} htmlFor={mark.id}>
+                {this._showByState(mark.checked)}
                 <input
                     type="checkbox"
                     id={mark.id}
                     name={mark.name || mark.id}
                     onChange={this._handleChange}
-                    checked={this.state.checked}
+                    checked={mark.checked}
                 />
-                <span>{this._showByState(this.state.checked)}</span>
+                <span>({mark.markCount})</span>
             </label>
         );
     }
