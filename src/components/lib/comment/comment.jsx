@@ -101,29 +101,6 @@ export default class Comment extends Component {
         return true;
     }
 
-    _markChange(checked) {
-        fetch('/mark', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                contentId: this.state.contentId,
-                checked: checked
-            }),
-            cache: 'no-cache'
-        }).then((res)=> {
-            return res.json();
-        }).then((data)=> {
-            this.setState(data);
-        }).catch((err)=> {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
     render() {
         var com = this.state;
         return (
@@ -150,7 +127,7 @@ export default class Comment extends Component {
                 </div>
                 <CommentItem
                     commentItem={com.commentItem}
-                    markChange={this._markChange.bind(this)}
+                    contentId={com.contentId}
                 />
                 <Page
                     anchorClassName={this.props.pageClassName}
@@ -176,7 +153,7 @@ class CommentItem extends Component {
     }
 
     _getItem(items) {
-        const _markChange = this.props.markChange;
+        const contentId = this.props.contentId
         return items.map((_item, index)=> {
             return (
                 <li key={index}>
@@ -186,7 +163,8 @@ class CommentItem extends Component {
                             <Mark
                                 className="mark"
                                 markCount={_item.markCount}
-                                onChange={_markChange}
+                                markId={contentId}
+                                markUrl="/commentMark"
                             />
                         </span>
                     </div>

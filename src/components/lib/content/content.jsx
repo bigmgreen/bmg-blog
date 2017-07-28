@@ -18,35 +18,10 @@ export default class Content extends Component {
             nextTitle: '',
             contentId: '',
         };
-
-        this._markChange = this._markChange.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
         this.setState(newProps);
-    }
-
-    _markChange(checked) {
-        fetch('/mark', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                contentId: this.state.contentId,
-                checked: checked
-            }),
-            cache: 'no-cache'
-        }).then((res)=> {
-            return res.json();
-        }).then((data)=> {
-            this.setState(data);
-        }).catch((err)=> {
-            if (err) {
-                console.log(err);
-            }
-        });
     }
 
     render() {
@@ -63,7 +38,8 @@ export default class Content extends Component {
                         <Mark
                             className={this.props.markClassName}
                             markCount={con.markCount}
-                            onChange={this._markChange}
+                            markId={con.contentId}
+                            markUrl="/mark"
                         />
                     </span>
                     <span>({con.browserCount})浏览</span>
