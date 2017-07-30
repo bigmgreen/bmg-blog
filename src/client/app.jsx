@@ -90,3 +90,14 @@ export default class Main extends Component {
         render(<App />, document.getElementById('app'));
     }
 }
+
+/*   异步请求地址   */
+module.exports.Url = {
+    INDEX: '/api/index',
+    INDEX_ARTICLE: '/api/article',
+    DETAIL: '/api/detail',
+    MARK: '/api/mark',
+    GET_COMMENT: '/api/getComment',
+    COMMENT: '/api/comment',
+    COMMENT_MARK: '/api/commentMark',
+};

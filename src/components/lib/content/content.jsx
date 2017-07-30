@@ -39,7 +39,7 @@ export default class Content extends Component {
                             className={this.props.markClassName}
                             markCount={con.markCount}
                             markId={con.contentId}
-                            markUrl="/mark"
+                            markUrl={this.props.url.MARK}
                         />
                     </span>
                     <span>({con.browserCount})浏览</span>

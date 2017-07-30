@@ -25,7 +25,7 @@ export default class Comment extends Component {
 
     _getComment(currentPage = 0) {
         Spinner.show();
-        fetch('/getComment',
+        fetch(this.props.url.GET_COMMENT,
             {
                 method: 'POST',
                 headers: {
@@ -61,7 +61,7 @@ export default class Comment extends Component {
         }
 
         Spinner.show();
-        fetch('/comment',
+        fetch(this.props.url.COMMENT,
             {
                 method: 'POST',
                 headers: {
@@ -128,11 +128,13 @@ export default class Comment extends Component {
                 <CommentItem
                     commentItem={com.commentItem}
                     contentId={com.contentId}
+                    url={this.props.url}
                 />
                 <Page
                     anchorClassName={this.props.pageClassName}
                     pageCount={com.pageCount}
                     onChange={this._getComment.bind(this)}
+                    url={this.props.url}
                 />
             </section>
         );
@@ -164,7 +166,7 @@ class CommentItem extends Component {
                                 className="mark"
                                 markCount={_item.markCount}
                                 markId={contentId}
-                                markUrl="/commentMark"
+                                markUrl={this.props.url.COMMENT_MARK}
                             />
                         </span>
                     </div>

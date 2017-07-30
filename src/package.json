@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js",
     "dev_b": "webpack --config webpack.dev.js",
+    "dev_hot": "webpack-dev-server --config webpack.hot.js",
     "cs": "webpack-dev-server --config webpack.components.js",
-    "cs_b": "webpack --config webpack.components.js"
+    "cs_b": "webpack --config webpack.components.js",
+    "server": "supervisor server.js"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +29,7 @@
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
     "less-loader": "^4.0.4",
+    "promise-polyfill": "^6.0.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^0.4.6",
@@ -35,9 +38,14 @@
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.4",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "uuid": "^3.1.0",
     "whatwg-fetch": "^2.0.3"
   }
 }

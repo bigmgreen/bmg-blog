@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main from '../app';
+import Main,{Url} from '../app';
 import Spinner from '../../components/lib/spinner/spinner';
 import Banner from '../../components/lib/banner/banner';
 import Author from '../../components/lib/author/author';
@@ -40,7 +40,7 @@ class App extends Component {
 
     _getData(type = 'all', currentPage = 0) {
         Spinner.show();
-        fetch('/index',
+        fetch(Url.INDEX,
             {
                 method: 'POST',
                 headers: {
@@ -87,7 +87,7 @@ class App extends Component {
                             <Article
                                 items={this.state.article.items}
                                 page={this.state.page}
-                                url="/article"
+                                url={Url.INDEX_ARTICLE}
                                 text ="加载更多"
                                 isGetData ={true}
                             />

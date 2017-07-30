@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import Main from '../app';
+import Main,{Url} from '../app';
 import Spinner from '../../components/lib/spinner/spinner';
 import Author from '../../components/lib/author/author';
 import Types from '../../components/lib/types/types';
 import Crumbs from '../../components/lib/crumbs/crumbs';
 import Content from '../../components/lib/content/content';
-import Share from '../../components/lib/share/share';
 import Comment from '../../components/lib/comment/comment';
 import '../static/css/detail.css';
 
@@ -51,7 +50,7 @@ class App extends Component {
 
     _getData(id) {
         Spinner.show();
-        fetch('/detail',
+        fetch(Url.DETAIL,
             {
                 method: 'POST',
                 headers: {
@@ -122,8 +121,12 @@ class App extends Component {
                             <Content
                                 {...this.state.content}
                                 markClassName="mark"
+                                url={Url}
                             />
-                            <Comment {...this.state.comment} />
+                            <Comment
+                                {...this.state.comment}
+                                url={Url}
+                            />
                         </div>
                         <div className="right">
                             <Author
