@@ -4,9 +4,10 @@ const router = require('./router/router');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-var uuidV1 = require('uuid/v1');//TODO 登录控制
+const uuidV1 = require('uuid/v1');//TODO 登录控制
 
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(session({

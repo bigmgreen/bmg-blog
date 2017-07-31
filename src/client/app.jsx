@@ -10,6 +10,8 @@ import LoginStatus from '../components/lib/loginStatus/loginStatus';
 import Promise from 'promise-polyfill';
 import 'whatwg-fetch';
 
+let Url = null;
+
 export default class Main extends Component {
     constructor (props) {
         super(props);
@@ -33,6 +35,7 @@ export default class Main extends Component {
         return (
             <LoginStatus
                 anchorClassName="login-status"
+
                 offLine={{
                     login: 'login.html',
                     loginText: '登录',
@@ -41,7 +44,7 @@ export default class Main extends Component {
                 }}
                 onLine={{
                     welcome: '欢迎您',
-                    exit: '/exit',
+                    exit: Url.EXIT,
                     exitText: '退出',
                     userName: this.state.header.userName
                 }}
@@ -92,7 +95,8 @@ export default class Main extends Component {
 }
 
 /*   异步请求地址   */
-module.exports.Url = {
+
+module.exports.Url = Url ={
     INDEX: '/api/index',
     INDEX_ARTICLE: '/api/article',
     DETAIL: '/api/detail',
@@ -100,4 +104,9 @@ module.exports.Url = {
     GET_COMMENT: '/api/getComment',
     COMMENT: '/api/comment',
     COMMENT_MARK: '/api/commentMark',
+    EXIT: '/api/exit',
+    LOGIN: '/api/login',
+    FIND_PWD: '/api/findPwd',
+    FIND_PWD_VERIFY_CODE: '/api/findPwdVerifyCode',
+
 };

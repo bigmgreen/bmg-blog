@@ -78,13 +78,31 @@ class OnLine extends Component {
         super(props);
     }
 
+    _exit (url, e) {
+        e.preventDefault();
+        fetch(url, {
+            method:"GET"
+        }).then((res)=> {
+            return res.json();
+        }).then((data)=> {
+            const EXIT_SUCCESS = 1;
+            if (data.code === EXIT_SUCCESS) {
+                location.href = 'login.html'
+            }
+        }).catch((err)=> {
+            if (err) {
+                console.log(err);
+            }
+        })
+    }
+
     render() {
         var on = this.props;
         return (
             <div>
                 <span>{on.welcome}</span>
                 <strong>{this.props.userName}</strong>
-                <a href={on.exit}>{on.exitText}</a>
+                <a href={on.exit} onClick={this._exit.bind(this, on.exit)}>{on.exitText}</a>
             </div>
         );
     }

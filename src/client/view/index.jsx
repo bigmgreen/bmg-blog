@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Main,{Url} from '../app';
+import UserImg from '../static/common/img/user.jpg';
 import Spinner from '../../components/lib/spinner/spinner';
 import Banner from '../../components/lib/banner/banner';
 import Author from '../../components/lib/author/author';
@@ -96,7 +97,7 @@ class App extends Component {
                             <Author
                                 anchorClassName="author"
                                 title={this.state.author.title}
-                                src={this.state.author.src}
+                                src={UserImg}
                                 alt="作者头像"
                                 infos={this.state.author.infos}
                             />

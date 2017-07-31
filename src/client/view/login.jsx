@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main from '../app';
+import Main, {Url} from '../app';
 import Input from '../../components/lib/input/input';
 import Check from '../../components/lib/check/check';
 import Button from '../../components/lib/button/button';
@@ -72,23 +72,28 @@ class App extends Component {
                     <Button
                         error={this.state.error}
                         type="button"
-                        onClick={()=> {
+                        onClick={(e)=> {
+                            e.preventDefault();
                             const isValidatePass = this._validate(this.state);
                             if (isValidatePass) {
 
                                 {/*     网络请求  start    */
                                 }
-                                fetch('/login', {
+
+                                const {userName, pwd, remember7Day} = this.state;
+
+                                fetch(Url.LOGIN, {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
-                                    body: new FormData(document.querySelector('form'))
+                                    body: {userName: userName, pwd: pwd, remember7Day: remember7Day,}
                                 }).then((res)=> {
                                     return res.json();
                                 }).then((data)=> {
-                                    if (data.code === 0) {
-                                        window.location.href = 'index.html';
+                                    const LOGIN_SUCCESS = 1;
+                                    if (data.code === LOGIN_SUCCESS) {
+                                        location.href = 'index.html';
                                     } else {
                                         this.setState(data);
                                     }

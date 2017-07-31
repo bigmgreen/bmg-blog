@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main from '../app';
+import Main, {Url} from '../app';
 import Input from '../../components/lib/input/input';
 import Button from '../../components/lib/button/button';
 import VerifyCode from '../../components/lib/verifyCode/verifyCode';
@@ -55,7 +55,7 @@ class App extends Component {
                         }}
                     />
                     <VerifyCode
-                        src="http://fanyi.baidu.com/static/translation/img/header/logo_cbfea26.png"
+                        src={Url.FIND_PWD_VERIFY_CODE}
                         wrapClassName="input-wrap"
                         inputClassName="input"
                         errorClassName="error"
@@ -81,16 +81,24 @@ class App extends Component {
 
                                 {/*     网络请求  start    */
                                 }
-                                fetch('/findPwd', {
+
+                                const {userName, email, verifyCode} = this.state;
+
+                                fetch(Url.FIND_PWD, {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
-                                    body: new FormData(document.querySelector('form'))
+                                    body: {
+                                        userName: userName,
+                                        email: email,
+                                        verifyCode: verifyCode
+                                    }
                                 }).then((res)=> {
                                     return res.json();
                                 }).then((data)=> {
-                                    if (data.code === 0) {
+                                    const FIND_SUCCESS = 1;
+                                    if (data.code === FIND_SUCCESS) {
                                         window.location.href = 'login.html';
                                     } else {
                                         this.setState(data);
