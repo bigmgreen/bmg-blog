@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main from '../app';
+import Main, {Url} from '../app';
 import Input from '../../components/lib/input/input';
 import Button from '../../components/lib/button/button';
 import VerifyCode from '../../components/lib/verifyCode/verifyCode';
@@ -109,7 +109,7 @@ class App extends Component {
                         }}
                     />
                     <VerifyCode
-                        src="http://fanyi.baidu.com/static/translation/img/header/logo_cbfea26.png"
+                        src={Url.REGISTER_VERIFY_CODE}
                         wrapClassName="input-wrap"
                         inputClassName="input"
                         errorClassName="error"
@@ -135,16 +135,26 @@ class App extends Component {
 
                                 {/*     网络请求  start    */
                                 }
-                                fetch('/register', {
+
+                                const {inviteCode, userName, email, pwd, verifyCode} = this.state;
+
+                                fetch(Url.REGISTER, {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
-                                    body: new FormData(document.querySelector('form'))
+                                    body: {
+                                        inviteCode: inviteCode,
+                                        userName: userName,
+                                        email: email,
+                                        pwd: pwd,
+                                        verifyCode: verifyCode
+                                    }
                                 }).then((res)=> {
                                     return res.json();
                                 }).then((data)=> {
-                                    if (data.code === 0) {
+                                    const REGISTER_SUCCESS = 1;
+                                    if (data.code === REGISTER_SUCCESS) {
                                         window.location.href = 'index.html';
                                     } else {
                                         this.setState(data);

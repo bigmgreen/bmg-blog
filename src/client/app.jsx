@@ -108,5 +108,6 @@ module.exports.Url = Url ={
     LOGIN: '/api/login',
     FIND_PWD: '/api/findPwd',
     FIND_PWD_VERIFY_CODE: '/api/findPwdVerifyCode',
-
+    REGISTER_VERIFY_CODE: '/api/registerVerifyCode',
+    REGISTER: '/api/register',
 };
