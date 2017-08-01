@@ -8,7 +8,8 @@
     "w": "webpack --config webpack.config.js --watch --progress",
     "s": "webpack-dev-server --open",
     "demo-b": "webpack --config webpack.demo.config.js",
-    "demo": "webpack-dev-server --hot --open --config webpack.demo.config.js"
+    "demo": "webpack-dev-server --hot --open --config webpack.demo.config.js",
+    "mw": "node app.js"
   },
   "author": "",
   "license": "ISC",
@@ -33,9 +34,11 @@
     "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
     "webpack": "^3.0.0",
+    "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
+    "express": "^4.15.3",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"

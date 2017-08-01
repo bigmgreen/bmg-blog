@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import Main, {Url} from '../app';
+import Spinner from '../../components/lib/spinner/spinner';
 import Input from '../../components/lib/input/input';
 import Check from '../../components/lib/check/check';
 import Button from '../../components/lib/button/button';
 
 class App extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
+            header: {
+                userName: '',
+                nav: []
+            },
             userName: '',
             userNameError: '',
             pwd: '',
@@ -18,10 +23,37 @@ class App extends Component {
         };
     }
 
+    _getData() {
+        Spinner.show();
+        fetch(Url.PAGE_INFO)
+            .then((res)=> {
+                return res.json();
+            })
+            .then((data)=> {
+                this.setState(data);
+                Spinner.hide();
+            })
+            .catch((err)=> {
+                if (err) {
+                    console.log(err);
+                }
+                Spinner.hide();
+            });
+    }
+
+    componentDidMount() {
+        this._getData();
+    }
+
     render() {
 
         return (
-            <Main top={false}>
+            <Main
+                top={false}
+                header={this.state.header}
+                onNavClick={this._getData.bind(this)}
+                jump={true}
+            >
                 <form className="panel"
                 >
                     <header className="panel-title"><a href="register.html">去注册</a>或<a href="findPwd.html">找回密码</a>
@@ -82,12 +114,17 @@ class App extends Component {
 
                                 const {userName, pwd, remember7Day} = this.state;
 
+
                                 fetch(Url.LOGIN, {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
-                                    body: {userName: userName, pwd: pwd, remember7Day: remember7Day,}
+                                    body: JSON.stringify({
+                                        userName: userName,
+                                        pwd: pwd,
+                                        remember7Day: remember7Day
+                                    })
                                 }).then((res)=> {
                                     return res.json();
                                 }).then((data)=> {

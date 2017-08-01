@@ -1,18 +1,8 @@
-import _ from 'lodash';
-import './style.css';
-import meImg from './user.jpg';
+var express = require('express');
+let app = express();
 
-function component () {
-    var el =  document.createElement('div');
+app.post('/api/data', function (req, res) {
+   res.send('aaa');
+});
 
-    el.innerHTML = _.join(['hello', 'webpack', 'watch U', 'webpack-dev-server running', 'hot'], ' ');
-    el.classList.add('hello');
-
-    var img = new Image();
-    img.src = meImg;
-    el.appendChild(img);
-
-    return el;
-}
-
-document.body.appendChild(component());
+app.listen(3000);

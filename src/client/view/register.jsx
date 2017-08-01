@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Main, {Url} from '../app';
+import Spinner from '../../components/lib/spinner/spinner';
 import Input from '../../components/lib/input/input';
 import Button from '../../components/lib/button/button';
 import VerifyCode from '../../components/lib/verifyCode/verifyCode';
@@ -9,6 +10,10 @@ class App extends Component {
         super(props);
 
         this.state = {
+            header: {
+                userName: '',
+                nav: []
+            },
             inviteCode: '',
             inviteCodeError: '',
             userName: '',
@@ -24,9 +29,36 @@ class App extends Component {
         };
     }
 
+    _getData() {
+        Spinner.show();
+        fetch(Url.PAGE_INFO)
+            .then((res)=> {
+                return res.json();
+            })
+            .then((data)=> {
+                this.setState(data);
+                Spinner.hide();
+            })
+            .catch((err)=> {
+                if (err) {
+                    console.log(err);
+                }
+                Spinner.hide();
+            });
+    }
+
+    componentDidMount() {
+        this._getData();
+    }
+
     render() {
         return (
-            <Main top={false}>
+            <Main
+                top={false}
+                header={this.state.header}
+                onNavClick={this._getData.bind(this)}
+                jump={true}
+            >
                 <form className="panel"
                 >
                     <header className="panel-title"><a href="login.html">去登录</a>或<a href="findPwd.html">找回密码</a>

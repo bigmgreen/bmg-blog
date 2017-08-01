@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const captchaPng = require('captchapng');
+const loginRouter = require('./loginRouter');
 
 
 // 简单打印访问时间
@@ -9,6 +10,7 @@ router.use(function timeLog(req, res, next) {
     next();
 });
 
+router.use(loginRouter);
 
 router.post('/index', function (req, res) {
     res.json({
@@ -481,8 +483,33 @@ router.get('/exit', function (req, res) {
     res.json({code: 1});
 });
 
-router.post('/login', function (req, res) {
-    res.json({code: 1});
+router.get('/pageInfo', function (req, res) {
+    res.json({
+        "header": {
+            "nav": [
+                {
+                    "type": "index",
+                    "text": "首页",
+                    "href": "index.html?type=index"
+                },
+                {
+                    "type": "html5",
+                    "text": "html5",
+                    "href": "index.html?type=html5"
+                },
+                {
+                    "type": "angular",
+                    "text": "angular",
+                    "href": "index.html?type=angular"
+                },
+                {
+                    "type": "react",
+                    "text": "react",
+                    "href": "index.html?type=react"
+                }
+            ]
+        }
+    });
 });
 
 router.post('/findPwd', function (req, res) {
@@ -521,5 +548,6 @@ router.get('/registerVerifyCode', function (req, res) {
     });
     res.end(imgbase64);
 });
+
 
 module.exports = router;
