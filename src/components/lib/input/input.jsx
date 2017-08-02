@@ -111,6 +111,56 @@ export class NumberInput extends Component {
 export class EmailInput extends Component {
     constructor(props) {
         super(props);
+        this._onClick = this._onClick.bind(this);
+        this.state = {
+            time: props.time || 60,
+            countDown: false,
+            text: props.text || '获取验证码'
+        };
+        this.time = false;
+    }
+
+    _onClick(e) {
+
+        if (this.props.validateEmail() === false) {
+            return;
+        }
+
+        if (this.time) {
+            return;
+        }
+
+        let {time, countDown} = this.state;
+        if (countDown === false) {
+            this.props.sendEmail(()=> {
+                this.time = setInterval(()=> {
+                    if (time <= 1) {
+                        clearInterval(this.time);
+                        this.time = false;
+                        this.setState({
+                            time: this.props.time || 60,
+                            countDown: false,
+                            text: this.props.text || '获取验证码'
+                        });
+                        return;
+                    }
+
+                    if (typeof this.props.sendEmail !== 'function') {
+                        throw new ReferenceError('sendEmail函数没有定义~');
+                    }
+                    this.setState({
+                        countDown: true,
+                        time: --time,
+                        text: `${time}s后重试`
+                    });
+
+                }, 1000);
+            });
+        } else {
+            this.setState({
+                countDown: true,
+            });
+        }
     }
 
     render() {
@@ -118,11 +168,17 @@ export class EmailInput extends Component {
         /* TODO  需要一个过滤输入的正则表达式   */
 
         return (
-            <Input
-                {...this.props}
-                isChineseFilter={true}
-                pattern='/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/'
-            />
+            <div className="input-email">
+                <Input
+                    {...this.props}
+                    isChineseFilter={true}
+                />
+                <button
+                    onClick={e=>this._onClick(e)}
+                    className="input-email-btn"
+                    type="button">{this.state.text}
+                </button>
+            </div>
         );
     }
 }

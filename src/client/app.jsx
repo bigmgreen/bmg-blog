@@ -111,4 +111,5 @@ module.exports.Url = Url ={
     REGISTER_VERIFY_CODE: '/api/registerVerifyCode',
     REGISTER: '/api/register',
     PAGE_INFO: '/api/pageInfo',
+    GET_EMAIL_CODE: '/api/getEmailCode',
 };

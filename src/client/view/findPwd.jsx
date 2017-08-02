@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Main, {Url} from '../app';
 import Spinner from '../../components/lib/spinner/spinner';
-import Input from '../../components/lib/input/input';
+import Input,{EmailInput} from '../../components/lib/input/input';
 import Button from '../../components/lib/button/button';
 import VerifyCode from '../../components/lib/verifyCode/verifyCode';
 
@@ -14,6 +14,8 @@ class App extends Component {
             userNameError: '',
             email: '',
             emailError: '',
+            emailVerifyCode: '',
+            emailVerifyCodeError: '',
             verifyCode: '',
             verifyCodeError: '',
         };
@@ -67,7 +69,7 @@ class App extends Component {
                             })
                         }}
                     />
-                    <Input
+                    <EmailInput
                         wrapClassName="input-wrap"
                         inputClassName="input"
                         errorClassName="error"
@@ -79,6 +81,63 @@ class App extends Component {
                             this.setState({
                                 email: value,
                                 emailError: ''
+                            })
+                        }}
+                        validateEmail={()=> {
+                            const email = this.state.email;
+                            const emailIsNull = (email === '');
+                            const reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+                            const emailIsValid = (reg.test(email) === false);
+
+                            if (emailIsNull) {
+                                this.setState({
+                                    emailError: '邮箱不能为空'
+                                });
+                                return false;
+                            } else if (emailIsValid) {
+                                this.setState({
+                                    emailError: '邮箱格式错误'
+                                });
+                                return false;
+                            }
+                        }}
+                        sendEmail={(func)=> {
+                            fetch(Url.GET_EMAIL_CODE, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    email: this.state.email
+                                })
+                            }).then((res)=> {
+                                return res.json();
+                            }).then((data)=> {
+                                const SEND_SUCCESS = 1;
+                                if (data.code === SEND_SUCCESS) {
+                                    func();
+                                } else {
+                                    this.setState(data);
+                                }
+                            }).catch((err)=> {
+                                if (err) {
+                                    console.log(err);
+                                }
+                            });
+                        }}
+                    />
+                    <Input
+                        wrapClassName="input-wrap"
+                        inputClassName="input"
+                        errorClassName="error"
+                        placeholder="邮箱验证码"
+                        value={this.state.emailVerifyCode}
+                        error={this.state.emailVerifyCodeError}
+                        name="emailVerifyCode"
+                        onChange={(value)=> {
+                            this.setState({
+                                emailVerifyCode: value,
+                                emailVerifyCodeError: ''
                             })
                         }}
                     />
@@ -117,11 +176,11 @@ class App extends Component {
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
-                                    body: {
+                                    body: JSON.stringify({
                                         userName: userName,
                                         email: email,
                                         verifyCode: verifyCode
-                                    }
+                                    })
                                 }).then((res)=> {
                                     return res.json();
                                 }).then((data)=> {
@@ -148,13 +207,14 @@ class App extends Component {
         );
     }
 
-    _validate({userName, email, verifyCode}) {
+    _validate({userName, email, emailVerifyCode, verifyCode}) {
         const userNameIsNull = (userName === '');
         const emailIsNull = (email === '');
         const reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         const emailIsValid = (reg.test(email) === false);
-
+        const emailVerifyCodeIsNull = (emailVerifyCode === '');
         const verifyCodeIsNull = (verifyCode === '');
+
         if (userNameIsNull) {
             this.setState({
                 userNameError: '用户名不能为空'
@@ -170,6 +230,13 @@ class App extends Component {
         } else if (emailIsValid) {
             this.setState({
                 emailError: '邮箱格式错误'
+            });
+            return false;
+        }
+
+        if (emailVerifyCodeIsNull) {
+            this.setState({
+                emailVerifyCodeError: '邮箱验证码不能为空'
             });
             return false;
         }

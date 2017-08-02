@@ -1,4 +1,4 @@
-.input-wrap .error{
+.input-wrap .error {
     display: block;
     position: absolute;
     bottom: 5px;
@@ -6,4 +6,29 @@
     height: 1.2em;
     color: #e10601;
     font-size: 12px;
+}
+
+.input-email {
+    position: relative;
+}
+
+.input-email .input-email-btn:active {
+    background-color: #eee;
+    transition: background-color .5s;
+    color: #999;
+}
+
+.input-email .input-email-btn {
+    transition: background-color .5s;
+    position: absolute;
+    right: 50px;
+    background: none;
+    border: 0 none;
+    outline: 0 none;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 4em;
+    top: 2px;
+    color: #666;
+    border-radius: 30%;
 }
