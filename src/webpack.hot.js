@@ -90,7 +90,10 @@ module.exports = {
         hot: true,  // 让 dev-server 开启 HMR
         open: true,
         proxy: {
-            "/api": "http://localhost:3000"
+            "/api": {
+                target: "http://localhost:3000",
+                changeOrigin: true
+            }
         }
     }
 };
