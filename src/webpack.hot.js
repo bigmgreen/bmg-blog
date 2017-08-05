@@ -13,7 +13,7 @@ const glob = require('glob')
 //entries函数--自动检索js文件
 const entries = (function () {
     const jsDir = path.resolve(C_PATH, 'view', '*.{js,jsx}');
-    var entryFiles = glob.sync(jsDir)
+    var entryFiles = glob.sync(jsDir);
     var map = {};
 
     for (var i = 0; i < entryFiles.length; i++) {
@@ -88,12 +88,6 @@ module.exports = {
         contentBase: BUILD_PATH,
         openPage: 'index.html',
         hot: true,  // 让 dev-server 开启 HMR
-        open: true,
-        proxy: {
-            "/api": {
-                target: "http://localhost:3000",
-                changeOrigin: true
-            }
-        }
+        open: true
     }
 };

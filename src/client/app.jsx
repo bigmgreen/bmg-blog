@@ -13,12 +13,12 @@ import 'whatwg-fetch';
 let Url = null;
 
 export default class Main extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.state = {
             header: {
-                userName:'',
+                userName: '',
                 nav: []
             }
         };
@@ -95,21 +95,61 @@ export default class Main extends Component {
 }
 
 /*   异步请求地址   */
+const BASE_URL = 'http://127.0.0.1:3000';
+module.exports.Url = Url = {
+    INDEX: BASE_URL + '/api/index',
+    INDEX_ARTICLE: BASE_URL + '/api/article',
+    DETAIL: BASE_URL + '/api/detail',
+    MARK: BASE_URL + '/api/mark',
+    GET_COMMENT: BASE_URL + '/api/getComment',
+    COMMENT: BASE_URL + '/api/comment',
+    COMMENT_MARK: BASE_URL + '/api/commentMark',
+    EXIT: BASE_URL + '/api/exit',
+    LOGIN: BASE_URL + '/api/login',
+    FIND_PWD: BASE_URL + '/api/findPwd',
+    FIND_PWD_VERIFY_CODE: BASE_URL + '/api/findPwdVerifyCode',
+    REGISTER_VERIFY_CODE: BASE_URL + '/api/registerVerifyCode',
+    REGISTER: BASE_URL + '/api/register',
+    PAGE_INFO: BASE_URL + '/api/pageInfo',
+    GET_EMAIL_CODE: BASE_URL + '/api/getEmailCode',
+};
 
-module.exports.Url = Url ={
-    INDEX: '/api/index',
-    INDEX_ARTICLE: '/api/article',
-    DETAIL: '/api/detail',
-    MARK: '/api/mark',
-    GET_COMMENT: '/api/getComment',
-    COMMENT: '/api/comment',
-    COMMENT_MARK: '/api/commentMark',
-    EXIT: '/api/exit',
-    LOGIN: '/api/login',
-    FIND_PWD: '/api/findPwd',
-    FIND_PWD_VERIFY_CODE: '/api/findPwdVerifyCode',
-    REGISTER_VERIFY_CODE: '/api/registerVerifyCode',
-    REGISTER: '/api/register',
-    PAGE_INFO: '/api/pageInfo',
-    GET_EMAIL_CODE: '/api/getEmailCode',
+/*   请求方法封装   */
+module.exports.bmgFetch = {
+
+    post (url, data, config) {
+
+        let option = Object.assign({
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }, config, {
+            body: JSON.stringify(data)
+        });
+
+        return fetch(url, option);
+    },
+
+    get (url, data, config) {
+        let option = Object.assign({
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }, config);
+
+        url +='?';
+
+        for (let key of Object.keys(data)) {
+            url+=`${key}=${data[key]}&`
+        }
+
+        return fetch(url, option);
+    }
+
 };

@@ -27,11 +27,12 @@ app.use('*', function (req, res, next) {
     res.header("X-Content-Type-Options", "nosniff");
     res.header("Content-Security-Policy", "default-src 'self' 'unsafe-eval'");
 
-    // res.header("Access-Control-Allow-Origin", "http://127.0.0.1:8080");
-    // res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    // res.header("Access-Control-Allow-Credentials", true);
-    // res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    // res.header("Content-Type", "application/json;charset=utf-8");
+    res.header("Access-Control-Allow-Origin", "http://127.0.0.1:8080");
+    res.header("Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie");
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("Content-Type", "application/json;charset=utf-8");
 
     next();
 });

@@ -61,7 +61,7 @@ class App extends Component {
             >
                 <form className="panel"
                 >
-                    <header className="panel-title"><a href="login.html">去登录</a>或<a href="findPwd.html">找回密码</a>
+                    <header className="panel-title"><a href="login.html">去登录</a>或<a href="findPwd.html">重置密码</a>
                     </header>
                     <Input
                         wrapClassName="input-wrap"

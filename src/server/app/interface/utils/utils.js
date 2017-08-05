@@ -22,7 +22,7 @@ function excute(sql, callback) {
     console.log("sql打印：", sql);
     pool.getConnection(function (err, connection) {
         connection.query(sql, function (err, rows, fields) {
-            callback(err, rows, fields);
+            callback && callback(err, rows, fields);
             connection.release();
         });
     });
@@ -45,6 +45,113 @@ module.exports = {
             `;
         excute(sql, callback);
     },
+    /**
+     * 根据userId获取user
+     * @param userId
+     * @param callback
+     */
+    getUserById: function (userId, callback) {
+        var sql = ` SELECT * FROM user WHERE userId=${pool.escape(userId)}`;
+        excute(sql, callback);
+    },
+    /**
+     * 根据邮箱获取user
+     * @param email
+     * @param callback
+     */
+    getUserByEmail: function (email, callback) {
+        var sql = ` SELECT * FROM user WHERE email=${pool.escape(email)}`;
+        excute(sql, callback);
+    },
+    /**
+     * 向数据库保存邮箱验证码
+     * @param email
+     * @param code
+     * @param callback
+     */
+    saveEmailValidateCode: function (email, code, callback) {
+        var sql = `
+            INSERT INTO user_email_code(email, code) VALUES ("${email}","${code}")
+        `;
+        excute(sql, callback);
+    },
+    /**
+     * 向数据库保存图片验证码
+     * @param code
+     * @param callback
+     */
+    saveVerifyCode: function (code, callback) {
+        var sql = `
+            INSERT INTO user_verify_code(code) VALUES ("${code}")
+        `;
+        excute(sql, callback);
+    },
+    /**
+     * 验证图片验证码
+     * @param code
+     * @param callback
+     */
+    checkVerifyCode: function (code,callback) {
+        var sql = `
+            SELECT COUNT(*) as count from  user_verify_code WHERE code=${pool.escape(code)}
+        `;
+        excute(sql, callback);
+    },
+    /**
+     * 验证用户
+     * @param userName
+     * @param callback
+     */
+    checkUserByName: function (userName, callback) {
+        var sql = `
+            SELECT * FROM user WHERE 
+                userName=${pool.escape(userName)}
+        `;
+        excute(sql, callback);
+    },
+    /**
+     * 验证邮箱验证码
+     * @param email
+     * @param emailVerifyCode
+     * @param callback
+     */
+    checkEmailVerifyCode: function (email, emailVerifyCode, callback) {
+        var sql = `
+            SELECT COUNT(*) as count FROM user_email_code 
+                WHERE 
+                email=${pool.escape(email)}
+                AND
+                code=${pool.escape(emailVerifyCode)}
+        `;
+        excute(sql, callback);
+    },
+    /**
+     * 删除验证过的邮箱验证码
+     * @param email
+     */
+    removeEmailVerifyCode: function (email) {
+        var sql = `
+            DELETE FROM user_email_code WHERE email=${pool.escape(email)}
+        `;
+        excute(sql);
+    },
+    /**
+     * 重置密码
+     * @param userId
+     * @param pwd
+     * @param callback
+     */
+    findPwd: function (userId, pwd,callback) {
+        var sql = `
+            UPDATE user SET pwd=${pool.escape(pwd)} 
+            WHERE userId=${userId}
+        `;
+        excute(sql, callback);
+    },
+
+
+
+
     /**
      * 获取对应类型的总条数
      * @param param

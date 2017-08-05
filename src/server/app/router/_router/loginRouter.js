@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-let Login = require('../interface/loginInterFace');
+let Login = require('../../interface/loginInterFace');
 const uuidV1 = require('uuid/v1');
 
 const _setRemember7Day = (remember7Day, uuId, res)=> {
 
     if (remember7Day) {
-        res.cookie('blog_online', uuId,
-            {path: '/api', expires: new Date(Date.now() + 604800000), httpOnly: true});
+        res.cookie('session_id', uuId,
+            {path: '/', expires: new Date(Date.now() + 604800000), httpOnly: true});
     } else {
-        res.cookie('blog_online', uuId,
-            {path: '/api', expires: new Date(Date.now() + 1800000), httpOnly: true});
+        res.cookie('session_id', uuId,
+            {path: '/', expires: new Date(Date.now() + 1800000), httpOnly: true});
     }
 
 };
@@ -28,9 +28,16 @@ router.post('/login', function (req, res) {
 
         if (HAS_USER) {
             let uuId = uuidV1();
+
+            const _cookie = req.cookies['session_id'];
+            if (_cookie) {
+                delete req.session[`user_${_cookie}`];
+            }
+
             req.session[`user_${uuId}`] = _user.userId;
             _setRemember7Day(req.body.remember7Day, uuId, res);
-            res.json({code: 11});
+
+            res.json({code: 1});
         } else {
             res.json({
                 code: 0,
@@ -42,8 +49,8 @@ router.post('/login', function (req, res) {
 
 router.get('/exit', function (req, res) {
     //删除session，cookie
-    delete req.session[`user_${res.cookie['blog_online']}`];
-    res.clearCookie(`user_${res.cookie['blog_online']}`);
+    delete req.session[`user_${req.cookies['session_id']}`];
+    res.clearCookie('session_id');
     res.json({code: 1});
 });
 

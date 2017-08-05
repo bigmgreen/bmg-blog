@@ -1,0 +1,36 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'G:\\nodejs\\node.exe',
+1 verbose cli   'G:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'dev_hot' ]
+2 info using npm@3.10.10
+3 info using node@v6.10.0
+4 verbose run-script [ 'predev_hot', 'dev_hot', 'postdev_hot' ]
+5 info lifecycle demo@1.0.0~predev_hot: demo@1.0.0
+6 silly lifecycle demo@1.0.0~predev_hot: no script for predev_hot, continuing
+7 info lifecycle demo@1.0.0~dev_hot: demo@1.0.0
+8 verbose lifecycle demo@1.0.0~dev_hot: unsafe-perm in lifecycle true
+9 verbose lifecycle demo@1.0.0~dev_hot: PATH: G:\nodejs\node_modules\npm\bin\node-gyp-bin;G:\workspace\bmg-blog\src\node_modules\.bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;G:\nodejs\;G:\JDK8\bin;G:\JDK8\lib;G:\Git\cmd;G:\gittortoise\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\Users\Administrator\AppData\Local\atom\bin;G:\Microsoft VS Code\bin
+10 verbose lifecycle demo@1.0.0~dev_hot: CWD: G:\workspace\bmg-blog\src
+11 silly lifecycle demo@1.0.0~dev_hot: Args: [ '/d /s /c', 'webpack-dev-server --config webpack.hot.js' ]
+12 verbose stack Error: kill ENOSYS
+12 verbose stack     at exports._errnoException (util.js:1022:11)
+12 verbose stack     at process.kill (internal/process.js:172:13)
+12 verbose stack     at process.listener (G:\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
+12 verbose stack     at emitNone (events.js:91:20)
+12 verbose stack     at process.emit (events.js:185:7)
+12 verbose stack     at processEmit (G:\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at processEmit (G:\nodejs\node_modules\npm\node_modules\npm-registry-client\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:199:44)
+13 verbose cwd G:\workspace\bmg-blog\src
+14 error Windows_NT 10.0.10586
+15 error argv "G:\\nodejs\\node.exe" "G:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev_hot"
+16 error node v6.10.0
+17 error npm  v3.10.10
+18 error code ENOSYS
+19 error errno ENOSYS
+20 error syscall kill
+21 error kill ENOSYS
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]

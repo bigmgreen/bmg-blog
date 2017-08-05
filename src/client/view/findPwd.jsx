@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Main, {Url} from '../app';
+import Main, {Url, bmgFetch} from '../app';
 import Spinner from '../../components/lib/spinner/spinner';
-import Input,{EmailInput} from '../../components/lib/input/input';
+import Input, {EmailInput} from '../../components/lib/input/input';
 import Button from '../../components/lib/button/button';
 import VerifyCode from '../../components/lib/verifyCode/verifyCode';
 
@@ -16,6 +16,10 @@ class App extends Component {
             emailError: '',
             emailVerifyCode: '',
             emailVerifyCodeError: '',
+            pwd: '',
+            pwdError: '',
+            confirmPwd: '',
+            confirmPwdError: '',
             verifyCode: '',
             verifyCodeError: '',
         };
@@ -23,7 +27,7 @@ class App extends Component {
 
     _getData() {
         Spinner.show();
-        fetch(Url.PAGE_INFO)
+        bmgFetch.get(Url.PAGE_INFO)
             .then((res)=> {
                 return res.json();
             })
@@ -53,7 +57,9 @@ class App extends Component {
             >
                 <form className="panel"
                 >
-                    <header className="panel-title"><a href="register.html">去注册</a>或<a href="login.html">登录</a></header>
+                    <header className="panel-title">
+                        <a href="register.html">去注册</a>或<a href="login.html">登录</a>
+                    </header>
                     <Input
                         wrapClassName="input-wrap"
                         inputClassName="input"
@@ -102,14 +108,8 @@ class App extends Component {
                             }
                         }}
                         sendEmail={(func)=> {
-                            fetch(Url.GET_EMAIL_CODE, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    email: this.state.email
-                                })
+                            bmgFetch.post(Url.GET_EMAIL_CODE, {
+                                email: this.state.email
                             }).then((res)=> {
                                 return res.json();
                             }).then((data)=> {
@@ -141,6 +141,38 @@ class App extends Component {
                             })
                         }}
                     />
+                    <Input
+                        wrapClassName="input-wrap"
+                        inputClassName="input"
+                        errorClassName="error"
+                        type="password"
+                        placeholder="请输入密码"
+                        value={this.state.pwd}
+                        error={this.state.pwdError}
+                        name="pwd"
+                        onChange={(value)=> {
+                            this.setState({
+                                pwd: value,
+                                pwdError: ''
+                            })
+                        }}
+                    />
+                    <Input
+                        wrapClassName="input-wrap"
+                        inputClassName="input"
+                        errorClassName="error"
+                        type="password"
+                        placeholder="确认密码__123abc+-*/"
+                        value={this.state.confirmPwd}
+                        error={this.state.confirmPwdError}
+                        name="confirmPwd"
+                        onChange={(value)=> {
+                            this.setState({
+                                confirmPwd: value,
+                                confirmPwdError: ''
+                            })
+                        }}
+                    />
                     <VerifyCode
                         src={Url.FIND_PWD_VERIFY_CODE}
                         wrapClassName="input-wrap"
@@ -163,24 +195,28 @@ class App extends Component {
                     <Button
                         type="button"
                         onClick={()=> {
+                            this.setState({
+                                userNameError: '',
+                                emailError: '',
+                                emailVerifyCodeError: '',
+                                pwdError: '',
+                                confirmPwdError: '',
+                                verifyCodeError: ''
+                            });
                             const isValidatePass = this._validate(this.state);
                             if (isValidatePass) {
 
                                 {/*     网络请求  start    */
                                 }
 
-                                const {userName, email, verifyCode} = this.state;
+                                const {userName, email, emailVerifyCode, pwd, verifyCode} = this.state;
 
-                                fetch(Url.FIND_PWD, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({
-                                        userName: userName,
-                                        email: email,
-                                        verifyCode: verifyCode
-                                    })
+                                bmgFetch.post(Url.FIND_PWD, {
+                                    userName: userName,
+                                    email: email,
+                                    emailVerifyCode: emailVerifyCode,
+                                    pwd: pwd,
+                                    verifyCode: verifyCode
                                 }).then((res)=> {
                                     return res.json();
                                 }).then((data)=> {
@@ -200,14 +236,14 @@ class App extends Component {
                             }
                         }}
                         className="btn"
-                        name="找回"
+                        name="重置"
                     />
                 </form>
             </Main>
         );
     }
 
-    _validate({userName, email, emailVerifyCode, verifyCode}) {
+    _validate({userName, email, emailVerifyCode, pwd, confirmPwd, verifyCode}) {
         const userNameIsNull = (userName === '');
         const emailIsNull = (email === '');
         const reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
@@ -240,6 +276,40 @@ class App extends Component {
             });
             return false;
         }
+
+        /*   密码验证   start   */
+        const pwdIsNull = (pwd === '');
+        if (pwdIsNull) {
+            this.setState({
+                pwdError: '密码不能为空'
+            });
+            return false;
+        }
+        const pwdTooShort = (pwd.length < 6);
+        if (pwdTooShort) {
+            this.setState({
+                pwdError: '密码最小长度为6'
+            });
+            return false;
+        }
+        /*   密码验证   end   */
+
+        /*   确认密码验证   start   */
+        const confirmPwdIsNull = (confirmPwd === '');
+        if (confirmPwdIsNull) {
+            this.setState({
+                confirmPwdError: '确认密码不能为空'
+            });
+            return false;
+        }
+        const confirmPwdIsRight = (confirmPwd !== pwd);
+        if (confirmPwdIsRight) {
+            this.setState({
+                confirmPwdError: '确认密码和密码不一致'
+            });
+            return false;
+        }
+        /*   确认密码验证   end   */
 
         if (verifyCodeIsNull) {
             this.setState({

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main,{Url} from '../app';
+import Main,{Url,bmgFetch} from '../app';
 import UserImg from '../static/common/img/user.jpg';
 import Spinner from '../../components/lib/spinner/spinner';
 import Banner from '../../components/lib/banner/banner';
@@ -41,19 +41,10 @@ class App extends Component {
 
     _getData(type = 'all', currentPage = 0) {
         Spinner.show();
-        fetch(Url.INDEX,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    type: type,
-                    currentPage: currentPage
-                }),
-                cache: 'no-cache'
-            })
+        bmgFetch.get(Url.INDEX,{
+            type: type,
+            currentPage: currentPage
+        })
             .then((res)=> {
                 return res.json();
             })
@@ -89,6 +80,7 @@ class App extends Component {
                                 items={this.state.article.items}
                                 page={this.state.page}
                                 url={Url.INDEX_ARTICLE}
+                                bmgFetch={bmgFetch}
                                 text ="加载更多"
                                 isGetData ={true}
                             />

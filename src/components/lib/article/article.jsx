@@ -54,16 +54,7 @@ export default class Article extends Component {
         }
 
         Spinner.show();
-        fetch(url,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify(param),
-                cache: 'no-cache'
-            })
+        this.props.bmgFetch.get(url,param)
             .then((res)=> {
                 return res.json();
             })
