@@ -11,6 +11,7 @@ import Promise from 'promise-polyfill';
 import 'whatwg-fetch';
 
 let Url = null;
+let bmgFetch = null;
 
 export default class Main extends Component {
     constructor(props) {
@@ -48,6 +49,7 @@ export default class Main extends Component {
                     exitText: '退出',
                     userName: this.state.header.userName
                 }}
+                bmgFetch={bmgFetch}
             />
         );
     }
@@ -115,7 +117,7 @@ module.exports.Url = Url = {
 };
 
 /*   请求方法封装   */
-module.exports.bmgFetch = {
+module.exports.bmgFetch = bmgFetch = {
 
     post (url, data, config) {
 
@@ -143,10 +145,11 @@ module.exports.bmgFetch = {
             },
         }, config);
 
-        url +='?';
-
-        for (let key of Object.keys(data)) {
-            url+=`${key}=${data[key]}&`
+        if (typeof data === 'object') {
+            url += '?';
+            for (let key of Object.keys(data)) {
+                url += `${key}=${data[key]}&`
+            }
         }
 
         return fetch(url, option);

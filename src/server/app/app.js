@@ -19,6 +19,15 @@ app.use(session({
 }));
 
 /**
+ * 允许跨域的域名
+ * @type {string[]}
+ */
+const origins = [
+    'http://127.0.0.1:8080',
+    'http://localhost:8080'
+];
+
+/**
  * 防御xss
  */
 app.use('*', function (req, res, next) {
@@ -26,13 +35,15 @@ app.use('*', function (req, res, next) {
     res.header("X-Frame-Options", "deny");
     res.header("X-Content-Type-Options", "nosniff");
     res.header("Content-Security-Policy", "default-src 'self' 'unsafe-eval'");
-
-    res.header("Access-Control-Allow-Origin", "http://127.0.0.1:8080");
-    res.header("Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie");
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     res.header("Content-Type", "application/json;charset=utf-8");
+
+    if (origins.indexOf(req.headers.origin) > -1) {
+        res.header("Access-Control-Allow-Origin", req.headers.origin);
+        res.header("Access-Control-Allow-Headers",
+            "Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie");
+        res.header("Access-Control-Allow-Credentials", true);
+        res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    }
 
     next();
 });

@@ -13,6 +13,7 @@ export default class LoginStatus extends Component {
         if (USER_NAME_NOT_NULL) {
             return (
                 <OnLine
+                    bmgFetch={props.bmgFetch}
                     welcome={props.onLine.welcome}
                     exit={props.onLine.exit}
                     exitText={props.onLine.exitText}
@@ -78,22 +79,23 @@ class OnLine extends Component {
         super(props);
     }
 
-    _exit (url, e) {
+    _exit(url, e) {
         e.preventDefault();
-        fetch(url, {
-            method:"GET"
-        }).then((res)=> {
-            return res.json();
-        }).then((data)=> {
-            const EXIT_SUCCESS = 1;
-            if (data.code === EXIT_SUCCESS) {
-                location.href = 'login.html'
-            }
-        }).catch((err)=> {
-            if (err) {
-                console.log(err);
-            }
-        })
+        this.props.bmgFetch.get(url)
+            .then((res)=> {
+                return res.json();
+            })
+            .then((data)=> {
+                const EXIT_SUCCESS = 1;
+                if (data.code === EXIT_SUCCESS) {
+                    location.href = 'login.html'
+                }
+            })
+            .catch((err)=> {
+                if (err) {
+                    console.log(err);
+                }
+            })
     }
 
     render() {

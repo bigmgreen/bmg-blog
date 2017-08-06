@@ -60,6 +60,7 @@ router.post('/getEmailCode', (req, res)=> {
                         code: 1,
                         msg: '发送成功'
                     });
+                    console.log(`邮箱验证码:${code}`);
                     console.log('Message %s sent: %s', info.messageId, info.response);
                 });
             });
@@ -123,6 +124,7 @@ router.post('/findPwd', function (req, res) {
                         FindPwd.checkEmailVerifyCode(email, emailVerifyCode, (err, IS_EMAIL_CODE_RIGHT)=> {
                             if (IS_EMAIL_CODE_RIGHT) {
 
+                                //密码找回
                                 FindPwd.findPwd(user.userId, pwd, (err)=> {
                                     if (err) {
                                         res.json({
@@ -131,7 +133,10 @@ router.post('/findPwd', function (req, res) {
                                         });
                                         return;
                                     }
+                                    //移除数据库内邮箱验证码
                                     FindPwd.removeEmailVerifyCode(email);
+                                    //重置成功后，让用户重新登录
+                                    Utils.logout(req, res);
                                     res.json({code: 1});
                                 });
 

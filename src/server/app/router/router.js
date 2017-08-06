@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const captchaPng = require('captchapng');
+const Utils = require('./utils/utils');
 const loginRouter = require('./_router/loginRouter');
 const findPwdRouter = require('./_router/findPwdRouter');
 const indexRouter = require('./_router/indexRouter');
+const registerRouter = require('./_router/registerRouter');
 
 // 简单打印访问时间
 router.use(function timeLog(req, res, next) {
@@ -11,7 +12,25 @@ router.use(function timeLog(req, res, next) {
     next();
 });
 
+router.get('/exit', function (req, res) {
+    Utils.logout(req, res);
+    res.json({code: 1});
+});
+
+router.get('/pageInfo', function (req, res) {
+
+    Utils.getNav((err, nav)=> {
+        res.json({
+            "header": {
+                "nav": nav
+            }
+        });
+    });
+
+});
+
 router.use(loginRouter);
+router.use(registerRouter);
 router.use(findPwdRouter);
 router.use(indexRouter);
 
@@ -220,54 +239,4 @@ router.post('/commentMark', function (req, res) {
         "markCount": "2018"
     });
 });
-
-router.get('/pageInfo', function (req, res) {
-    res.json({
-        "header": {
-            "nav": [
-                {
-                    "type": "index",
-                    "text": "首页",
-                    "href": "index.html?type=index"
-                },
-                {
-                    "type": "html5",
-                    "text": "html5",
-                    "href": "index.html?type=html5"
-                },
-                {
-                    "type": "angular",
-                    "text": "angular",
-                    "href": "index.html?type=angular"
-                },
-                {
-                    "type": "react",
-                    "text": "react",
-                    "href": "index.html?type=react"
-                }
-            ]
-        }
-    });
-});
-
-router.post('/register', (req, res)=> {
-    "use strict";
-    res.json({
-        code: 1
-    });
-});
-
-router.get('/registerVerifyCode', function (req, res) {
-    var p = new captchaPng(80, 30, parseInt(Math.random() * 9000 + 1000)); // width,height,numeric captcha
-    p.color(0, 0, 0, 0);  // First color: background (red, green, blue, alpha)
-    p.color(80, 80, 80, 255); // Second color: paint (red, green, blue, alpha)
-
-    var img = p.getBase64();
-    var imgbase64 = new Buffer(img, 'base64');
-    res.writeHead(200, {
-        'Content-Type': 'image/png'
-    });
-    res.end(imgbase64);
-});
-
 module.exports = router;

@@ -1,22 +1,11 @@
 const express = require('express');
 const router = express.Router();
-let Login = require('../../interface/loginInterFace');
 const uuidV1 = require('uuid/v1');
-
-const _setRemember7Day = (remember7Day, uuId, res)=> {
-
-    if (remember7Day) {
-        res.cookie('session_id', uuId,
-            {path: '/', expires: new Date(Date.now() + 604800000), httpOnly: true});
-    } else {
-        res.cookie('session_id', uuId,
-            {path: '/', expires: new Date(Date.now() + 1800000), httpOnly: true});
-    }
-
-};
+const Utils = require('../utils/utils');
+let Login = require('../../interface/loginInterFace');
 
 router.post('/login', function (req, res) {
-    Login.getUser(req.body, (err, HAS_USER, _user)=> {
+    Login.getUser(req.body, (err, HAS_USER, user)=> {
         "use strict";
 
         if (err) {
@@ -24,19 +13,11 @@ router.post('/login', function (req, res) {
                 code: 0,
                 error: '服务器正在维护...'
             });
+            return;
         }
 
         if (HAS_USER) {
-            let uuId = uuidV1();
-
-            const _cookie = req.cookies['session_id'];
-            if (_cookie) {
-                delete req.session[`user_${_cookie}`];
-            }
-
-            req.session[`user_${uuId}`] = _user.userId;
-            _setRemember7Day(req.body.remember7Day, uuId, res);
-
+            Utils.setLogin(req.body.remember7Day, uuidV1(), user.userId, req, res);
             res.json({code: 1});
         } else {
             res.json({
@@ -45,13 +26,6 @@ router.post('/login', function (req, res) {
             });
         }
     });
-});
-
-router.get('/exit', function (req, res) {
-    //删除session，cookie
-    delete req.session[`user_${req.cookies['session_id']}`];
-    res.clearCookie('session_id');
-    res.json({code: 1});
 });
 
 module.exports = router;

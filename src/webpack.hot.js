@@ -24,12 +24,20 @@ const entries = (function () {
     return map;
 })();
 
+const pageTitle = {
+    index: '首页',
+    login: '登录',
+    register: '注册',
+    detail: '详情',
+    findPwd: '忘记密码',
+};
+
 //根据js文件生产html文件
 const plugins = Object.keys(entries).map((name) => {
     "use strict";
 
     return new HtmlWebpackPlugin({
-        title: name,
+        title: pageTitle[name],
         chunks: [name],
         filename: path.resolve(BUILD_PATH, `${name}.html`),
     });

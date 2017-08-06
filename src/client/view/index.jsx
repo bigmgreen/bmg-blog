@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main,{Url,bmgFetch} from '../app';
+import Main, {Url, bmgFetch} from '../app';
 import UserImg from '../static/common/img/user.jpg';
 import Spinner from '../../components/lib/spinner/spinner';
 import Banner from '../../components/lib/banner/banner';
@@ -33,7 +33,7 @@ class App extends Component {
                 items: []
             },
             page: {
-                type: 0,
+                type: 'all',
                 currentPage: 0
             }
         };
@@ -41,15 +41,18 @@ class App extends Component {
 
     _getData(type = 'all', currentPage = 0) {
         Spinner.show();
-        bmgFetch.get(Url.INDEX,{
+        const param = {
             type: type,
             currentPage: currentPage
-        })
+        };
+        bmgFetch.get(Url.INDEX, param)
             .then((res)=> {
                 return res.json();
             })
             .then((data)=> {
-                this.setState(data);
+                this.setState(Object.assign({
+                    page: param
+                }, data));
                 Spinner.hide();
             })
             .catch((err)=> {
@@ -77,12 +80,16 @@ class App extends Component {
                     <div className="main">
                         <div className="left">
                             <Article
+                                anchorClassName="article-style"
+                                figureClassName="figure"
+                                footerClassName="article-footer"
                                 items={this.state.article.items}
+                                PAGE_SIZE={this.state.article.PAGE_SIZE}
                                 page={this.state.page}
                                 url={Url.INDEX_ARTICLE}
                                 bmgFetch={bmgFetch}
-                                text ="加载更多"
-                                isGetData ={true}
+                                text="加载更多"
+                                isGetData={true}
                             />
                         </div>
                         <div className="right">

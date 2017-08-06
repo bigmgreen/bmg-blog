@@ -29,6 +29,7 @@ function excute(sql, callback) {
 }
 
 module.exports = {
+    PAGE_SIZE: PAGE_SIZE,
     /**
      * 获取user
      * @param param
@@ -51,7 +52,7 @@ module.exports = {
      * @param callback
      */
     getUserById: function (userId, callback) {
-        var sql = ` SELECT * FROM user WHERE userId=${pool.escape(userId)}`;
+        var sql = ` SELECT * FROM user WHERE userId=${userId}`;
         excute(sql, callback);
     },
     /**
@@ -91,9 +92,24 @@ module.exports = {
      * @param code
      * @param callback
      */
-    checkVerifyCode: function (code,callback) {
+    checkVerifyCode: function (code, callback) {
         var sql = `
             SELECT COUNT(*) as count from  user_verify_code WHERE code=${pool.escape(code)}
+        `;
+        excute(sql, callback);
+    },
+    /**
+     * 验证邀请码
+     * @param inviteCode
+     * @param callback
+     */
+    checkInviteCode: function (inviteCode, callback) {
+        var sql = `
+            SELECT COUNT(*) as count from  inviteCode 
+            WHERE
+                inviteCode=${pool.escape(inviteCode)}
+            AND
+                status=0
         `;
         excute(sql, callback);
     },
@@ -141,13 +157,167 @@ module.exports = {
      * @param pwd
      * @param callback
      */
-    findPwd: function (userId, pwd,callback) {
+    findPwd: function (userId, pwd, callback) {
         var sql = `
             UPDATE user SET pwd=${pool.escape(pwd)} 
             WHERE userId=${userId}
         `;
         excute(sql, callback);
     },
+    /**
+     * 获取首页数据
+     * @param type
+     * @param currentPage
+     * @param callback
+     * TODO 可做缓存
+     */
+    getIndex: function (type, currentPage = 0, callback) {
+
+        let nav = new Promise((resolve, reject)=> {
+            excute('SELECT * FROM nav', (err, nav)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(nav);
+                }
+            });
+        });
+        let banner = new Promise((resolve, reject)=> {
+            excute('SELECT * FROM banner', (err, banner)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(banner);
+                }
+            });
+        });
+        let article = new Promise((resolve, reject)=> {
+
+            let sql = `SELECT * FROM article`;
+
+            if (type !== 'all') {
+                sql += ` WHERE type=${pool.escape(type)}`
+            }
+            sql += ` order by id desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
+
+            excute(sql, (err, article)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(article);
+                }
+            });
+        });
+        let author = new Promise((resolve, reject)=> {
+            excute('SELECT * FROM author', (err, author)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(author);
+                }
+            });
+        });
+        let types = new Promise((resolve, reject)=> {
+            excute('SELECT * FROM types', (err, types)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(types);
+                }
+            });
+        });
+
+        Promise.all([nav, banner, article, author, types])
+            .then((results)=> {
+                callback(false, results);
+            })
+            .catch((err)=> {
+                callback(err);
+            })
+        ;
+    },
+    /**
+     * 获取首页文章列表数据
+     * @param type
+     * @param currentPage
+     * @param callback
+     */
+    getArticle: function (type, currentPage = 0, callback) {
+
+        let sql = `SELECT * FROM article`;
+
+        if (type !== 'all') {
+            sql += ` WHERE type=${pool.escape(type)}`
+        }
+        sql += ` order by id desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
+
+        excute(sql, (err, article)=> {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, article);
+            }
+        });
+    },
+    /**
+     * 注册
+     * @param inviteCode
+     * @param userName
+     * @param email
+     * @param pwd
+     * @param callback
+     */
+    register: function (inviteCode, userName, email, pwd, callback) {
+        var sql = `
+            INSERT INTO user(userName, email, pwd) VALUES 
+            (
+                ${pool.escape(userName)},${pool.escape(email)},${pool.escape(pwd)}
+            )
+        `;
+
+        var _sql = `
+            UPDATE inviteCode SET status=1
+            WHERE inviteCode=${pool.escape(inviteCode)}
+        `;
+
+        excute(sql, (err)=> {
+            if (err) {
+                callback(err);
+                return;
+            }
+            excute(_sql, callback);
+        });
+    },
+
+    getNav: function (callback) {
+        excute('SELECT * FROM nav', callback);
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -24,11 +24,13 @@ export default class Article extends Component {
     }
 
     _getItem(items) {
+
+        const props = this.props;
         return items.map((article, index)=> {
             return (
-                <a key={index} href={article.href} className={article.anchorClassName}>
+                <a key={index} href={article.href} className={props.anchorClassName}>
                     <Figure
-                        anchorClassName={article.figureClassName}
+                        anchorClassName={props.figureClassName}
                         type={article.type}
                         title={article.title}
                         src={article.src}
@@ -36,11 +38,11 @@ export default class Article extends Component {
                     />
                     <div>
                         <p>{article.content}</p>
-                        <div className={article.footerClassName}>
+                        <div className={props.footerClassName}>
                             <Fmt fmt={article.dateStr}/>
-                            <span>（{article.markCount}）个赞</span>
-                            <span>（{article.browserCount}）浏览</span>
-                            <span>（{article.commentCount}）评论</span>
+                            <span>（{parseInt(article.markCount, 10)}）个赞</span>
+                            <span>（{parseInt(article.browserCount, 10)}）浏览</span>
+                            <span>（{parseInt(article.commentCount, 10)}）评论</span>
                         </div>
                     </div>
                 </a>
@@ -54,23 +56,26 @@ export default class Article extends Component {
         }
 
         Spinner.show();
-        this.props.bmgFetch.get(url,param)
+
+        param.currentPage++;
+
+        this.props.bmgFetch.get(url, param)
             .then((res)=> {
                 return res.json();
             })
             .then((data)=> {
                 let items = data.items;
-                const dataIsNull = (items.length === 0);
+                let _data = {
+                    items: this.state.items.concat(data.items)
+                };
+                const dataIsNull = (items.length < data.PAGE_SIZE);
                 if (dataIsNull) {
-                    this.setState({
+                    _data = Object.assign({
                         text: '没有更多数据了',
                         isGetData: false
-                    });
-                } else {
-                    this.setState({
-                        items: this.state.items.concat(data.items)
-                    });
+                    }, _data);
                 }
+                this.setState(_data);
                 Spinner.hide();
             })
             .catch((err)=> {
@@ -85,10 +90,19 @@ export default class Article extends Component {
         return (
             <div>
                 {this._getItem(this.state.items)}
-                <span ref="loadData"
-                      className="load"
-                      onClick={this._getData.bind(this, this.props.url, this.state.page)}
-                >{this.state.text}</span>
+                {(()=>{
+                    if (this.state.items.length < this.state.PAGE_SIZE) {
+                        return (
+                            <span className="load">没有更多数据了</span>
+                        );
+                    }
+                  return (
+                      <span ref="loadData"
+                            className="load"
+                            onClick={this._getData.bind(this, this.props.url, this.state.page)}
+                      >{this.state.text}</span>
+                  );
+                })()}
             </div>
         );
     }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main, {Url} from '../app';
+import Main, {Url,bmgFetch} from '../app';
 import Spinner from '../../components/lib/spinner/spinner';
 import Input from '../../components/lib/input/input';
 import Button from '../../components/lib/button/button';
@@ -10,10 +10,6 @@ class App extends Component {
         super(props);
 
         this.state = {
-            header: {
-                userName: '',
-                nav: []
-            },
             inviteCode: '',
             inviteCodeError: '',
             userName: '',
@@ -31,7 +27,7 @@ class App extends Component {
 
     _getData() {
         Spinner.show();
-        fetch(Url.PAGE_INFO)
+        bmgFetch.get(Url.PAGE_INFO)
             .then((res)=> {
                 return res.json();
             })
@@ -162,6 +158,16 @@ class App extends Component {
                     <Button
                         type="button"
                         onClick={()=> {
+
+                            this.setState({
+                                inviteCodeError: '',
+                                userNameError: '',
+                                emailError: '',
+                                pwdError: '',
+                                confirmPwdError: '',
+                                verifyCodeError: '',
+                            });
+
                             const isValidatePass = this._validate(this.state);
                             if (isValidatePass) {
 
@@ -170,18 +176,12 @@ class App extends Component {
 
                                 const {inviteCode, userName, email, pwd, verifyCode} = this.state;
 
-                                fetch(Url.REGISTER, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: {
-                                        inviteCode: inviteCode,
-                                        userName: userName,
-                                        email: email,
-                                        pwd: pwd,
-                                        verifyCode: verifyCode
-                                    }
+                                bmgFetch.post(Url.REGISTER, {
+                                    inviteCode: inviteCode,
+                                    userName: userName,
+                                    email: email,
+                                    pwd: pwd,
+                                    verifyCode: verifyCode
                                 }).then((res)=> {
                                     return res.json();
                                 }).then((data)=> {
