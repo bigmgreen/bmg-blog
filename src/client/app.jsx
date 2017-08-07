@@ -145,12 +145,14 @@ module.exports.bmgFetch = bmgFetch = {
             },
         }, config);
 
+        url += '?';
         if (typeof data === 'object') {
-            url += '?';
             for (let key of Object.keys(data)) {
                 url += `${key}=${data[key]}&`
             }
         }
+
+        url += Date.now();
 
         return fetch(url, option);
     }

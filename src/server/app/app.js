@@ -48,17 +48,6 @@ app.use('*', function (req, res, next) {
     next();
 });
 
-// /**
-//  * 防御csrf
-//  */
-// app.use(['/add', '/del', '/update', '/recovery'], function (req, res, next) {
-//     if (req.body.token == req.session.uuid) {
-//         next();
-//     } else {
-//         res.send('可疑操作，服务器拒绝响应！');
-//     }
-// });
-
 app.use('/api', router);
 
 module.exports = app;

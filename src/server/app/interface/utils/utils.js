@@ -288,13 +288,145 @@ module.exports = {
             excute(_sql, callback);
         });
     },
-
+    /**
+     * 获取导航信息
+     * @param callback
+     */
     getNav: function (callback) {
         excute('SELECT * FROM nav', callback);
     },
+    /**
+     * 获取详情页信息
+     * @param contentId
+     * @param callback
+     * @returns {boolean}
+     */
+    getDetail: function (contentId, callback) {
 
+        let nav = new Promise((resolve, reject)=> {
+            excute('SELECT * FROM nav', (err, nav)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(nav);
+                }
+            });
+        });
+        let content = new Promise((resolve, reject)=> {
+            excute(`SELECT * FROM content WHERE contentId=${contentId}`, (err, content)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(content);
+                }
+            });
+        });
+        let comment = new Promise((resolve, reject)=> {
 
+            let sql = `
+                SELECT 
+                *
+                FROM comment
+                WHERE 
+                contentId=${pool.escape(contentId)}
+            `;
 
+            sql += ` order by commentId desc LIMIT 0,${PAGE_SIZE}`;
+
+            excute(sql, (err, comment)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(comment);
+                }
+            });
+        });
+        let author = new Promise((resolve, reject)=> {
+            excute('SELECT * FROM author', (err, author)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(author);
+                }
+            });
+        });
+        let types = new Promise((resolve, reject)=> {
+            excute('SELECT * FROM types', (err, types)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(types);
+                }
+            });
+        });
+
+        let commentCount = new Promise((resolve, reject)=> {
+
+            let sql = `
+                SELECT 
+                    COUNT(*) AS count 
+                FROM comment
+                WHERE 
+                contentId=${pool.escape(contentId)}
+            `;
+
+            excute(sql, (err, count)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(count);
+                }
+            });
+        });
+
+        let contentPrev = new Promise((resolve, reject)=> {
+            let sql = `
+                SELECT * FROM content 
+                WHERE contentId<${contentId}
+                order by contentId desc LIMIT 1
+            `;
+            excute(sql, (err, content)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(content);
+                }
+            });
+        });
+
+        let contentNext = new Promise((resolve, reject)=> {
+            let sql = `
+                SELECT * FROM content 
+                WHERE contentId>${contentId}
+                order by contentId desc LIMIT 1
+            `;
+            excute(sql, (err, content)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(content);
+                }
+            });
+        });
+
+        Promise.all([
+            nav,
+            content,
+            comment,
+            author,
+            types,
+            commentCount,
+            contentPrev,
+            contentNext
+        ])
+            .then((results)=> {
+                callback(false, results);
+            })
+            .catch((err)=> {
+                callback(err);
+            })
+        ;
+    },
 
 
 

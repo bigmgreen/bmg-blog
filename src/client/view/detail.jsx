@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Main,{Url} from '../app';
+import Main, {Url, bmgFetch} from '../app';
 import UserImg from '../static/common/img/user.jpg';
 import Spinner from '../../components/lib/spinner/spinner';
 import Author from '../../components/lib/author/author';
@@ -49,20 +49,11 @@ class App extends Component {
         };
     }
 
-    _getData(id) {
+    _getData(contentId) {
         Spinner.show();
-        fetch(Url.DETAIL,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    id: id
-                }),
-                cache: 'no-cache'
-            })
+        bmgFetch.get(Url.DETAIL, {
+            contentId: contentId
+        })
             .then((res)=> {
                 return res.json();
             })
@@ -79,7 +70,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this._getData();
+        this._getData(location.search.split('=')[1]);
 
         window._bd_share_config = {
             "common": {
@@ -122,9 +113,12 @@ class App extends Component {
                             <Content
                                 {...this.state.content}
                                 markClassName="mark"
+                                anchorClassName="content"
                                 url={Url}
                             />
                             <Comment
+                                anchorClassName="comment"
+                                pageClassName="page"
                                 {...this.state.comment}
                                 url={Url}
                             />
