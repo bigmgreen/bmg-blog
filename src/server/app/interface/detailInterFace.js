@@ -107,3 +107,84 @@ exports.mark = function (userId, {contentId, checked}, callBack) {
         callBack(err, count);
     });
 };
+
+/**
+ * 获取详情页评论
+ * @param contentId
+ * @param currentPage
+ * @param callBack
+ * @returns {boolean}
+ */
+exports.getComment = function ({contentId,currentPage}, callBack) {
+
+    Utils.getComment(contentId,currentPage, (err, comment)=> {
+        "use strict";
+
+        if (err) {
+            callBack(err);
+            return;
+        }
+
+        if (comment && comment.length > 0) {
+
+            let commentCount = comment[1][0]['count'];
+
+            let _comment = {
+                contentId: contentId,
+                commentCount: commentCount,
+                pageCount: Math.ceil(commentCount / Utils.PAGE_SIZE),
+                commentItem: comment[0],
+                PAGE_SIZE: Utils.PAGE_SIZE
+            };
+
+            callBack(null, _comment);
+            return;
+        }
+        callBack(null, false);
+
+    });
+};
+
+/**
+ * 提交评论
+ * @param contentId
+ * @param userId
+ * @param dateStr
+ * @param content
+ * @param callBack
+ */
+exports.comment = function ({contentId,userId,dateStr,content}, callBack) {
+
+    Utils.getUserById(userId, (err, user)=>{
+        if (err) {
+            callBack(err);
+            return;
+        }
+        Utils.comment(contentId,user[0].userName,dateStr,content, (err, comment)=>{
+            if (err) {
+                callBack(err);
+                return;
+            }
+
+            console.log(comment)
+
+            if (comment && comment.length > 0) {
+
+                let commentCount = comment[1][0]['count'];
+
+                let _comment = {
+                    contentId: contentId,
+                    commentCount: commentCount,
+                    pageCount: Math.ceil(commentCount / Utils.PAGE_SIZE),
+                    commentItem: comment[0],
+                    PAGE_SIZE: Utils.PAGE_SIZE
+                };
+
+                callBack(null, _comment);
+                return;
+            }
+            callBack(null, false);
+        });
+    });
+
+};

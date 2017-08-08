@@ -37,62 +37,43 @@ router.post('/mark', function (req, res) {
 
 });
 
-router.post('/getComment', function (req, res) {
-    res.send({
-        "contentId": "1",
-        "commentCount": "2017",
-        "pageCount": "10",
-        "error": "",
-        "commentItem": [
-            {
-                "critics": "zx",
-                "dateStr": "2017-01-01",
-                "markCount": "2017",
-                "content": "aaaaa"
-            },
-            {
-                "critics": "zx",
-                "dateStr": "2017-01-01",
-                "markCount": "2017",
-                "content": "dddd"
-            },
-            {
-                "critics": "zx",
-                "dateStr": "2017-01-01",
-                "markCount": "2017",
-                "content": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-            }
-        ]
+router.get('/getComment', function (req, res) {
+
+    Detail.getComment(req.query, (err, comments)=>{
+        if (err) {
+            console.log(err);
+            res.json({
+                code: 0,
+                error: '服务器正在维护...'
+            });
+            return;
+        }
+        res.json(comments);
     });
+
 });
 
 router.post('/comment', function (req, res) {
-    res.send({
-        "contentId": "1",
-        "commentCount": "2017",
-        "pageCount": "10",
-        "error": "",
-        "commentItem": [
-            {
-                "critics": "zx",
-                "dateStr": "2017-01-01",
-                "markCount": "2017",
-                "content": "aaaaa"
-            },
-            {
-                "critics": "zx",
-                "dateStr": "2017-01-01",
-                "markCount": "2017",
-                "content": "dddd"
-            },
-            {
-                "critics": "zx",
-                "dateStr": "2017-01-01",
-                "markCount": "2017",
-                "content": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-            }
-        ]
+
+    let comment = {};
+    comment.contentId = req.body.contentId;
+    comment.content = req.body.content;
+    comment.dateStr = (new Date()).toString();
+    comment.userId = Utils.getUserId(req);
+
+    Detail.comment(comment, (err, comments)=>{
+        if (err) {
+            console.log(err);
+            res.json({
+                code: 0,
+                error: '服务器正在维护...'
+            });
+            return;
+        }
+
+        res.json(comments);
     });
+
 });
 
 router.post('/commentMark', function (req, res) {

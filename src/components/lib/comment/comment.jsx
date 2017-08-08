@@ -25,18 +25,10 @@ export default class Comment extends Component {
 
     _getComment(currentPage = 0) {
         Spinner.show();
-        fetch(this.props.url.GET_COMMENT,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    id: this.state.contentId,
-                    currentPage: currentPage
-                })
-            })
+        this.props.bmgFetch.get(this.props.url.GET_COMMENT, {
+            contentId: this.state.contentId,
+            currentPage: currentPage
+        })
             .then((res)=> {
                 return res.json();
             })
@@ -54,30 +46,23 @@ export default class Comment extends Component {
 
     _commit() {
 
-        let val = this.state.value;
+        let content = this.state.value;
 
-        if (this._validateValue(val) === false) {
+        if (this._validateValue(content) === false) {
             return;
         }
 
         Spinner.show();
-        fetch(this.props.url.COMMENT,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    id: this.state.contentId,
-                    value: val
-                })
-            })
+        this.props.bmgFetch.post(this.props.url.COMMENT, {
+            contentId: this.state.contentId,
+            content: content
+        })
             .then((res)=> {
                 return res.json();
             })
             .then((data)=> {
                 Spinner.hide();
+                data.value = '';
                 this.setState(data);
             })
             .catch((err)=> {
@@ -101,7 +86,7 @@ export default class Comment extends Component {
         return true;
     }
 
-    _getTextArea (isLogin) {
+    _getTextArea(isLogin) {
         if (isLogin) {
             return (
                 <textarea

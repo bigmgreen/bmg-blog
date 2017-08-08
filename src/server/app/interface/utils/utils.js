@@ -415,7 +415,7 @@ module.exports = {
             `;
             excute(sql, (err, result)=> {
 
-                let count=parseInt(result[0]['browserCount']);
+                let count = parseInt(result[0]['browserCount']);
                 var _sql = `
                     UPDATE  content 
                     SET     browserCount=${++count}
@@ -481,11 +481,11 @@ module.exports = {
                 let userMarked = _result[0]['userMarked'];
                 if (checked) {
                     result++;
-                    userMarked +=`,${userId}`;
+                    userMarked += `,${userId}`;
                 } else {
                     result--;
-                    let reg = new RegExp(`,${userId}`,'g');
-                    userMarked = userMarked.replace(reg,'');
+                    let reg = new RegExp(`,${userId}`, 'g');
+                    userMarked = userMarked.replace(reg, '');
                 }
 
                 var sql = `
@@ -513,116 +513,96 @@ module.exports = {
             });
 
     },
-
-
-
-
-
-
     /**
-     * 获取对应类型的总条数
-     * @param param
+     * 获取详情页评论
+     * @param contentId
+     * @param currentPage
      * @param callback
+     * @returns {boolean}
      */
-    getTotalByType: function (param, callback) {
-        var sql = 'SELECT COUNT(*) as count FROM news_list';
+    getComment: function (contentId, currentPage, callback) {
 
-        var num = !isNaN(param.type) ? param.type : -1;
+        let comment = new Promise((resolve, reject)=> {
 
-        if (param.type == -1) {
-            sql = sql + ' WHERE status = 1';
-        } else {
-            sql = sql + ' WHERE status = 0';
-        }
+            let sql = `
+                SELECT 
+                *
+                FROM comment
+                WHERE 
+                contentId=${pool.escape(contentId)}
+            `;
 
-        if (param.type != 0 && param.type != -1) {
-            sql = sql + ' AND TYPE=' + mysql.format(num);
-        }
-        excute(sql, callback);
+            sql += ` order by commentId desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
+
+            excute(sql, (err, comment)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(comment);
+                }
+            });
+        });
+
+        let commentCount = new Promise((resolve, reject)=> {
+
+            let sql = `
+                SELECT 
+                    COUNT(*) AS count 
+                FROM comment
+                WHERE 
+                contentId=${pool.escape(contentId)}
+            `;
+
+            excute(sql, (err, count)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(count);
+                }
+            });
+        });
+
+
+        Promise.all([
+            comment,
+            commentCount
+        ])
+            .then((results)=> {
+                callback(false, results);
+            })
+            .catch((err)=> {
+                callback(err);
+            })
+        ;
     },
     /**
-     * 获取精选数据
-     * @param param
+     * 提交评论
+     * @param contentId
+     * @param critics
+     * @param dateStr
+     * @param content
      * @param callback
      */
-    getAll: function (param, callback) {
-        var num = !isNaN(param.pageNumber) ? param.pageNumber : 0;
+    comment: function (contentId, critics, dateStr, content, callback) {
+        var sql = `
+            INSERT INTO comment(contentId,critics,dateStr,content) 
+            VALUES 
+            (
+                ${pool.escape(contentId)},
+                ${pool.escape(critics)},
+                ${pool.escape(dateStr)},
+                ${pool.escape(content)}
+            )
+        `;
 
-        var sql = 'SELECT * FROM news_list WHERE status = 0 order by id desc LIMIT '
-            + mysql.format(num * PAGE_SIZE) + ',' + PAGE_SIZE;
-        excute(sql, callback);
-    },
-    /**
-     * 根据类型获取数据
-     * @param param
-     * @param callback
-     */
-    getNewsByType: function (param, callback) {
-        var num = !isNaN(param.pageNumber) ? param.pageNumber : 0;
-        var type = !isNaN(param.type) ? param.type : -1;
-        var sql = 'SELECT * FROM news_list WHERE status = 0 AND TYPE ='
-            + mysql.format(type) + ' order by id desc LIMIT '
-            + mysql.format(num * PAGE_SIZE)
-            + ',' + PAGE_SIZE;
-        excute(sql, callback);
-    },
-    /**
-     * 获取回收站的数据
-     * @param param
-     * @param callback
-     */
-    getDelNewsByType: function (param, callback) {
-        var num = !isNaN(param.pageNumber) ? param.pageNumber : 0;
-        var pageNumber = num * PAGE_SIZE;
-        var sql = 'SELECT * FROM news_list WHERE status = 1 order by id desc LIMIT ' + mysql.format(pageNumber) + ',' + PAGE_SIZE;
-        excute(sql, callback);
-    },
-    /**
-     * 增加一条数据
-     * @param param
-     * @param callback
-     */
-    add: function (param, callback) {
-        var sql = 'INSERT INTO `news_list`(`title`, `imgSrc`, `date`, `type`, `from`) VALUES ('
-            + xss(pool.escape(param.title)) + ','
-            + xss(pool.escape(param.imgSrc)) + ','
-            + xss(pool.escape(param.date)) + ','
-            + xss(pool.escape(param.type)) + ','
-            + xss(pool.escape(param.from)) + ')';
-        excute(sql, callback);
-    },
-    /**
-     * 按照id删除某个记录
-     * @param param
-     * @param callback
-     */
-    del: function (param, callback) {
-        var id = !isNaN(param.id) ? param.id : -1;
-        var sql = 'UPDATE `news_list` SET `status`=1 WHERE id=' + mysql.format(id);
-        excute(sql, callback);
-    },
-    /**
-     * 按照id编辑某个记录
-     * @param param
-     * @param callback
-     */
-    update: function (param, callback) {
-        var sql = 'UPDATE `news_list` SET `title`='
-            + xss(pool.escape(param.title)) + ',`imgSrc`='
-            + xss(pool.escape(param.imgSrc)) + ',`date`='
-            + xss(pool.escape(param.date)) + ',`from`='
-            + xss(pool.escape(param.from)) + ' WHERE id='
-            + xss(pool.escape(param.id));
-        excute(sql, callback);
-    },
-    /**
-     * 恢复某一条记录
-     * @param param
-     * @param callback
-     */
-    recovery: function (param, callback) {
-        var id = !isNaN(param.id) ? param.id : -1;
-        var sql = 'UPDATE `news_list` SET `status`=0 WHERE id=' + mysql.format(id);
-        excute(sql, callback);
+        excute(sql, (err)=> {
+            if (err) {
+                callback(err);
+                return;
+            }
+            this.getComment(contentId, callback);
+        });
     }
+
+
 };
