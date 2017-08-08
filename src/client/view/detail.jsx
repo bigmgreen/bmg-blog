@@ -45,7 +45,8 @@ class App extends Component {
                 commentCount: "",
                 pageCount: "",
                 commentItem: [],
-            }
+            },
+            isLogin: false
         };
     }
 
@@ -112,14 +113,18 @@ class App extends Component {
                         <div className="left">
                             <Content
                                 {...this.state.content}
+                                isLogin={this.state.isLogin}
                                 markClassName="mark"
                                 anchorClassName="content"
+                                bmgFetch={bmgFetch}
                                 url={Url}
                             />
                             <Comment
                                 anchorClassName="comment"
                                 pageClassName="page"
                                 {...this.state.comment}
+                                isLogin={this.state.isLogin}
+                                bmgFetch={bmgFetch}
                                 url={Url}
                             />
                         </div>

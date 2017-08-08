@@ -36,7 +36,10 @@ export default class Content extends Component {
                     <span>{con.dateTime}</span>
                     <span>
                         <Mark
+                            bmgFetch={this.props.bmgFetch}
                             className={this.props.markClassName}
+                            checked={this.props.userMarked}
+                            isLogin={this.state.isLogin}
                             markCount={con.markCount}
                             markId={con.contentId}
                             markUrl={this.props.url.MARK}

@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local
-Source Server Version : 50549
+Source Server         : 本地数据库
+Source Server Version : 50533
 Source Host           : localhost:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 50549
+Target Server Version : 50533
 File Encoding         : 65001
 
-Date: 2017-08-06 20:57:31
+Date: 2017-08-08 18:19:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `article`
+-- Table structure for article
 -- ----------------------------
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
@@ -42,7 +42,7 @@ INSERT INTO `article` VALUES ('2', 'detail.html?id=1', 'html5', '星球大战', 
 INSERT INTO `article` VALUES ('3', 'detail.html?id=1', 'html5', '星球大战', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'bmg', '星球大战星球大战球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大', '2015-1-1', '00000000000000002017', '00000000000000002017', '00000000000000002017');
 
 -- ----------------------------
--- Table structure for `author`
+-- Table structure for author
 -- ----------------------------
 DROP TABLE IF EXISTS `author`;
 CREATE TABLE `author` (
@@ -62,7 +62,7 @@ INSERT INTO `author` VALUES ('4', '邮箱', '1@163.com');
 INSERT INTO `author` VALUES ('5', '简介', '除了帅气以外再也没有拿得出手的技术了');
 
 -- ----------------------------
--- Table structure for `banner`
+-- Table structure for banner
 -- ----------------------------
 DROP TABLE IF EXISTS `banner`;
 CREATE TABLE `banner` (
@@ -78,7 +78,54 @@ CREATE TABLE `banner` (
 INSERT INTO `banner` VALUES ('1', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'https://www.baidu.com/');
 
 -- ----------------------------
--- Table structure for `invitecode`
+-- Table structure for comment
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `commentId` int(11) NOT NULL AUTO_INCREMENT,
+  `contentId` int(11) NOT NULL DEFAULT '0',
+  `critics` varchar(255) NOT NULL,
+  `dateStr` varchar(255) NOT NULL,
+  `markCount` int(11) NOT NULL DEFAULT '0',
+  `content` longtext NOT NULL,
+  PRIMARY KEY (`commentId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of comment
+-- ----------------------------
+INSERT INTO `comment` VALUES ('1', '1', 'zx', '2017-05-06', '0', '你说了什么？？？');
+INSERT INTO `comment` VALUES ('2', '1', 'zx', '2017-05-06', '0', '你说了什么？？？');
+INSERT INTO `comment` VALUES ('3', '1', 'zx', '2017-05-06', '0', '你说了什么？？？');
+
+-- ----------------------------
+-- Table structure for content
+-- ----------------------------
+DROP TABLE IF EXISTS `content`;
+CREATE TABLE `content` (
+  `contentId` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` longtext NOT NULL,
+  `dateTime` varchar(255) NOT NULL,
+  `markCount` int(10) unsigned DEFAULT '0',
+  `browserCount` int(10) unsigned DEFAULT '0',
+  `userMarked` longtext,
+  PRIMARY KEY (`contentId`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of content
+-- ----------------------------
+INSERT INTO `content` VALUES ('1', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-01-01', '1', '49', ' ,1');
+INSERT INTO `content` VALUES ('2', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '5', null);
+INSERT INTO `content` VALUES ('3', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
+INSERT INTO `content` VALUES ('4', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
+INSERT INTO `content` VALUES ('5', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
+INSERT INTO `content` VALUES ('6', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
+INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
+
+-- ----------------------------
+-- Table structure for invitecode
 -- ----------------------------
 DROP TABLE IF EXISTS `invitecode`;
 CREATE TABLE `invitecode` (
@@ -95,7 +142,7 @@ INSERT INTO `invitecode` VALUES ('1', '123456', '1');
 INSERT INTO `invitecode` VALUES ('2', '111111', '1');
 
 -- ----------------------------
--- Table structure for `nav`
+-- Table structure for nav
 -- ----------------------------
 DROP TABLE IF EXISTS `nav`;
 CREATE TABLE `nav` (
@@ -115,7 +162,7 @@ INSERT INTO `nav` VALUES ('angular', 'angular', 'index.html?type=angular', '3');
 INSERT INTO `nav` VALUES ('react', 'react', 'index.html?type=react', '4');
 
 -- ----------------------------
--- Table structure for `types`
+-- Table structure for types
 -- ----------------------------
 DROP TABLE IF EXISTS `types`;
 CREATE TABLE `types` (
@@ -138,7 +185,7 @@ INSERT INTO `types` VALUES ('5', '面试题', '面试题', '2017', 'index.html?t
 INSERT INTO `types` VALUES ('6', '其他', '其他', '2017', 'index.html?type=javascript');
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -161,7 +208,7 @@ INSERT INTO `user` VALUES ('zzzz', '6', '111111', '11@qq.com');
 INSERT INTO `user` VALUES ('qq', '7', '111111', '2@q.com');
 
 -- ----------------------------
--- Table structure for `user_email_code`
+-- Table structure for user_email_code
 -- ----------------------------
 DROP TABLE IF EXISTS `user_email_code`;
 CREATE TABLE `user_email_code` (
@@ -176,7 +223,7 @@ CREATE TABLE `user_email_code` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `user_verify_code`
+-- Table structure for user_verify_code
 -- ----------------------------
 DROP TABLE IF EXISTS `user_verify_code`;
 CREATE TABLE `user_verify_code` (

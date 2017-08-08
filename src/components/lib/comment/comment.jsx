@@ -101,21 +101,31 @@ export default class Comment extends Component {
         return true;
     }
 
+    _getTextArea (isLogin) {
+        if (isLogin) {
+            return (
+                <textarea
+                    onChange={(e)=> {
+                        this.setState({
+                            value: e.target.value,
+                            error: ''
+                        })
+                    }}
+                    value={this.state.value}
+                />
+            );
+        } else {
+            return (<a className="text-area" href="login.html">去登录</a>);
+        }
+    }
+
     render() {
         var com = this.state;
         return (
             <section className={this.props.anchorClassName}>
                 <h4>({com.commentCount})评论</h4>
                 <div>
-                    <textarea
-                        onChange={(e)=> {
-                            this.setState({
-                                value: e.target.value,
-                                error: ''
-                            })
-                        }}
-                        value={this.state.value}
-                    />
+                    {this._getTextArea(this.props.isLogin)}
                     <Button
                         errorClassName="error"
                         error={this.state.error}
@@ -128,6 +138,7 @@ export default class Comment extends Component {
                 <CommentItem
                     commentItem={com.commentItem}
                     contentId={com.contentId}
+                    isLogin={this.props.isLogin}
                     url={this.props.url}
                 />
                 <Page
@@ -166,6 +177,7 @@ class CommentItem extends Component {
                                 className="mark"
                                 markCount={_item.markCount}
                                 markId={contentId}
+                                isLogin={this.props.isLogin}
                                 markUrl={this.props.url.COMMENT_MARK}
                             />
                         </span>

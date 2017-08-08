@@ -15,6 +15,7 @@
     overflow: hidden;
 }
 
+.comment .text-area,
 .comment textarea {
     width: 730px;
     box-sizing: border-box;
@@ -22,6 +23,12 @@
     display: block;
     margin: 0 auto 10px;
     height: 200px;
+}
+
+.comment .text-area {
+    border: 1px solid #999;
+    text-align: center;
+    line-height: 160px;
 }
 
 .comment .btn {

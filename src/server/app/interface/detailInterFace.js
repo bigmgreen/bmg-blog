@@ -25,8 +25,11 @@ exports.getDetail = function (contentId, userId, callBack) {
                     nav: detail[0]
                 };
 
-                if (user && user.length > 0) {
+                const HAS_LOGIN = user && user.length > 0;
+                let isLogin = false;
+                if (HAS_LOGIN) {
                     _header.userName = user[0].userName;
+                    isLogin = true;
                 }
 
                 let _content = detail[1][0];
@@ -52,6 +55,15 @@ exports.getDetail = function (contentId, userId, callBack) {
                     _content.nextTitle = '没有后一篇了';
                 }
 
+                if (HAS_LOGIN) {
+
+                    let hasMark = _content['userMarked'];
+
+                    let marked = hasMark && (hasMark.indexOf(userId) > -1);
+                    _content['userMarked'] = marked;
+                }
+
+
                 let commentCount = detail[5][0]['count'];
 
                 let _comment = {
@@ -61,6 +73,8 @@ exports.getDetail = function (contentId, userId, callBack) {
                     commentItem: detail[2],
                     PAGE_SIZE: Utils.PAGE_SIZE
                 };
+
+
                 let _author = {
                     title: '作者',
                     infos: detail[3]
@@ -69,7 +83,7 @@ exports.getDetail = function (contentId, userId, callBack) {
                     title: '分类',
                     items: detail[4]
                 };
-                let _detail = new Detail(_header, _content, _comment, _author, _types);
+                let _detail = new Detail(_header, _content, _comment, _author, _types, isLogin);
 
                 callBack(null, _detail);
                 return;
@@ -77,5 +91,19 @@ exports.getDetail = function (contentId, userId, callBack) {
             callBack(null, false);
         });
 
+    });
+};
+
+/**
+ * 文章点赞
+ * @param userId
+ * @param contentId
+ * @param checked
+ * @param callBack
+ */
+exports.mark = function (userId, {contentId, checked}, callBack) {
+
+    Utils.mark(userId, contentId, checked, (err, count)=> {
+        callBack(err, count);
     });
 };

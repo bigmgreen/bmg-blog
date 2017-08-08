@@ -397,8 +397,7 @@ module.exports = {
         let contentNext = new Promise((resolve, reject)=> {
             let sql = `
                 SELECT * FROM content 
-                WHERE contentId>${contentId}
-                order by contentId desc LIMIT 1
+                WHERE contentId>${contentId}  LIMIT 1
             `;
             excute(sql, (err, content)=> {
                 if (err) {
@@ -406,6 +405,30 @@ module.exports = {
                 } else {
                     resolve(content);
                 }
+            });
+        });
+
+        let updateBrowserCount = new Promise((resolve, reject)=> {
+            let sql = `
+                SELECT browserCount FROM content 
+                WHERE contentId=${contentId}
+            `;
+            excute(sql, (err, result)=> {
+
+                let count=parseInt(result[0]['browserCount']);
+                var _sql = `
+                    UPDATE  content 
+                    SET     browserCount=${++count}
+                    WHERE   contentId=${contentId}
+                `;
+                excute(_sql, (err, rows)=> {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(count, rows);
+                    }
+                });
+
             });
         });
 
@@ -417,7 +440,8 @@ module.exports = {
             types,
             commentCount,
             contentPrev,
-            contentNext
+            contentNext,
+            updateBrowserCount
         ])
             .then((results)=> {
                 callback(false, results);
@@ -427,27 +451,68 @@ module.exports = {
             })
         ;
     },
+    /**
+     * 文章点赞
+     * @param userId
+     * @param contentId
+     * @param checked
+     * @param callback
+     */
+    mark: function (userId, contentId, checked, callback) {
 
+        let markCountPromise = new Promise((resolve, reject)=> {
+            let sql = `
+                SELECT markCount,userMarked FROM content 
+                WHERE contentId=${contentId}
+            `;
+            excute(sql, (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
 
+        let updateMarkCountPromise = new Promise((resolve, reject)=> {
+            markCountPromise.then((_result)=> {
 
+                let result = _result[0]['markCount'];
+                let userMarked = _result[0]['userMarked'];
+                if (checked) {
+                    result++;
+                    userMarked +=`,${userId}`;
+                } else {
+                    result--;
+                    let reg = new RegExp(`,${userId}`,'g');
+                    userMarked = userMarked.replace(reg,'');
+                }
 
+                var sql = `
+                    UPDATE  content 
+                    SET     markCount=${result},userMarked=${pool.escape(userMarked)}
+                    WHERE   contentId=${contentId}
+                `;
+                excute(sql, (err, markCount)=> {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result, markCount);
+                    }
+                });
+            });
+        });
 
+        updateMarkCountPromise
+            .then((result)=> {
+                console.log(result)
+                callback(false, result);
+            })
+            .catch((err)=> {
+                callback(err);
+            });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    },
 
 
 

@@ -35,17 +35,14 @@ export default class Mark extends Component {
     }
 
     _markChange({markId, markUrl}, checked) {
-        fetch(markUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                contentId: markId,
-                checked: checked
-            }),
-            cache: 'no-cache'
+
+        if (typeof this.props.bmgFetch === 'undefined') {
+            throw new ReferenceError('没有传递bmgFetch参数...');
+        }
+
+        this.props.bmgFetch.post(markUrl, {
+            contentId: markId,
+            checked: checked
         }).then((res)=> {
             return res.json();
         }).then((data)=> {
@@ -57,20 +54,33 @@ export default class Mark extends Component {
         });
     }
 
+    _getMarkCountDom() {
+        let mark = this.state;
+        if (this.props.isLogin) {
+            return (
+                <label className={this.props.className} htmlFor={mark.id}>
+                    {this._showByState(mark.checked)}
+                    <input
+                        type="checkbox"
+                        id={mark.id}
+                        name={mark.name || mark.id}
+                        onChange={this._handleChange}
+                        checked={mark.checked}
+                    />
+                    <span>({mark.markCount})</span>
+                </label>
+            );
+        } else {
+            return (
+                <label className={this.props.className} >
+                    {this._showByState(mark.checked)}
+                    <span>(<a href="login.html">去登录</a>)</span>
+                </label>
+            );
+        }
+    }
+
     render() {
-        var mark = this.state;
-        return (
-            <label className={this.props.className} htmlFor={mark.id}>
-                {this._showByState(mark.checked)}
-                <input
-                    type="checkbox"
-                    id={mark.id}
-                    name={mark.name || mark.id}
-                    onChange={this._handleChange}
-                    checked={mark.checked}
-                />
-                <span>({mark.markCount})</span>
-            </label>
-        );
+        return this._getMarkCountDom();
     }
 }
