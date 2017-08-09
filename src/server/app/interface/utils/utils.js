@@ -600,9 +600,69 @@ module.exports = {
                 callback(err);
                 return;
             }
-            this.getComment(contentId, callback);
+            this.getComment(contentId, 0, callback);
         });
-    }
+    },
+    /**
+     * 评论点赞
+     * @param userId
+     * @param commentId
+     * @param checked
+     * @param callback
+     */
+    commentMark: function (userId, commentId, checked, callback) {
 
+        let markCountPromise = new Promise((resolve, reject)=> {
+            let sql = `
+                SELECT markCount,userMarked FROM comment 
+                WHERE commentId=${commentId}
+            `;
+            excute(sql, (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
 
+        let updateMarkCountPromise = new Promise((resolve, reject)=> {
+            markCountPromise.then((_result)=> {
+
+                let result = _result[0]['markCount'];
+                let userMarked = _result[0]['userMarked'];
+                if (checked) {
+                    result++;
+                    userMarked += `,${userId}`;
+                } else {
+                    result--;
+                    let reg = new RegExp(`,${userId}`, 'g');
+                    userMarked = userMarked.replace(reg, '');
+                }
+
+                var sql = `
+                    UPDATE  comment 
+                    SET     markCount=${result},userMarked=${pool.escape(userMarked)}
+                    WHERE   commentId=${commentId}
+                `;
+                excute(sql, (err, markCount)=> {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result, markCount);
+                    }
+                });
+            });
+        });
+
+        updateMarkCountPromise
+            .then((result)=> {
+                console.log(result)
+                callback(false, result);
+            })
+            .catch((err)=> {
+                callback(err);
+            });
+
+    },
 };

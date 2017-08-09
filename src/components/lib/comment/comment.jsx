@@ -17,6 +17,7 @@ export default class Comment extends Component {
             value: '',
             error: '',
         }
+        this._commit = this._commit.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -86,6 +87,14 @@ export default class Comment extends Component {
         return true;
     }
 
+    _onKeyDown(e) {
+        let code = e.keyCode || e.charCode;
+
+        if (e.ctrlKey && (code == 13)) {
+            this._commit();
+        }
+    }
+
     _getTextArea(isLogin) {
         if (isLogin) {
             return (
@@ -96,6 +105,7 @@ export default class Comment extends Component {
                             error: ''
                         })
                     }}
+                    onKeyDown={this._onKeyDown.bind(this)}
                     value={this.state.value}
                 />
             );
@@ -115,7 +125,7 @@ export default class Comment extends Component {
                         errorClassName="error"
                         error={this.state.error}
                         type="submit"
-                        onClick={this._commit.bind(this)}
+                        onClick={this._commit}
                         className="btn"
                         name="提交"
                     />
@@ -124,6 +134,7 @@ export default class Comment extends Component {
                     commentItem={com.commentItem}
                     contentId={com.contentId}
                     isLogin={this.props.isLogin}
+                    bmgFetch={this.props.bmgFetch}
                     url={this.props.url}
                 />
                 <Page
@@ -151,7 +162,9 @@ class CommentItem extends Component {
     }
 
     _getItem(items) {
-        const contentId = this.props.contentId
+
+        const props = this.props;
+
         return items.map((_item, index)=> {
             return (
                 <li key={index}>
@@ -161,9 +174,11 @@ class CommentItem extends Component {
                             <Mark
                                 className="mark"
                                 markCount={_item.markCount}
-                                markId={contentId}
-                                isLogin={this.props.isLogin}
-                                markUrl={this.props.url.COMMENT_MARK}
+                                data={{commentId: _item.commentId}}
+                                checked={_item.userMarked}
+                                bmgFetch={props.bmgFetch}
+                                isLogin={props.isLogin}
+                                markUrl={props.url.COMMENT_MARK}
                             />
                         </span>
                     </div>
@@ -194,6 +209,11 @@ class Page extends Component {
     }
 
     render() {
+
+        if (this.props.pageCount < 2) {
+            return null;
+        }
+
         return (
             <div className={this.props.anchorClassName}>
                 <span>&lt;&lt;第</span>

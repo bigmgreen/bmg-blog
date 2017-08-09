@@ -5,9 +5,13 @@ export default class Text extends Component {
         super(props);
     }
 
+    _getText(text) {
+        //TODO
+    }
+
     render () {
         return (
-            <span>{this.props.fmt}</span>
+            <span>{this._getText(this.props.fmt)}</span>
         );
     }
 }

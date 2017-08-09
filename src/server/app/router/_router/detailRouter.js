@@ -77,8 +77,18 @@ router.post('/comment', function (req, res) {
 });
 
 router.post('/commentMark', function (req, res) {
-    res.send({
-        "markCount": "2018"
+    Detail.commentMark(Utils.getUserId(req), req.body, (err, count)=> {
+        if (err) {
+            console.log(err);
+            res.json({
+                code: 0,
+                error: '服务器正在维护...'
+            });
+            return;
+        }
+        res.json({
+            markCount: count
+        });
     });
 });
 

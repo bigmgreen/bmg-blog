@@ -9,12 +9,13 @@ export default class Mark extends Component {
         this._handleChange = this._handleChange.bind(this);
 
         this.state = {
-            checked: false,
+            checked: props.checked || false,
             markCount: props.markCount || 0
         }
     }
 
     componentWillReceiveProps(newProps) {
+
         this.setState(newProps);
     }
 
@@ -34,16 +35,15 @@ export default class Mark extends Component {
         }
     }
 
-    _markChange({markId, markUrl}, checked) {
+    _markChange({data, markUrl}, checked) {
 
         if (typeof this.props.bmgFetch === 'undefined') {
             throw new ReferenceError('没有传递bmgFetch参数...');
         }
 
-        this.props.bmgFetch.post(markUrl, {
-            contentId: markId,
-            checked: checked
-        }).then((res)=> {
+        data.checked = checked;
+
+        this.props.bmgFetch.post(markUrl, data).then((res)=> {
             return res.json();
         }).then((data)=> {
             this.setState(data);

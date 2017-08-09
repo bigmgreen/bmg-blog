@@ -1,6 +1,7 @@
 import './content.css';
 import React, {Component} from 'react';
 import Mark from '../mark/mark';
+import Text from '../fmt/fmt';
 
 export default class Content extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export default class Content extends Component {
                     <p>{con.content}</p>
                 </div>
                 <footer>
-                    <span>{con.dateTime}</span>
+                    <span><Text fmt={con.dateTime} /></span>
                     <span>
                         <Mark
                             bmgFetch={this.props.bmgFetch}
@@ -41,7 +42,7 @@ export default class Content extends Component {
                             checked={this.props.userMarked}
                             isLogin={this.state.isLogin}
                             markCount={con.markCount}
-                            markId={con.contentId}
+                            data={{contentId: con.contentId}}
                             markUrl={this.props.url.MARK}
                         />
                     </span>

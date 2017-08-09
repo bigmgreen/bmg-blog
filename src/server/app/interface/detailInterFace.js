@@ -70,10 +70,20 @@ exports.getDetail = function (contentId, userId, callBack) {
                     contentId: _content['contentId'],
                     commentCount: commentCount,
                     pageCount: Math.ceil(commentCount / Utils.PAGE_SIZE),
-                    commentItem: detail[2],
                     PAGE_SIZE: Utils.PAGE_SIZE
                 };
 
+                let tempComment = detail[2];
+                tempComment.forEach((item)=> {
+                    let hasMark = item['userMarked'];
+                    let marked = false;
+
+                    if (hasMark && (hasMark.indexOf(userId) > -1)) {
+                        marked = true;
+                    }
+                    item['userMarked'] = marked;
+                });
+                _comment.commentItem = tempComment;
 
                 let _author = {
                     title: '作者',
@@ -115,9 +125,9 @@ exports.mark = function (userId, {contentId, checked}, callBack) {
  * @param callBack
  * @returns {boolean}
  */
-exports.getComment = function ({contentId,currentPage}, callBack) {
+exports.getComment = function ({contentId, currentPage}, callBack) {
 
-    Utils.getComment(contentId,currentPage, (err, comment)=> {
+    Utils.getComment(contentId, currentPage, (err, comment)=> {
         "use strict";
 
         if (err) {
@@ -153,14 +163,14 @@ exports.getComment = function ({contentId,currentPage}, callBack) {
  * @param content
  * @param callBack
  */
-exports.comment = function ({contentId,userId,dateStr,content}, callBack) {
+exports.comment = function ({contentId, userId, dateStr, content}, callBack) {
 
-    Utils.getUserById(userId, (err, user)=>{
+    Utils.getUserById(userId, (err, user)=> {
         if (err) {
             callBack(err);
             return;
         }
-        Utils.comment(contentId,user[0].userName,dateStr,content, (err, comment)=>{
+        Utils.comment(contentId, user[0].userName, dateStr, content, (err, comment)=> {
             if (err) {
                 callBack(err);
                 return;
@@ -187,4 +197,18 @@ exports.comment = function ({contentId,userId,dateStr,content}, callBack) {
         });
     });
 
+};
+
+/**
+ * 评论点赞点赞
+ * @param userId
+ * @param commentId
+ * @param checked
+ * @param callBack
+ */
+exports.commentMark = function (userId, {commentId, checked}, callBack) {
+
+    Utils.commentMark(userId, commentId, checked, (err, count)=> {
+        callBack(err, count);
+    });
 };
