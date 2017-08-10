@@ -6,6 +6,7 @@
     background-color: #fff;
     margin-bottom: 10px;
     transition: opacity .3s;
+    overflow: hidden;
 }
 
 a.article-style:hover {

@@ -39,7 +39,7 @@ export default class Article extends Component {
                     <div>
                         <p>{article.content}</p>
                         <div className={props.footerClassName}>
-                            <Fmt fmt={article.dateStr}/>
+                            <Fmt fmt={article.dateTime}/>
                             <span>（{parseInt(article.markCount, 10)}）个赞</span>
                             <span>（{parseInt(article.browserCount, 10)}）浏览</span>
                             <span>（{parseInt(article.commentCount, 10)}）评论</span>

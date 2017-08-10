@@ -1,9 +1,9 @@
 'use strict';
-var mysql = require('mysql');
-var xss = require('xss');
+let mysql = require('mysql');
+let xss = require('xss');
 
 //连接数据库设置-创建连接池
-var pool = mysql.createPool({
+let pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
@@ -11,7 +11,7 @@ var pool = mysql.createPool({
 });
 
 //每页的容量
-var PAGE_SIZE = 10;
+let PAGE_SIZE = 10;
 
 /**
  * 数据库操作公共接口
@@ -37,7 +37,7 @@ module.exports = {
      */
     getUser: function (param, callback) {
         const {userName, pwd}=param;
-        var sql =
+        let sql =
             `
             SELECT * FROM user WHERE 
                 userName=${pool.escape(userName)}
@@ -52,7 +52,7 @@ module.exports = {
      * @param callback
      */
     getUserById: function (userId, callback) {
-        var sql = ` SELECT * FROM user WHERE userId=${userId}`;
+        let sql = ` SELECT * FROM user WHERE userId=${userId}`;
         excute(sql, callback);
     },
     /**
@@ -61,7 +61,7 @@ module.exports = {
      * @param callback
      */
     getUserByEmail: function (email, callback) {
-        var sql = ` SELECT * FROM user WHERE email=${pool.escape(email)}`;
+        let sql = ` SELECT * FROM user WHERE email=${pool.escape(email)}`;
         excute(sql, callback);
     },
     /**
@@ -71,7 +71,7 @@ module.exports = {
      * @param callback
      */
     saveEmailValidateCode: function (email, code, callback) {
-        var sql = `
+        let sql = `
             INSERT INTO user_email_code(email, code) VALUES ("${email}","${code}")
         `;
         excute(sql, callback);
@@ -82,7 +82,7 @@ module.exports = {
      * @param callback
      */
     saveVerifyCode: function (code, callback) {
-        var sql = `
+        let sql = `
             INSERT INTO user_verify_code(code) VALUES ("${code}")
         `;
         excute(sql, callback);
@@ -93,7 +93,7 @@ module.exports = {
      * @param callback
      */
     checkVerifyCode: function (code, callback) {
-        var sql = `
+        let sql = `
             SELECT COUNT(*) as count from  user_verify_code WHERE code=${pool.escape(code)}
         `;
         excute(sql, callback);
@@ -104,7 +104,7 @@ module.exports = {
      * @param callback
      */
     checkInviteCode: function (inviteCode, callback) {
-        var sql = `
+        let sql = `
             SELECT COUNT(*) as count from  inviteCode 
             WHERE
                 inviteCode=${pool.escape(inviteCode)}
@@ -119,7 +119,7 @@ module.exports = {
      * @param callback
      */
     checkUserByName: function (userName, callback) {
-        var sql = `
+        let sql = `
             SELECT * FROM user WHERE 
                 userName=${pool.escape(userName)}
         `;
@@ -132,7 +132,7 @@ module.exports = {
      * @param callback
      */
     checkEmailVerifyCode: function (email, emailVerifyCode, callback) {
-        var sql = `
+        let sql = `
             SELECT COUNT(*) as count FROM user_email_code 
                 WHERE 
                 email=${pool.escape(email)}
@@ -146,7 +146,7 @@ module.exports = {
      * @param email
      */
     removeEmailVerifyCode: function (email) {
-        var sql = `
+        let sql = `
             DELETE FROM user_email_code WHERE email=${pool.escape(email)}
         `;
         excute(sql);
@@ -158,7 +158,7 @@ module.exports = {
      * @param callback
      */
     findPwd: function (userId, pwd, callback) {
-        var sql = `
+        let sql = `
             UPDATE user SET pwd=${pool.escape(pwd)} 
             WHERE userId=${userId}
         `;
@@ -193,12 +193,12 @@ module.exports = {
         });
         let article = new Promise((resolve, reject)=> {
 
-            let sql = `SELECT * FROM article`;
+            let sql = `SELECT * FROM content`;
 
             if (type !== 'all') {
                 sql += ` WHERE type=${pool.escape(type)}`
             }
-            sql += ` order by id desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
+            sql += ` order by contentId desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
 
             excute(sql, (err, article)=> {
                 if (err) {
@@ -244,12 +244,12 @@ module.exports = {
      */
     getArticle: function (type, currentPage = 0, callback) {
 
-        let sql = `SELECT * FROM article`;
+        let sql = `SELECT * FROM content`;
 
         if (type !== 'all') {
             sql += ` WHERE type=${pool.escape(type)}`
         }
-        sql += ` order by id desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
+        sql += ` order by contentId desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
 
         excute(sql, (err, article)=> {
             if (err) {
@@ -268,14 +268,14 @@ module.exports = {
      * @param callback
      */
     register: function (inviteCode, userName, email, pwd, callback) {
-        var sql = `
+        let sql = `
             INSERT INTO user(userName, email, pwd) VALUES 
             (
                 ${pool.escape(userName)},${pool.escape(email)},${pool.escape(pwd)}
             )
         `;
 
-        var _sql = `
+        let _sql = `
             UPDATE inviteCode SET status=1
             WHERE inviteCode=${pool.escape(inviteCode)}
         `;
@@ -416,7 +416,7 @@ module.exports = {
             excute(sql, (err, result)=> {
 
                 let count = parseInt(result[0]['browserCount']);
-                var _sql = `
+                let _sql = `
                     UPDATE  content 
                     SET     browserCount=${++count}
                     WHERE   contentId=${contentId}
@@ -488,7 +488,7 @@ module.exports = {
                     userMarked = userMarked.replace(reg, '');
                 }
 
-                var sql = `
+                let sql = `
                     UPDATE  content 
                     SET     markCount=${result},userMarked=${pool.escape(userMarked)}
                     WHERE   contentId=${contentId}
@@ -584,7 +584,7 @@ module.exports = {
      * @param callback
      */
     comment: function (contentId, critics, dateStr, content, callback) {
-        var sql = `
+        let sql = `
             INSERT INTO comment(contentId,critics,dateStr,content) 
             VALUES 
             (
@@ -600,8 +600,76 @@ module.exports = {
                 callback(err);
                 return;
             }
+
             this.getComment(contentId, 0, callback);
+            this._updateContentCommentCount(contentId);
         });
+    },
+    /**
+     * 更新文章评论数
+     * @param contentId
+     * @private
+     */
+    _updateContentCommentCount: function (contentId) {
+        let getCommentCount = new Promise((resolve, reject)=> {
+            let sql = `
+                SELECT 
+                    COUNT(*) AS count 
+                FROM comment
+                WHERE 
+                contentId=${pool.escape(contentId)}
+            `;
+
+            excute(sql, (err, result)=> {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(result[0]);
+                }
+            });
+        });
+
+        let getContentCommentCount = new Promise((resolve, reject)=> {
+            let sql = `
+                SELECT 
+                    commentCount AS commentCount 
+                FROM content
+                WHERE 
+                contentId=${pool.escape(contentId)}
+            `;
+            excute(sql, (err, result)=> {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(result[0]);
+                }
+            });
+        });
+
+        Promise.all([getCommentCount, getContentCommentCount])
+            .then((result)=> {
+
+                let commentCount = parseInt(result[0]['count']);
+                let contentCommentCount = parseInt(result[1]['commentCount']);
+
+                let sql = `
+                UPDATE content
+                SET commentCount=${commentCount+contentCommentCount}
+                WHERE 
+                contentId=${pool.escape(contentId)}
+            `;
+                excute(sql, (err, _result)=> {
+                    if (err) {
+                        throw new SQLException(err);
+                    }
+                });
+            })
+            .catch((err)=> {
+                if (err) {
+                    throw new SQLException(err);
+                }
+            });
+
     },
     /**
      * 评论点赞
@@ -640,7 +708,7 @@ module.exports = {
                     userMarked = userMarked.replace(reg, '');
                 }
 
-                var sql = `
+                let sql = `
                     UPDATE  comment 
                     SET     markCount=${result},userMarked=${pool.escape(userMarked)}
                     WHERE   commentId=${commentId}

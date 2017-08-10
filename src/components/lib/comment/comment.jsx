@@ -169,7 +169,7 @@ class CommentItem extends Component {
             return (
                 <li key={index}>
                     <div>
-                        <strong><i>{_item.critics}</i>在_<Fmt fmt={_item.dateStr}/>_说：</strong>
+                        <strong><i>{_item.critics}</i>在_<Fmt fmt={_item.dateTime}/>_说：</strong>
                         <span>
                             <Mark
                                 className="mark"

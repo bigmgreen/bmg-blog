@@ -10,36 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50533
 File Encoding         : 65001
 
-Date: 2017-08-08 18:19:24
+Date: 2017-08-10 17:13:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for article
--- ----------------------------
-DROP TABLE IF EXISTS `article`;
-CREATE TABLE `article` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `href` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `src` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `alt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `content` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `dateStr` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `markCount` int(20) unsigned zerofill DEFAULT NULL,
-  `browserCount` int(20) unsigned zerofill DEFAULT NULL,
-  `commentCount` int(20) unsigned zerofill DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of article
--- ----------------------------
-INSERT INTO `article` VALUES ('1', 'detail.html?id=1', 'html5', '星球大战', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'bmg', '星球大战星球大战球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大', '2015-1-1', '00000000000000002017', '00000000000000002017', '00000000000000002017');
-INSERT INTO `article` VALUES ('2', 'detail.html?id=1', 'html5', '星球大战', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'bmg', '星球大战星球大战球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大', '2015-1-1', '00000000000000002017', '00000000000000002017', '00000000000000002017');
-INSERT INTO `article` VALUES ('3', 'detail.html?id=1', 'html5', '星球大战', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'bmg', '星球大战星球大战球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大', '2015-1-1', '00000000000000002017', '00000000000000002017', '00000000000000002017');
 
 -- ----------------------------
 -- Table structure for author
@@ -85,18 +59,34 @@ CREATE TABLE `comment` (
   `commentId` int(11) NOT NULL AUTO_INCREMENT,
   `contentId` int(11) NOT NULL DEFAULT '0',
   `critics` varchar(255) NOT NULL,
-  `dateStr` varchar(255) NOT NULL,
+  `dateTime` bigint(20) NOT NULL,
   `markCount` int(11) NOT NULL DEFAULT '0',
   `content` longtext NOT NULL,
+  `userMarked` longtext,
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
-INSERT INTO `comment` VALUES ('1', '1', 'zx', '2017-05-06', '0', '你说了什么？？？');
-INSERT INTO `comment` VALUES ('2', '1', 'zx', '2017-05-06', '0', '你说了什么？？？');
-INSERT INTO `comment` VALUES ('3', '1', 'zx', '2017-05-06', '0', '你说了什么？？？');
+INSERT INTO `comment` VALUES ('1', '1', 'zx', '1497075762689', '0', '你说了什么？？？', null);
+INSERT INTO `comment` VALUES ('2', '1', 'zx', '1497075762689', '0', '你说了什么？？？', null);
+INSERT INTO `comment` VALUES ('3', '1', 'zx', '1497075762689', '0', '你说了什么？？？', null);
+INSERT INTO `comment` VALUES ('4', '1', 'zx', '1497075762689', '0', 'zxover~~', null);
+INSERT INTO `comment` VALUES ('5', '1', 'zx', '1497075762689', '0', 'zzz', null);
+INSERT INTO `comment` VALUES ('6', '1', 'zx', '1497075762689', '0', 'zx', null);
+INSERT INTO `comment` VALUES ('7', '1', 'zx', '1497075762689', '0', '??', null);
+INSERT INTO `comment` VALUES ('8', '1', 'zx', '1497075762689', '0', 'zz', null);
+INSERT INTO `comment` VALUES ('9', '1', 'zx', '1497075762689', '0', 'z', null);
+INSERT INTO `comment` VALUES ('10', '1', 'zx', '1497075762689', '1', 'z', 'null,1');
+INSERT INTO `comment` VALUES ('11', '1', 'zx', '1497075762689', '1', 'z', 'null,1');
+INSERT INTO `comment` VALUES ('12', '1', 'zx', '1497075762689', '0', 'lzy', null);
+INSERT INTO `comment` VALUES ('13', '1', 'zx', '1497075762689', '0', 'zx', null);
+INSERT INTO `comment` VALUES ('14', '7', 'zx', '1497075762689', '0', '1', null);
+INSERT INTO `comment` VALUES ('15', '6', 'zx', '1497075762689', '0', '1', null);
+INSERT INTO `comment` VALUES ('16', '7', 'zx', '1497075762689', '0', '1', null);
+INSERT INTO `comment` VALUES ('17', '7', 'zx', '1497075762689', '0', '1', null);
+INSERT INTO `comment` VALUES ('18', '7', 'zx', '1497075762689', '0', '1', null);
 
 -- ----------------------------
 -- Table structure for content
@@ -106,23 +96,28 @@ CREATE TABLE `content` (
   `contentId` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` longtext NOT NULL,
-  `dateTime` varchar(255) NOT NULL,
+  `dateTime` bigint(255) NOT NULL,
   `markCount` int(10) unsigned DEFAULT '0',
   `browserCount` int(10) unsigned DEFAULT '0',
   `userMarked` longtext,
+  `type` varchar(255) NOT NULL,
+  `href` varchar(255) NOT NULL,
+  `src` varchar(255) NOT NULL,
+  `alt` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `commentCount` int(11) DEFAULT '0',
   PRIMARY KEY (`contentId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of content
 -- ----------------------------
-INSERT INTO `content` VALUES ('1', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-01-01', '1', '49', ' ,1');
-INSERT INTO `content` VALUES ('2', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '5', null);
-INSERT INTO `content` VALUES ('3', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
-INSERT INTO `content` VALUES ('4', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
-INSERT INTO `content` VALUES ('5', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
-INSERT INTO `content` VALUES ('6', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
-INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '2017-05-06', '0', '0', null);
+INSERT INTO `content` VALUES ('1', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '1', '151', ' ,1', 'html5', 'detail.html?id=1', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
+INSERT INTO `content` VALUES ('2', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '43', null, 'html5', 'detail.html?id=2', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
+INSERT INTO `content` VALUES ('3', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=3', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
+INSERT INTO `content` VALUES ('4', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=4', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
+INSERT INTO `content` VALUES ('5', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '1', null, 'html5', 'detail.html?id=5', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
+INSERT INTO `content` VALUES ('6', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=6', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
+INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '8', null, 'html5', 'detail.html?id=7', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '4');
 
 -- ----------------------------
 -- Table structure for invitecode
@@ -178,11 +173,11 @@ CREATE TABLE `types` (
 -- Records of types
 -- ----------------------------
 INSERT INTO `types` VALUES ('1', 'JavaScript', 'JavaScript', '2017', 'index.html?type=javascript');
-INSERT INTO `types` VALUES ('2', 'css', 'css', '2017', 'index.html?type=javascript');
-INSERT INTO `types` VALUES ('3', 'html5', 'html5', '2017', 'index.html?type=javascript');
-INSERT INTO `types` VALUES ('4', 'nodeJs', 'nodeJs', '2017', 'index.html?type=javascript');
-INSERT INTO `types` VALUES ('5', '面试题', '面试题', '2017', 'index.html?type=javascript');
-INSERT INTO `types` VALUES ('6', '其他', '其他', '2017', 'index.html?type=javascript');
+INSERT INTO `types` VALUES ('2', 'css', 'css', '2017', 'index.html?type=css');
+INSERT INTO `types` VALUES ('3', 'html5', 'html5', '2017', 'index.html?type=html5');
+INSERT INTO `types` VALUES ('4', 'nodeJs', 'nodeJs', '2017', 'index.html?type=nodeJs');
+INSERT INTO `types` VALUES ('5', '面试题', '面试题', '2017', 'index.html?type=面试题');
+INSERT INTO `types` VALUES ('6', '其他', '其他', '2017', 'index.html?type=其他');
 
 -- ----------------------------
 -- Table structure for user

@@ -61,6 +61,8 @@ exports.getDetail = function (contentId, userId, callBack) {
 
                     let marked = hasMark && (hasMark.indexOf(userId) > -1);
                     _content['userMarked'] = marked;
+                } else {
+                    _content['userMarked'] = false;
                 }
 
 
