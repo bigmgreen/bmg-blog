@@ -96,24 +96,24 @@ export default class Main extends Component {
     }
 }
 
-/*   异步请求地址   */
-const BASE_URL = 'http://127.0.0.1:3000';
+/*   跨域数据请求地址   */
+const BASE_URL = 'http://127.0.0.1:3000/api';
 module.exports.Url = Url = {
-    INDEX: BASE_URL + '/api/index',
-    INDEX_ARTICLE: BASE_URL + '/api/article',
-    DETAIL: BASE_URL + '/api/detail',
+    INDEX: BASE_URL + '/index',
+    INDEX_ARTICLE: BASE_URL + '/article',
+    DETAIL: BASE_URL + '/detail',
     MARK: BASE_URL + '/api/mark',
-    GET_COMMENT: BASE_URL + '/api/getComment',
-    COMMENT: BASE_URL + '/api/comment',
-    COMMENT_MARK: BASE_URL + '/api/commentMark',
-    EXIT: BASE_URL + '/api/exit',
-    LOGIN: BASE_URL + '/api/login',
-    FIND_PWD: BASE_URL + '/api/findPwd',
-    FIND_PWD_VERIFY_CODE: BASE_URL + '/api/findPwdVerifyCode',
-    REGISTER_VERIFY_CODE: BASE_URL + '/api/registerVerifyCode',
-    REGISTER: BASE_URL + '/api/register',
-    PAGE_INFO: BASE_URL + '/api/pageInfo',
-    GET_EMAIL_CODE: BASE_URL + '/api/getEmailCode',
+    GET_COMMENT: BASE_URL + '/getComment',
+    COMMENT: BASE_URL + '/comment',
+    COMMENT_MARK: BASE_URL + '/commentMark',
+    EXIT: BASE_URL + '/exit',
+    LOGIN: BASE_URL + '/login',
+    FIND_PWD: BASE_URL + '/findPwd',
+    FIND_PWD_VERIFY_CODE: BASE_URL + '/findPwdVerifyCode',
+    REGISTER_VERIFY_CODE: BASE_URL + '/registerVerifyCode',
+    REGISTER: BASE_URL + '/register',
+    PAGE_INFO: BASE_URL + '/pageInfo',
+    GET_EMAIL_CODE: BASE_URL + '/getEmailCode',
 };
 
 /*   请求方法封装   */
