@@ -9,7 +9,7 @@ const BUILD_PATH = path.resolve(C_PATH, 'dist');
 
 
 //引入glob
-const glob = require('glob')
+const glob = require('glob');
 //entries函数--自动检索js文件
 const entries = (function () {
     const jsDir = path.resolve(C_PATH, 'view', '*.{js,jsx}');
@@ -58,7 +58,7 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                use: ['babel-loader'],
+                loader: 'babel-loader',
                 /*
                  * include 这个属性是用来划定需要编译的范围
                  * 2017-7-18就是忘记加新路径
@@ -66,7 +66,11 @@ module.exports = {
                  *      You may need an appropriate loader to handle this file type.
                  */
                 include: [C_PATH, path.resolve(ROOT_PATH, 'components')],
-                exclude: NODE_MODULES_PATH
+                exclude: NODE_MODULES_PATH,
+                query: {
+                    presets: ['es2015', 'react' ],
+                    cacheDirectory: true
+                }
             },
             {
                 test: /\.css$/,
