@@ -1,0 +1,61 @@
+html,
+body {
+    font-size: 14px;
+    color: #333;
+    min-width: 1200px;
+    background-color: #f2f2f2;
+    line-height: 1;
+    font-family: "Microsoft YaHei";
+    letter-spacing:2px;
+    cursor: default;
+}
+
+html,
+body,
+p,
+div,
+ul,
+dl,
+dt,
+dd,
+h4,
+li,
+input {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+input,
+button {
+    vertical-align: middle;
+    outline: none;
+}
+
+input::-webkit-input-placeholder {
+    color: rgba(51, 40, 40, 0.5);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #666;
+    box-shadow: 0 0 0 1000px #fff inset !important;
+}
+
+a {
+    text-decoration: none;
+    color: #333333;
+    transition: color .3s;
+}
+
+a:hover {
+    transition: color .3s;
+    border-bottom: 1px solid;
+    color: #5bd21a;
+}
+
+ul,
+li {
+    list-style: none;
+}

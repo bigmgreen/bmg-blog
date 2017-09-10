@@ -1,6 +1,9 @@
+/**
+ *  入口程序
+ */
 import Vue from 'vue';
 import Mgt from './Mgt';
-import router from './view/router';
+import router from './view/router/mgtRouter';
 
 Vue.config.productionTip = false;
 

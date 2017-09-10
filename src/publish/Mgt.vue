@@ -1,23 +1,28 @@
+<!--    入口模板文件    -->
 <template>
     <div id="app">
-        <h1>hello lzy</h1>
+        <com-header></com-header>
         <router-view></router-view>
+        <com-menu></com-menu>
+        <com-footer></com-footer>
     </div>
 </template>
 
 <script>
+    import Header from './view/components/Header';
+    import Footer from './view/components/Footer';
+    import Menu from './view/components/Menu';
+
     export default {
-        name: 'mgt'
+        name: 'mgt',
+        components: {
+            'com-header': Header
+            , 'com-footer': Footer
+            , 'com-menu': Menu
+        }
     }
 </script>
 
-<style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
-    }
-</style>
+<link rel="stylesheet" href="./static/common/css/reset.css">
+<link rel="stylesheet" href="./static/common/css/base.css">
+<link rel="stylesheet" href="./static/common/css/animate.min.css">
