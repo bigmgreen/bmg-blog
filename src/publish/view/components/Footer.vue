@@ -4,6 +4,6 @@
 <style scoped>
     .foot{
         text-align: center;
-
+        line-height: 3em;
     }
 </style>

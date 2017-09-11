@@ -26,7 +26,7 @@
         border-radius: 50px;
         padding: 1em;
     }
-    div{
+    form div{
         height: 30px;
         margin: 10px 0;
     }

@@ -36,11 +36,14 @@
     @import "./static/common/css/base.css";
     @import "./static/common/css/animate.min.css";
 
+    .main {
+        margin: 20px auto;
+    }
     .main::after {
         content: '';
         overflow: hidden;
         clear: both;
-        display: none;
+        display: block;
         visibility: hidden;
         font-size: 0;
         height: 0;
@@ -52,7 +55,7 @@
 
     .right {
         width: 990px;
-        float: right;
+        margin-left: 210px;
     }
 
     .left {
