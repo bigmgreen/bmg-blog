@@ -15,10 +15,18 @@ Vue.config.productionTip = false;
     body.insertBefore(article, body.firstChild);
     fn();
 })(()=> {
+
+    Vue.directive('title', {
+        inserted: function (el, binding) {
+            document.title = el.innerText;
+            el.remove();
+        }
+    });
+
     new Vue({
         el: '#app',
         router,
         template: '<Mgt/>',
         components: {Mgt}
-    })
+    });
 });

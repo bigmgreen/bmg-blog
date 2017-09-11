@@ -1,9 +1,17 @@
 <!--    入口模板文件    -->
 <template>
-    <div id="app">
+    <div id="app" class="section">
         <com-header></com-header>
-        <router-view></router-view>
-        <com-menu></com-menu>
+        <div class="main">
+            <main>
+                <div class="right">
+                    <router-view></router-view>
+                </div>
+            </main>
+            <div class="left">
+                <com-menu></com-menu>
+            </div>
+        </div>
         <com-footer></com-footer>
     </div>
 </template>
@@ -23,6 +31,34 @@
     }
 </script>
 
-<link rel="stylesheet" href="./static/common/css/reset.css">
-<link rel="stylesheet" href="./static/common/css/base.css">
-<link rel="stylesheet" href="./static/common/css/animate.min.css">
+<style scoped>
+    @import "./static/common/css/reset.css";
+    @import "./static/common/css/base.css";
+    @import "./static/common/css/animate.min.css";
+
+    .main::after {
+        content: '';
+        overflow: hidden;
+        clear: both;
+        display: none;
+        visibility: hidden;
+        font-size: 0;
+        height: 0;
+    }
+    main {
+        width: 100%;
+        float: left;
+    }
+
+    .right {
+        width: 990px;
+        float: right;
+    }
+
+    .left {
+        width: 200px;
+        background: antiquewhite;
+        float: left;
+        margin-left: -100%;
+    }
+</style>
