@@ -25,6 +25,8 @@
         line-height: 50px;
         overflow: hidden;
         padding: 0 2em;
+        background-color: rgba(255, 255, 255, 0.53);
+        border-radius: 3em 1em;
     }
     h3 {
         font-size: 20px;

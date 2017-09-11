@@ -52,7 +52,6 @@ a {
 
 a:hover {
     transition: color .3s;
-    border-bottom: 1px solid;
     color: #5bd21a;
 }
 

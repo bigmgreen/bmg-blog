@@ -37,7 +37,7 @@
     @import "./static/common/css/animate.min.css";
 
     .main {
-        margin: 20px auto;
+        margin: 0 auto 20px;
     }
     .main::after {
         content: '';
@@ -60,7 +60,6 @@
 
     .left {
         width: 200px;
-        background: antiquewhite;
         float: left;
         margin-left: -100%;
     }
