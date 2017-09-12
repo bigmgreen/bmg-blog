@@ -18,12 +18,12 @@
     </div>
 </template>
 
-<script src="../../static/lib/particles/particles.js"></script>
 <script>
+    import "../../static/lib/particles/particles.js";
     export default {
         name: 'login',
-        mounted(){
-            console.log('rendered~')
+        mounted () {
+            console.log('rendered~');
             particlesJS('particlesJs',
                     {
                         "particles": {
@@ -145,6 +145,7 @@
         }
     }
 </script>
+
 <style scoped>
     .login {
         height: 300px;
@@ -219,9 +220,10 @@
         color: #fff;
         display: block;
         margin: 0 auto;
-        padding: 0.6em 2em;
+        padding: 2em 2em;
         font-size: 15px;
         cursor: pointer;
+        border-radius: 50%;
     }
 
     button:hover {

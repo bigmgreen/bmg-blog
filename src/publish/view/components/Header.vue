@@ -15,6 +15,9 @@
             return {
                 name: 'zx'
             }
+        },
+        mounted () {
+            console.log('~~~')
         }
     }
 </script>
