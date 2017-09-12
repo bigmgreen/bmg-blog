@@ -1,29 +1,29 @@
 <template>
     <div>
         <div class="login">
-            <div v-title>登录页</div>
-            <form id="loginForm">
-                <div class="name">
-                    <input type="text" name="name" placeholder="用户名" maxlength="10">
-                </div>
-                <div class="pwd">
-                    <input type="password" name="pwd" placeholder="密码" maxlength="20">
-                </div>
-                <button type="submit">登录</button>
-            </form>
+            <div class="wrap">
+                <div v-title>登录页</div>
+                <form id="loginForm">
+                    <div class="name">
+                        <input type="text" name="name" placeholder="用户名" maxlength="10">
+                    </div>
+                    <div class="pwd">
+                        <input type="password" name="pwd" placeholder="密码" maxlength="20">
+                    </div>
+                    <button type="submit">登录</button>
+                </form>
+            </div>
         </div>
         <div id="particlesJs" class="bgi"></div>
     </div>
 </template>
 
+<script src="../../static/lib/particles/particles.js"></script>
 <script>
-    import '../../static/lib/particles/particles.js';
     export default {
         name: 'login',
-        mounted () {
-            /*
-             * 背景动画
-             * */
+        mounted(){
+            console.log('rendered~')
             particlesJS('particlesJs',
                     {
                         "particles": {
@@ -145,18 +145,9 @@
         }
     }
 </script>
-<script src="../../static/lib/particles/particles.js"></script>
 <style scoped>
     .login {
         height: 300px;
-    }
-    .login form{
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        z-index: 10;
-        margin-left: -150px;
-        margin-top: -150px;
     }
 
     .bgi {
@@ -171,15 +162,15 @@
 
     form {
         text-align: center;
-        background-color: rgba(255, 255, 255, 0.53);
+        background-color: #f9f9f9;
         border-radius: 50%;
         padding: 1em;
         height: 300px;
         width: 300px;
-        margin-left: 230px;
         box-sizing: border-box;
         padding-top: 5em;
-        margin-top: 3.6em;
+        position: relative;
+        z-index: 10;
     }
 
     form div {
@@ -235,5 +226,79 @@
 
     button:hover {
         background-color: rgba(239, 103, 42, 0.4);
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(90deg);
+        }
+        10% {
+            transform: rotate(126deg);
+        }
+        20% {
+            transform: rotate(162deg);
+        }
+        30% {
+            transform: rotate(198deg);
+        }
+        40% {
+            transform: rotate(234deg);
+        }
+        50% {
+            transform: rotate(270deg);
+        }
+        60% {
+            transform: rotate(306deg);
+        }
+        70% {
+            transform: rotate(342deg);
+        }
+        80% {
+            transform: rotate(18deg);
+        }
+        90% {
+            transform: rotate(54deg);
+        }
+        100% {
+            transform: rotate(90deg);
+        }
+    }
+
+    .wrap {
+        height: 300px;
+        width: 300px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 10;
+        margin-left: -150px;
+        margin-top: -150px;
+    }
+
+    .wrap:after {
+        animation: rotate 10s infinite;
+        transform: rotate(90deg);
+        transform-origin: 50%;
+        top: 49%;
+        left: -4%;
+    }
+
+    .wrap:before {
+        animation: rotate 10s infinite alternate-reverse;
+        transform-origin: 50%;
+        top: 49%;
+        left: -4%;
+    }
+
+    .wrap:after,
+    .wrap:before {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 10px;
+        background-color: #fff;
+        z-index: 9;
+        width: 320px;
+        border-radius: 50%;
     }
 </style>
