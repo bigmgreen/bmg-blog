@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: 'world',
+  name: 'FromPage',
   data () {
     return {
-      msg: '这个我试试路由'
+      msg: '这是来源统计页面'
     }
   }
 }

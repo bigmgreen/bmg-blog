@@ -17,9 +17,9 @@
 </template>
 
 <script>
-    import Header from './view/components/Header';
-    import Footer from './view/components/Footer';
-    import Menu from './view/components/Menu';
+    import Header from './view/components/include/Header';
+    import Footer from './view/components/include/Footer';
+    import Menu from './view/components/include/Menu';
 
     export default {
         name: 'mgt',

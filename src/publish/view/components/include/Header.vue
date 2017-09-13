@@ -3,7 +3,7 @@
         <h3>blog发布端</h3>
         <span>
             欢迎<b>{{name}}</b>登录
-            <a href="#">退出</a>
+            <router-link to="/login">退出</router-link>
         </span>
     </header>
 </template>

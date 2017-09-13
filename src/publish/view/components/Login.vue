@@ -10,7 +10,7 @@
                     <div class="pwd">
                         <input type="password" name="pwd" placeholder="密码" maxlength="20">
                     </div>
-                    <button type="submit">登录</button>
+                    <button type="button" @click="clickFn">登录</button>
                 </form>
             </div>
         </div>
@@ -142,6 +142,11 @@
                         }
                     }
             );
+        },
+        methods: {
+            clickFn: function () {
+                this.$router.push('/');
+            }
         }
     }
 </script>

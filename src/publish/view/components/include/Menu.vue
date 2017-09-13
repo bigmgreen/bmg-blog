@@ -2,13 +2,13 @@
     <aside>
         <dl>
             <dt>您的位置:<b>{{pageName}}</b></dt>
-            <dd><a href="#">文章列表</a></dd>
-            <dd><a href="#">访客统计</a></dd>
-            <dd><a href="#">点赞统计</a></dd>
-            <dd><a href="#">分享统计</a></dd>
-            <dd><a href="#">评论管理</a></dd>
-            <dd><a href="#">来源统计</a></dd>
-            <dd><a href="#">邀请码</a></dd>
+            <dd><router-link to="/articlePage">文章列表</router-link></dd>
+            <dd><router-link to="/visitCountPage">访客统计</router-link></dd>
+            <dd><router-link to="/markCountPage">点赞统计</router-link></dd>
+            <dd><router-link to="/shareCountPage">分享统计</router-link></dd>
+            <dd><router-link to="/commentCountPage">评论管理</router-link></dd>
+            <dd><router-link to="/fromCountPage">来源统计</router-link></dd>
+            <dd><router-link to="/inviteCountPage">邀请码</router-link></dd>
         </dl>
     </aside>
 </template>
