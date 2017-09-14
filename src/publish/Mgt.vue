@@ -56,6 +56,7 @@
     .right {
         width: 990px;
         margin-left: 210px;
+        padding: 2em;
     }
 
     .left {

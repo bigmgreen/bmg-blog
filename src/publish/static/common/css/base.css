@@ -10,6 +10,21 @@
 
 /*  容器  end    */
 
+/*  工具类  start    */
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+/*  工具类  end    */
+
 /*   面板  start   */
 .panel {
     width: 500px;
@@ -73,3 +88,54 @@
 }
 
 /*   面板  end   */
+
+/*   按钮  start   */
+
+.btn {
+    padding: .3em 1em;
+    line-height: 2;
+    background-color: #169bd5;
+    border: 0 none;
+    cursor: pointer;
+    color: #fff;
+    transition: opacity .5s ease;
+    border-radius: 1em;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.btn:hover {
+    opacity: .7;
+    transition: opacity .5s ease;
+}
+
+/*   按钮  end   */
+
+/*   表格  start   */
+
+.table-wrap {
+    overflow: hidden;
+    border-radius: 2em;
+    margin: 1em 0;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+tr:hover {
+    background-color: #fff;
+}
+
+th,
+td {
+    line-height: 3em;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.83);
+}
+
+/*   表格  end   */
