@@ -27,6 +27,11 @@
             'com-header': Header
             , 'com-footer': Footer
             , 'com-menu': Menu
+        },
+        mounted () {
+            $.get(Url.INDEX, false, this).then(data=> {
+                log(data)
+            });
         }
     }
 </script>
@@ -39,6 +44,7 @@
     .main {
         margin: 0 auto 20px;
     }
+
     .main::after {
         content: '';
         overflow: hidden;
@@ -48,6 +54,7 @@
         font-size: 0;
         height: 0;
     }
+
     main {
         width: 100%;
         float: left;

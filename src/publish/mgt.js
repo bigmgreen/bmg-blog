@@ -4,10 +4,13 @@
 import Vue from 'vue';
 import Mgt from './Mgt';
 import router from './view/router/mgtRouter';
+import './static/common/js/url';
+import './static/common/js/fetch';
 
 Vue.config.productionTip = false;
 
 ((fn)=> {
+
     let doc = document;
     let body = doc.body;
     let article = doc.createElement('article');
@@ -22,6 +25,9 @@ Vue.config.productionTip = false;
             el.remove();
         }
     });
+
+    // 简化日志打印
+    window.log = window.console.log;
 
     new Vue({
         el: '#app',
