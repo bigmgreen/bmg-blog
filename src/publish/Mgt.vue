@@ -1,15 +1,15 @@
 <!--    入口模板文件    -->
 <template>
     <div id="app" class="section">
-        <com-header></com-header>
+        <com-header v-bind:userName="userName" ref="header"></com-header>
         <div class="main">
             <main>
                 <div class="right">
-                    <router-view></router-view>
+                    <router-view v-on:event="setUserName"></router-view>
                 </div>
             </main>
             <div class="left">
-                <com-menu></com-menu>
+                <com-menu ref="menu"></com-menu>
             </div>
         </div>
         <com-footer></com-footer>
@@ -28,10 +28,27 @@
             , 'com-footer': Footer
             , 'com-menu': Menu
         },
+        data () {
+            return {
+                userName: '',
+                crumbs: ''
+            }
+        },
         mounted () {
-            $.get(Url.INDEX, false, this).then(data=> {
-                log(data)
-            });
+            if (this.userName == '') {
+                $.get(Url.GET_USER, false, this).then(user=> {
+                    if (Url.CODE.OK == user.code) {
+                        this.userName = user.userName;
+                    }
+                });
+            }
+        },
+        methods: {
+            setUserName (userName) {
+                this.userName = userName;
+                this.$refs.menu.setOnlyPageName();
+                this.$refs.header.show();
+            }
         }
     }
 </script>

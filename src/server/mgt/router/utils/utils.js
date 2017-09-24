@@ -39,7 +39,9 @@ exports.setLogin = (uuId, userId, req, res)=> {
  */
 exports.isLogin = (req)=> {
     const _cookie = req.cookies['session_id'];
-    return !!req.session[`user_${_cookie}`];
+    //这里假设userId是大于0的整数
+    const userId = parseInt(req.session[`user_${_cookie}`]);
+    return userId >= 0;
 };
 
 /**

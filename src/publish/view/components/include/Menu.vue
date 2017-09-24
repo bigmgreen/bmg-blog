@@ -21,10 +21,33 @@
                 pageName: '---'
             }
         },
+        mounted () {
+            this.setOnlyPageName();
+        },
         methods: {
             setPageName: function (path, name) {
                 this.pageName = name;
                 this.$router.push(path);
+            },
+            setOnlyPageName: function () {
+                const pages = [
+                    {path: '/', name: '文章列表'},
+                    {path: '/articlePage', name: '文章列表'},
+                    {path: '/visitCountPage', name: '访客统计'},
+                    {path: '/markCountPage', name: '点赞统计'},
+                    {path: '/shareCountPage', name: '分享统计'},
+                    {path: '/commentCountPage', name: '评论管理'},
+                    {path: '/fromCountPage', name: '来源统计'},
+                    {path: '/inviteCountPage', name: '邀请码'}
+                ];
+
+                const _path = this.$route.path;
+
+                for (const item of pages) {
+                    if (_path == item.path) {
+                        this.pageName = item.name;
+                    }
+                }
             }
         }
     }

@@ -1,9 +1,9 @@
 <template>
     <header>
         <h3>blog发布端</h3>
-        <span>
-            欢迎<b>{{name}}</b>登录
-            <router-link to="/login">退出</router-link>
+        <span v-show="isShow">
+            欢迎<b>{{userName}}</b>登录
+            <a href="javascript:;" @click="exit">退出</a>
         </span>
     </header>
 </template>
@@ -11,13 +11,24 @@
 <script>
     export default {
         name: 'header',
+        props:['userName'],
         data () {
             return {
-                name: 'zx'
-            }
+                isShow: true
+            };
         },
-        mounted () {
-            console.log('~~~')
+        methods: {
+            exit () {
+                this.isShow = false;
+                $.get(Url.EXIT, false, this).then(data=> {
+                    if (Url.CODE.OK == data.code) {
+                        this.$router.push('/login');
+                    }
+                });
+            },
+            show () {
+                this.isShow = true;
+            }
         }
     }
 </script>

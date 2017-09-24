@@ -1,22 +1,38 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地数据库
-Source Server Version : 50533
+Source Server         : local
+Source Server Version : 50549
 Source Host           : localhost:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 50533
+Target Server Version : 50549
 File Encoding         : 65001
 
-Date: 2017-08-14 10:05:45
+Date: 2017-09-24 22:56:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for author
+-- Table structure for `admin`
+-- ----------------------------
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+  `userName` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `pwd` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `userId` bigint(20) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO `admin` VALUES ('admin', '123', '0');
+
+-- ----------------------------
+-- Table structure for `author`
 -- ----------------------------
 DROP TABLE IF EXISTS `author`;
 CREATE TABLE `author` (
@@ -36,7 +52,7 @@ INSERT INTO `author` VALUES ('4', '邮箱', '1@163.com');
 INSERT INTO `author` VALUES ('5', '简介', '除了帅气以外再也没有拿得出手的技术了');
 
 -- ----------------------------
--- Table structure for banner
+-- Table structure for `banner`
 -- ----------------------------
 DROP TABLE IF EXISTS `banner`;
 CREATE TABLE `banner` (
@@ -52,7 +68,7 @@ CREATE TABLE `banner` (
 INSERT INTO `banner` VALUES ('1', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'https://www.baidu.com/');
 
 -- ----------------------------
--- Table structure for comment
+-- Table structure for `comment`
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -89,7 +105,7 @@ INSERT INTO `comment` VALUES ('17', '7', 'zx', '1497075762689', '0', '1', null);
 INSERT INTO `comment` VALUES ('18', '7', 'zx', '1497075762689', '0', '1', null);
 
 -- ----------------------------
--- Table structure for content
+-- Table structure for `content`
 -- ----------------------------
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
@@ -117,10 +133,10 @@ INSERT INTO `content` VALUES ('3', '星球大战', '星球大战星球大战星�
 INSERT INTO `content` VALUES ('4', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=4', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
 INSERT INTO `content` VALUES ('5', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '1', null, 'html5', 'detail.html?id=5', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
 INSERT INTO `content` VALUES ('6', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=6', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
-INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '9', null, 'html5', 'detail.html?id=7', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '4');
+INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '12', null, 'html5', 'detail.html?id=7', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '4');
 
 -- ----------------------------
--- Table structure for invitecode
+-- Table structure for `invitecode`
 -- ----------------------------
 DROP TABLE IF EXISTS `invitecode`;
 CREATE TABLE `invitecode` (
@@ -137,7 +153,7 @@ INSERT INTO `invitecode` VALUES ('1', '123456', '1');
 INSERT INTO `invitecode` VALUES ('2', '111111', '1');
 
 -- ----------------------------
--- Table structure for nav
+-- Table structure for `nav`
 -- ----------------------------
 DROP TABLE IF EXISTS `nav`;
 CREATE TABLE `nav` (
@@ -157,7 +173,7 @@ INSERT INTO `nav` VALUES ('angular', 'angular', 'index.html?type=angular', '3');
 INSERT INTO `nav` VALUES ('react', 'react', 'index.html?type=react', '4');
 
 -- ----------------------------
--- Table structure for types
+-- Table structure for `types`
 -- ----------------------------
 DROP TABLE IF EXISTS `types`;
 CREATE TABLE `types` (
@@ -180,7 +196,7 @@ INSERT INTO `types` VALUES ('5', '面试题', '面试题', '2017', 'index.html?t
 INSERT INTO `types` VALUES ('6', '其他', '其他', '2017', 'index.html?type=其他');
 
 -- ----------------------------
--- Table structure for user
+-- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -203,7 +219,7 @@ INSERT INTO `user` VALUES ('zzzz', '6', '111111', '11@qq.com');
 INSERT INTO `user` VALUES ('qq', '7', '111111', '2@q.com');
 
 -- ----------------------------
--- Table structure for user_email_code
+-- Table structure for `user_email_code`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_email_code`;
 CREATE TABLE `user_email_code` (
@@ -211,14 +227,14 @@ CREATE TABLE `user_email_code` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `code` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`codeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user_email_code
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for user_verify_code
+-- Table structure for `user_verify_code`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_verify_code`;
 CREATE TABLE `user_verify_code` (

@@ -114,7 +114,8 @@
 /*   表格  start   */
 
 .table-wrap {
-    overflow: hidden;
+    overflow: auto;
+    white-space: nowrap;
     border-radius: 2em;
     margin: 1em 0;
 }
@@ -139,3 +140,23 @@ td {
 }
 
 /*   表格  end   */
+
+/*   字长   start   */
+
+.em-8 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 8em;
+}
+
+.em-4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 4em;
+}
+
+/*   字长   end   */

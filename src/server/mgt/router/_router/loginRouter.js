@@ -18,7 +18,7 @@ router.post('/login', function (req, res) {
 
         if (HAS_USER) {
             Utils.setLogin(uuidV1(), user.userId, req, res);
-            res.json({code: 1});
+            res.json(Object.assign(user, {code: 1}));
         } else {
             res.json({
                 code: 0,

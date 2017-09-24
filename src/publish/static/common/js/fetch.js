@@ -8,6 +8,9 @@ if (!window.Promise) {
 }
 /*   兼容性处理  end   */
 
+/**
+ * TODO 请求动画未加~
+ */
 const _fetch =(url, data, target, option) =>{
     return fetch(url, option).then(res=> {
         return res.json();
@@ -17,7 +20,6 @@ const _fetch =(url, data, target, option) =>{
         if (IS_LOGOUT === code) {
             target.$router.push('/login');
             log(msg);
-            return null;
         }
         return data;
     });
@@ -26,6 +28,13 @@ const _fetch =(url, data, target, option) =>{
 /*   请求方法封装  start  */
 window.$ = {
 
+    /**
+     * fetch函数封装
+     * @param url 请求路径
+     * @param data 请求数据
+     * @param target 发出请求的实例
+     * @param config 额外配置项
+     */
     post (url, data, target, config) {
 
         let option = Object.assign({
@@ -42,6 +51,13 @@ window.$ = {
         return _fetch(url, data, target, option);
     },
 
+    /**
+     * fetch函数封装
+     * @param url 请求路径
+     * @param data 请求数据
+     * @param target 发出请求的实例
+     * @param config 额外配置项
+     */
     get (url, data, target, config) {
         let option = Object.assign({
             method: "GET",

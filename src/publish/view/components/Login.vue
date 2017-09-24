@@ -5,12 +5,13 @@
                 <div v-title>登录页</div>
                 <form id="loginForm">
                     <div class="name">
-                        <input type="text" name="name" placeholder="用户名" maxlength="10">
+                        <input type="text" name="userName" v-model="userName" placeholder="用户名" maxlength="10">
                     </div>
                     <div class="pwd">
-                        <input type="password" name="pwd" placeholder="密码" maxlength="20">
+                        <input type="password" name="pwd" v-model="pwd" placeholder="密码" maxlength="20">
                     </div>
-                    <button type="button" @click="clickFn">登录</button>
+                    <p class="error">{{error}}</p>
+                    <button type="button" @click="login">登录</button>
                 </form>
             </div>
         </div>
@@ -22,8 +23,14 @@
     import "../../static/lib/particles/particles.js";
     export default {
         name: 'login',
+        data (){
+            return {
+                userName: '',
+                pwd: '',
+                error: ''
+            };
+        },
         mounted () {
-            console.log('rendered~');
             particlesJS('particlesJs',
                     {
                         "particles": {
@@ -144,8 +151,22 @@
             );
         },
         methods: {
-            clickFn: function () {
-                this.$router.push('/');
+            login () {
+
+                $.post(Url.LOGIN, {
+                    userName: this.userName,
+                    pwd:this.pwd
+                }, this).then(data=> {
+
+                    if (Url.CODE.OK === data.code) {
+                        this.$router.push('/');
+                        this.$emit('event', data.userName);
+                    } else {
+                        this.error = data.error
+                    }
+
+                });
+
             }
         }
     }
@@ -307,5 +328,13 @@
         z-index: 9;
         width: 320px;
         border-radius: 50%;
+    }
+
+    .error {
+        font-size: 12px;
+        color: rgba(255, 0, 0, 0.8);
+        transform: scale(0.8);
+        margin-top: -8px;
+        margin-bottom: 8px;
     }
 </style>

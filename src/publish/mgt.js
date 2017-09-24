@@ -6,6 +6,7 @@ import Mgt from './Mgt';
 import router from './view/router/mgtRouter';
 import './static/common/js/url';
 import './static/common/js/fetch';
+import './static/common/js/fmtDate';
 
 Vue.config.productionTip = false;
 

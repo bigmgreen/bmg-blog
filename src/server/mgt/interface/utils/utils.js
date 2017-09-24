@@ -11,7 +11,7 @@ let pool = mysql.createPool({
 });
 
 //每页的容量
-let PAGE_SIZE = 10;
+let PAGE_SIZE = 1;
 
 /**
  * 数据库操作公共接口
@@ -52,147 +52,199 @@ module.exports = {
      * @param callback
      */
     getUserById: function (userId, callback) {
-        let sql = ` SELECT * FROM user WHERE userId=${userId}`;
+        let sql = ` SELECT * FROM admin WHERE userId=${userId}`;
         excute(sql, callback);
     },
+    // /**
+    //  * 根据邮箱获取user
+    //  * @param email
+    //  * @param callback
+    //  */
+    // getUserByEmail: function (email, callback) {
+    //     let sql = ` SELECT * FROM user WHERE email=${pool.escape(email)}`;
+    //     excute(sql, callback);
+    // },
+    // /**
+    //  * 向数据库保存邮箱验证码
+    //  * @param email
+    //  * @param code
+    //  * @param callback
+    //  */
+    // saveEmailValidateCode: function (email, code, callback) {
+    //     let sql = `
+    //         INSERT INTO user_email_code(email, code) VALUES ("${email}","${code}")
+    //     `;
+    //     excute(sql, callback);
+    // },
+    // /**
+    //  * 向数据库保存图片验证码
+    //  * @param code
+    //  * @param callback
+    //  */
+    // saveVerifyCode: function (code, callback) {
+    //     let sql = `
+    //         INSERT INTO user_verify_code(code) VALUES ("${code}")
+    //     `;
+    //     excute(sql, callback);
+    // },
+    // /**
+    //  * 验证图片验证码
+    //  * @param code
+    //  * @param callback
+    //  */
+    // checkVerifyCode: function (code, callback) {
+    //     let sql = `
+    //         SELECT COUNT(*) as count from  user_verify_code WHERE code=${pool.escape(code)}
+    //     `;
+    //     excute(sql, callback);
+    // },
+    // /**
+    //  * 验证邀请码
+    //  * @param inviteCode
+    //  * @param callback
+    //  */
+    // checkInviteCode: function (inviteCode, callback) {
+    //     let sql = `
+    //         SELECT COUNT(*) as count from  inviteCode
+    //         WHERE
+    //             inviteCode=${pool.escape(inviteCode)}
+    //         AND
+    //             status=0
+    //     `;
+    //     excute(sql, callback);
+    // },
+    // /**
+    //  * 验证用户
+    //  * @param userName
+    //  * @param callback
+    //  */
+    // checkUserByName: function (userName, callback) {
+    //     let sql = `
+    //         SELECT * FROM user WHERE
+    //             userName=${pool.escape(userName)}
+    //     `;
+    //     excute(sql, callback);
+    // },
+    // /**
+    //  * 验证邮箱验证码
+    //  * @param email
+    //  * @param emailVerifyCode
+    //  * @param callback
+    //  */
+    // checkEmailVerifyCode: function (email, emailVerifyCode, callback) {
+    //     let sql = `
+    //         SELECT COUNT(*) as count FROM user_email_code
+    //             WHERE
+    //             email=${pool.escape(email)}
+    //             AND
+    //             code=${pool.escape(emailVerifyCode)}
+    //     `;
+    //     excute(sql, callback);
+    // },
+    // /**
+    //  * 删除验证过的邮箱验证码
+    //  * @param email
+    //  */
+    // removeEmailVerifyCode: function (email) {
+    //     let sql = `
+    //         DELETE FROM user_email_code WHERE email=${pool.escape(email)}
+    //     `;
+    //     excute(sql);
+    // },
+    // /**
+    //  * 重置密码
+    //  * @param userId
+    //  * @param pwd
+    //  * @param callback
+    //  */
+    // findPwd: function (userId, pwd, callback) {
+    //     let sql = `
+    //         UPDATE user SET pwd=${pool.escape(pwd)}
+    //         WHERE userId=${userId}
+    //     `;
+    //     excute(sql, callback);
+    // },
+    // /**
+    //  * 获取首页数据
+    //  * @param type
+    //  * @param currentPage
+    //  * @param callback
+    //  * TODO 可做缓存
+    //  */
+    // getIndex: function (type, currentPage = 0, callback) {
+    //
+    //     let nav = new Promise((resolve, reject)=> {
+    //         excute('SELECT * FROM nav', (err, nav)=> {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(nav);
+    //             }
+    //         });
+    //     });
+    //     let banner = new Promise((resolve, reject)=> {
+    //         excute('SELECT * FROM banner', (err, banner)=> {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(banner);
+    //             }
+    //         });
+    //     });
+    //     let article = new Promise((resolve, reject)=> {
+    //
+    //         let sql = `SELECT * FROM content`;
+    //
+    //         if (type !== 'all') {
+    //             sql += ` WHERE type=${pool.escape(type)}`
+    //         }
+    //         sql += ` order by contentId desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
+    //
+    //         excute(sql, (err, article)=> {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(article);
+    //             }
+    //         });
+    //     });
+    //     let author = new Promise((resolve, reject)=> {
+    //         excute('SELECT * FROM author', (err, author)=> {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(author);
+    //             }
+    //         });
+    //     });
+    //     let types = new Promise((resolve, reject)=> {
+    //         excute('SELECT * FROM types', (err, types)=> {
+    //             if (err) {
+    //                 reject(err);
+    //             } else {
+    //                 resolve(types);
+    //             }
+    //         });
+    //     });
+    //
+    //     Promise.all([nav, banner, article, author, types])
+    //         .then((results)=> {
+    //             callback(false, results);
+    //         })
+    //         .catch((err)=> {
+    //             callback(err);
+    //         })
+    //     ;
+    // },
     /**
-     * 根据邮箱获取user
-     * @param email
-     * @param callback
-     */
-    getUserByEmail: function (email, callback) {
-        let sql = ` SELECT * FROM user WHERE email=${pool.escape(email)}`;
-        excute(sql, callback);
-    },
-    /**
-     * 向数据库保存邮箱验证码
-     * @param email
-     * @param code
-     * @param callback
-     */
-    saveEmailValidateCode: function (email, code, callback) {
-        let sql = `
-            INSERT INTO user_email_code(email, code) VALUES ("${email}","${code}")
-        `;
-        excute(sql, callback);
-    },
-    /**
-     * 向数据库保存图片验证码
-     * @param code
-     * @param callback
-     */
-    saveVerifyCode: function (code, callback) {
-        let sql = `
-            INSERT INTO user_verify_code(code) VALUES ("${code}")
-        `;
-        excute(sql, callback);
-    },
-    /**
-     * 验证图片验证码
-     * @param code
-     * @param callback
-     */
-    checkVerifyCode: function (code, callback) {
-        let sql = `
-            SELECT COUNT(*) as count from  user_verify_code WHERE code=${pool.escape(code)}
-        `;
-        excute(sql, callback);
-    },
-    /**
-     * 验证邀请码
-     * @param inviteCode
-     * @param callback
-     */
-    checkInviteCode: function (inviteCode, callback) {
-        let sql = `
-            SELECT COUNT(*) as count from  inviteCode 
-            WHERE
-                inviteCode=${pool.escape(inviteCode)}
-            AND
-                status=0
-        `;
-        excute(sql, callback);
-    },
-    /**
-     * 验证用户
-     * @param userName
-     * @param callback
-     */
-    checkUserByName: function (userName, callback) {
-        let sql = `
-            SELECT * FROM user WHERE 
-                userName=${pool.escape(userName)}
-        `;
-        excute(sql, callback);
-    },
-    /**
-     * 验证邮箱验证码
-     * @param email
-     * @param emailVerifyCode
-     * @param callback
-     */
-    checkEmailVerifyCode: function (email, emailVerifyCode, callback) {
-        let sql = `
-            SELECT COUNT(*) as count FROM user_email_code 
-                WHERE 
-                email=${pool.escape(email)}
-                AND
-                code=${pool.escape(emailVerifyCode)}
-        `;
-        excute(sql, callback);
-    },
-    /**
-     * 删除验证过的邮箱验证码
-     * @param email
-     */
-    removeEmailVerifyCode: function (email) {
-        let sql = `
-            DELETE FROM user_email_code WHERE email=${pool.escape(email)}
-        `;
-        excute(sql);
-    },
-    /**
-     * 重置密码
-     * @param userId
-     * @param pwd
-     * @param callback
-     */
-    findPwd: function (userId, pwd, callback) {
-        let sql = `
-            UPDATE user SET pwd=${pool.escape(pwd)} 
-            WHERE userId=${userId}
-        `;
-        excute(sql, callback);
-    },
-    /**
-     * 获取首页数据
+     * 获取首页文章列表数据
      * @param type
      * @param currentPage
      * @param callback
-     * TODO 可做缓存
      */
-    getIndex: function (type, currentPage = 0, callback) {
+    getArticle: function (type, currentPage, callback) {
 
-        let nav = new Promise((resolve, reject)=> {
-            excute('SELECT * FROM nav', (err, nav)=> {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(nav);
-                }
-            });
-        });
-        let banner = new Promise((resolve, reject)=> {
-            excute('SELECT * FROM banner', (err, banner)=> {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(banner);
-                }
-            });
-        });
         let article = new Promise((resolve, reject)=> {
-
             let sql = `SELECT * FROM content`;
 
             if (type !== 'all') {
@@ -200,101 +252,69 @@ module.exports = {
             }
             sql += ` order by contentId desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
 
-            excute(sql, (err, article)=> {
+            excute(sql, (err, result)=> {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(article);
+                    resolve(result);
                 }
             });
         });
-        let author = new Promise((resolve, reject)=> {
-            excute('SELECT * FROM author', (err, author)=> {
+        let count = new Promise((resolve, reject)=> {
+            excute('SELECT count(1) as count FROM content', (err, result)=> {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(author);
-                }
-            });
-        });
-        let types = new Promise((resolve, reject)=> {
-            excute('SELECT * FROM types', (err, types)=> {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(types);
+                    resolve(result);
                 }
             });
         });
 
-        Promise.all([nav, banner, article, author, types])
+        Promise.all([article, count])
             .then((results)=> {
                 callback(false, results);
             })
             .catch((err)=> {
                 callback(err);
-            })
-        ;
+            });
+
     },
-    /**
-     * 获取首页文章列表数据
-     * @param type
-     * @param currentPage
-     * @param callback
-     */
-    getArticle: function (type, currentPage = 0, callback) {
-
-        let sql = `SELECT * FROM content`;
-
-        if (type !== 'all') {
-            sql += ` WHERE type=${pool.escape(type)}`
-        }
-        sql += ` order by contentId desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
-
-        excute(sql, (err, article)=> {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, article);
-            }
-        });
-    },
-    /**
-     * 注册
-     * @param inviteCode
-     * @param userName
-     * @param email
-     * @param pwd
-     * @param callback
-     */
-    register: function (inviteCode, userName, email, pwd, callback) {
-        let sql = `
-            INSERT INTO user(userName, email, pwd) VALUES 
-            (
-                ${pool.escape(userName)},${pool.escape(email)},${pool.escape(pwd)}
-            )
-        `;
-
-        let _sql = `
-            UPDATE inviteCode SET status=1
-            WHERE inviteCode=${pool.escape(inviteCode)}
-        `;
-
-        excute(sql, (err)=> {
-            if (err) {
-                callback(err);
-                return;
-            }
-            excute(_sql, callback);
-        });
-    },
-    /**
-     * 获取导航信息
-     * @param callback
-     */
-    getNav: function (callback) {
-        excute('SELECT * FROM nav', callback);
-    },
+    // /**
+    //  * 注册
+    //  * @param inviteCode
+    //  * @param userName
+    //  * @param email
+    //  * @param pwd
+    //  * @param callback
+    //  */
+    // register: function (inviteCode, userName, email, pwd, callback) {
+    //     let sql = `
+    //         INSERT INTO user(userName, email, pwd) VALUES
+    //         (
+    //             ${pool.escape(userName)},${pool.escape(email)},${pool.escape(pwd)}
+    //         )
+    //     `;
+    //
+    //     let _sql = `
+    //         UPDATE inviteCode SET status=1
+    //         WHERE inviteCode=${pool.escape(inviteCode)}
+    //     `;
+    //
+    //     excute(sql, (err)=> {
+    //         if (err) {
+    //             callback(err);
+    //             return;
+    //         }
+    //         excute(_sql, callback);
+    //     });
+    // },
+    // /**
+    //  * 获取导航信息
+    //  * @param callback
+    //  */
+    // getNav: function (callback) {
+    //     excute('SELECT * FROM nav', callback);
+    // },
     /**
      * 获取详情页信息
      * @param contentId
@@ -654,7 +674,7 @@ module.exports = {
 
                 let sql = `
                 UPDATE content
-                SET commentCount=${commentCount+contentCommentCount}
+                SET commentCount=${commentCount + contentCommentCount}
                 WHERE 
                 contentId=${pool.escape(contentId)}
             `;

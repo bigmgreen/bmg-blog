@@ -113,7 +113,7 @@ module.exports.Url = Url = {
     REGISTER_VERIFY_CODE: BASE_URL + '/registerVerifyCode',
     REGISTER: BASE_URL + '/register',
     PAGE_INFO: BASE_URL + '/pageInfo',
-    GET_EMAIL_CODE: BASE_URL + '/getEmailCode',
+    GET_EMAIL_CODE: BASE_URL + '/getEmailCode'
 };
 
 /*   请求方法封装   */
