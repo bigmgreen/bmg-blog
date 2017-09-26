@@ -4,6 +4,8 @@ window.Url = {
     GET_USER: BASE_URL + '/getUser',
     INDEX: BASE_URL + '/index',
     INDEX_ARTICLE: BASE_URL + '/article',
+    VISITOR: BASE_URL + '/visitor',
+
     DETAIL: BASE_URL + '/detail',
     MARK: BASE_URL + '/api/mark',
     GET_COMMENT: BASE_URL + '/getComment',

@@ -11,7 +11,7 @@ let pool = mysql.createPool({
 });
 
 //每页的容量
-let PAGE_SIZE = 1;
+let PAGE_SIZE = 10;
 
 /**
  * 数据库操作公共接口
@@ -262,6 +262,45 @@ module.exports = {
         });
         let count = new Promise((resolve, reject)=> {
             excute('SELECT count(1) as count FROM content', (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        Promise.all([article, count])
+            .then((results)=> {
+                callback(false, results);
+            })
+            .catch((err)=> {
+                callback(err);
+            });
+
+    },
+    /**
+     * 获取访客列表数据
+     * @param currentPage
+     * @param callback
+     */
+    getVisitor: function (currentPage, callback) {
+
+        let article = new Promise((resolve, reject)=> {
+            let sql = `SELECT * FROM visit_count`;
+
+            sql += ` order by dateTime desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}`;
+
+            excute(sql, (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+        let count = new Promise((resolve, reject)=> {
+            excute('SELECT count(1) as count FROM visit_count', (err, result)=> {
                 if (err) {
                     reject(err);
                 } else {

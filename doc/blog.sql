@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50549
 File Encoding         : 65001
 
-Date: 2017-09-24 22:56:37
+Date: 2017-09-26 08:10:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -279,3 +279,20 @@ INSERT INTO `user_verify_code` VALUES ('30', '4099');
 INSERT INTO `user_verify_code` VALUES ('31', '6860');
 INSERT INTO `user_verify_code` VALUES ('32', '1207');
 INSERT INTO `user_verify_code` VALUES ('33', '6732');
+
+-- ----------------------------
+-- Table structure for `visit_count`
+-- ----------------------------
+DROP TABLE IF EXISTS `visit_count`;
+CREATE TABLE `visit_count` (
+  `userId` bigint(20) NOT NULL,
+  `ip` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dateTime` bigint(20) NOT NULL,
+  `userName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of visit_count
+-- ----------------------------
+INSERT INTO `visit_count` VALUES ('1', '127.0.0.1', '1506343947226', 'zx');

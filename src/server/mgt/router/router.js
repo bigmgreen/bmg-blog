@@ -4,6 +4,7 @@ const Utils = require('./utils/utils');
 const loginRouter = require('./_router/loginRouter');
 const userRouter = require('./_router/userRouter');
 const indexRouter = require('./_router/indexRouter');
+const visitorRouter = require('./_router/visitorRouter');
 
 /**
  * 简单打印访问时间
@@ -22,7 +23,7 @@ router.get('/exit', function (req, res) {
  * 检查登录状态
  */
 router.use('/api/*', (req, res, next)=> {
-    if (Utils.isLogin(req)) {
+    if (Utils.isLogin(req) || req.method.toUpperCase() == 'OPTIONS') {
         next();
     } else {
         res.json({
@@ -35,5 +36,6 @@ router.use('/api/*', (req, res, next)=> {
 router.use(loginRouter);
 router.use('/api',userRouter);
 router.use('/api',indexRouter);
+router.use('/api',visitorRouter);
 
 module.exports = router;
