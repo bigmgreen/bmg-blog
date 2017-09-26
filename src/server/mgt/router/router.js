@@ -5,6 +5,7 @@ const loginRouter = require('./_router/loginRouter');
 const userRouter = require('./_router/userRouter');
 const indexRouter = require('./_router/indexRouter');
 const visitorRouter = require('./_router/visitorRouter');
+const markRouter = require('./_router/markRouter');
 
 /**
  * 简单打印访问时间
@@ -34,8 +35,9 @@ router.use('/api/*', (req, res, next)=> {
 });
 
 router.use(loginRouter);
-router.use('/api',userRouter);
-router.use('/api',indexRouter);
-router.use('/api',visitorRouter);
+router.use('/api', userRouter);
+router.use('/api', indexRouter);
+router.use('/api', visitorRouter);
+router.use('/api', markRouter);
 
 module.exports = router;

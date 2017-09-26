@@ -18,6 +18,8 @@ router.post('/login', function (req, res) {
 
         if (HAS_USER) {
             Utils.setLogin(req.body.remember7Day, uuidV1(), user.userId, req, res);
+            user.ip = req.headers.origin;
+            Login.setUserToVisit(user);
             res.json({code: 1});
         } else {
             res.json({

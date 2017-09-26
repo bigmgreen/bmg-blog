@@ -47,6 +47,18 @@ module.exports = {
         excute(sql, callback);
     },
     /**
+     * 把的user插入到访问记录表中
+     * @param user
+     * @param callback
+     */
+    setUserToVisit: function (user, callback) {
+        let sql = `
+            INSERT INTO visit_count(userId, ip, dateTime, userName) VALUES 
+            ("${user.userId}","${user.ip}","${+new Date()}","${user.userName}")
+        `;
+        excute(sql, callback);
+    },
+    /**
      * 根据userId获取user
      * @param userId
      * @param callback

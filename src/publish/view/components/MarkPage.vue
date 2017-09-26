@@ -4,21 +4,23 @@
             <table>
                 <thead>
                 <tr>
+                    <th>序号</th>
                     <th>文章编号</th>
                     <th>文章标题</th>
                     <th>点赞数量</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>zx</td>
-                    <td>50</td>
+                <tr v-for="(item,index) in items">
+                    <td>{{++index}}</td>
+                    <td>{{item.contentId}}</td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.count}}</td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <pager></pager>
+        <pager v-bind:pageCount="pageCount" v-on:onPage="onPage"></pager>
     </article>
 </template>
 
@@ -28,11 +30,26 @@
         name: 'MarkPage',
         data () {
             return {
-                msg: '这是点赞统计页面'
+                items: [],
+                pageCount: 0,
             }
         },
         components: {
             'pager': Pager
+        },
+        mounted () {
+            this.onPage();
+        },
+        methods: {
+            onPage (currentPage = 0) {
+
+                $.get(Url.MARK, {
+                    currentPage: currentPage
+                }, this).then(data=> {
+                    this.items = data.items;
+                    this.pageCount = data.PAGE_COUNT;
+                });
+            }
         }
     }
 </script>

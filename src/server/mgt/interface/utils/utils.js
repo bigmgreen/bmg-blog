@@ -318,6 +318,46 @@ module.exports = {
             });
 
     },
+    /**
+     * 获取点赞列表
+     * @param currentPage
+     * @param callback
+     */
+    getMark: function (currentPage, callback) {
+
+        let mark = new Promise((resolve, reject)=> {
+            let sql = `SELECT contentId,title,markCount as count FROM content
+                    order by dateTime desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}
+                    `;
+
+
+            excute(sql, (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+        let count = new Promise((resolve, reject)=> {
+            excute('SELECT count(1) as count FROM content', (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        Promise.all([mark, count])
+            .then((results)=> {
+                callback(false, results);
+            })
+            .catch((err)=> {
+                callback(err);
+            });
+
+    },
     // /**
     //  * 注册
     //  * @param inviteCode

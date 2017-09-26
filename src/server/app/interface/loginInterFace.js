@@ -27,3 +27,12 @@ exports.getUser = function ({userName, pwd}, callBack) {
         callBack(null, false);
     });
 };
+
+/**
+ * 登录成功后记录访问记录
+ * @param user
+ * @returns {boolean}
+ */
+exports.setUserToVisit = function (user) {
+    Utils.setUserToVisit(user);
+};

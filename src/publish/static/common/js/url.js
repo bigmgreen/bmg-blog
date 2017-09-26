@@ -5,9 +5,9 @@ window.Url = {
     INDEX: BASE_URL + '/index',
     INDEX_ARTICLE: BASE_URL + '/article',
     VISITOR: BASE_URL + '/visitor',
+    MARK: BASE_URL + '/mark',
 
     DETAIL: BASE_URL + '/detail',
-    MARK: BASE_URL + '/api/mark',
     GET_COMMENT: BASE_URL + '/getComment',
     COMMENT: BASE_URL + '/comment',
     COMMENT_MARK: BASE_URL + '/commentMark',
