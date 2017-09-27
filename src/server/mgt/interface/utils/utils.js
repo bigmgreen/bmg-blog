@@ -358,6 +358,46 @@ module.exports = {
             });
 
     },
+    /**
+     * 获取来源列表
+     * @param currentPage
+     * @param callback
+     */
+    getFrom: function (currentPage, callback) {
+
+        let item = new Promise((resolve, reject)=> {
+            let sql = `SELECT * FROM from_count
+                    order by dateTime desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}
+                    `;
+
+
+            excute(sql, (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+        let count = new Promise((resolve, reject)=> {
+            excute('SELECT count(1) as count FROM from_count', (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        Promise.all([item, count])
+            .then((results)=> {
+                callback(false, results);
+            })
+            .catch((err)=> {
+                callback(err);
+            });
+
+    },
     // /**
     //  * 注册
     //  * @param inviteCode

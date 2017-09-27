@@ -6,6 +6,7 @@ window.Url = {
     INDEX_ARTICLE: BASE_URL + '/article',
     VISITOR: BASE_URL + '/visitor',
     MARK: BASE_URL + '/mark',
+    FROM: BASE_URL + '/from',
 
     DETAIL: BASE_URL + '/detail',
     GET_COMMENT: BASE_URL + '/getComment',
