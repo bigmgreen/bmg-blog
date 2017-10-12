@@ -398,6 +398,64 @@ module.exports = {
             });
 
     },
+    /**
+     * 获取邀请码列表
+     * @param currentPage
+     * @param callback
+     */
+    getInvite: function (currentPage, callback) {
+
+        let item = new Promise((resolve, reject)=> {
+            let sql = `SELECT * FROM invitecode
+                    order by dateTime desc LIMIT ${currentPage * PAGE_SIZE},${PAGE_SIZE}
+                    `;
+
+
+            excute(sql, (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+        let count = new Promise((resolve, reject)=> {
+            excute('SELECT count(1) as count FROM invitecode', (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        Promise.all([item, count])
+            .then((results)=> {
+                callback(false, results);
+            })
+            .catch((err)=> {
+                callback(err);
+            });
+
+    },
+    /**
+     * 获取邀请码
+     * @param inviteCode
+     * @param callback
+     */
+    getInviteCode: function (inviteCode, callback) {
+
+        let sql = `INSERT INTO invitecode(inviteCode,status,dateTime) VALUES ('${inviteCode}',0, ${+new Date()})`;
+
+        excute(sql, (err, result)=> {
+            if (err) {
+                callback(err);
+            } else {
+                callback(false, result);
+            }
+        });
+
+    },
     // /**
     //  * 注册
     //  * @param inviteCode

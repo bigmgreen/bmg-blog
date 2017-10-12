@@ -6,14 +6,14 @@
                 <tr>
                     <th>序号</th>
                     <th>来源</th>
-                    <th>来源数量</th>
+                    <th>访问时间</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(item,index) in items">
                     <td>{{++index}}</td>
                     <td>{{item.ip}}</td>
-                    <td>{{item.count}}</td>
+                    <td>{{fmtDate(item.dateTime)}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -40,6 +40,9 @@
             this.onPage();
         },
         methods: {
+            fmtDate(millisecond) {
+                return fmtDate(millisecond);
+            },
             onPage (currentPage = 0) {
                 $.get(Url.FROM, {
                     currentPage: currentPage

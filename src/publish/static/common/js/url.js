@@ -7,6 +7,8 @@ window.Url = {
     VISITOR: BASE_URL + '/visitor',
     MARK: BASE_URL + '/mark',
     FROM: BASE_URL + '/from',
+    INVITE: BASE_URL + '/invite',
+    GET_INVITE: BASE_URL + '/getInviteCode',
 
     DETAIL: BASE_URL + '/detail',
     GET_COMMENT: BASE_URL + '/getComment',

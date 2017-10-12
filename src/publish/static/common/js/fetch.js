@@ -44,9 +44,13 @@ window.$ = {
             headers: {
                 'Content-Type': 'application/json'
             },
-        }, config, {
-            body: JSON.stringify(data)
-        });
+        }, config);
+
+        if (typeof data === 'object') {
+            option = Object.assign(option, {
+                body: JSON.stringify(data)
+            });
+        }
 
         return _fetch(url, data, target, option);
     },
