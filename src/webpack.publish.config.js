@@ -13,8 +13,8 @@ module.exports = {
         filename: 'mgt.js'
     },
     resolve: {
-        extensions:['.vue', '.js', '.json'],
-        alias:{
+        extensions: ['.vue', '.js', '.json'],
+        alias: {
             'vue': 'vue/dist/vue.js'
         }
     },
@@ -32,7 +32,7 @@ module.exports = {
                     "env": {
                         "production": {
                             "plugins": [
-                                ["transform-runtime", { "polyfill": false, "regenerator": false }]
+                                ["transform-runtime", {"polyfill": false, "regenerator": false}]
                             ]
                         }
                     }
@@ -77,6 +77,7 @@ module.exports = {
         inline: true,
         contentBase: BUILD_PATH,
         openPage: 'index.html',
+        port: 8082,
         hot: true,  // 让 dev-server 开启 HMR
         open: true
     }

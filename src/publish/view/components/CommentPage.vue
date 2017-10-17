@@ -4,35 +4,55 @@
             <table>
                 <thead>
                 <tr>
-                    <th>文章编号</th>
-                    <th>文章标题</th>
+                    <th>序号</th>
                     <th>评论人</th>
                     <th>评论内容</th>
+                    <th>评论日期</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>title</td>
-                    <td>zx</td>
-                    <td>评论内容</td>
+                <tr v-for="(item,index) in items">
+                    <td>{{++index}}</td>
+                    <td>{{item.critics}}</td>
+                    <td>{{item.content}}</td>
+                    <td>{{fmtDate(item.dateTime)}}</td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <pager></pager>
+        <pager v-bind:pageCount="pageCount" v-on:onPage="onPage"></pager>
     </article>
 </template>
 
 <script>
     import Pager from '../../view/components/include/Pager';
+
     export default {
         name: 'CommentPage',
         data () {
-            return {}
+            return {
+                items: [],
+                pageCount: 0,
+            }
         },
         components: {
             'pager': Pager
+        },
+        mounted () {
+            this.onPage();
+        },
+        methods: {
+            fmtDate(millisecond) {
+                return fmtDate(millisecond);
+            },
+            onPage (currentPage = 0) {
+                $.get(Url.COMMENT, {
+                    currentPage: currentPage
+                }, this).then(data=> {
+                    this.items = data.items;
+                    this.pageCount = data.PAGE_COUNT;
+                });
+            }
         }
     }
 </script>

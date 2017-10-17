@@ -9,17 +9,8 @@ window.Url = {
     FROM: BASE_URL + '/from',
     INVITE: BASE_URL + '/invite',
     GET_INVITE: BASE_URL + '/getInviteCode',
-
-    DETAIL: BASE_URL + '/detail',
-    GET_COMMENT: BASE_URL + '/getComment',
     COMMENT: BASE_URL + '/comment',
-    COMMENT_MARK: BASE_URL + '/commentMark',
-    FIND_PWD: BASE_URL + '/findPwd',
-    FIND_PWD_VERIFY_CODE: BASE_URL + '/findPwdVerifyCode',
-    REGISTER_VERIFY_CODE: BASE_URL + '/registerVerifyCode',
-    REGISTER: BASE_URL + '/register',
-    PAGE_INFO: BASE_URL + '/pageInfo',
-    GET_EMAIL_CODE: BASE_URL + '/getEmailCode',
+    SHARE: BASE_URL + '/share',
 };
 
 window.Url.LOGIN= 'http://127.0.0.1:3001' + '/login';

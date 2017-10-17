@@ -15,6 +15,7 @@
                         <th>序号</th>
                         <th>邀请码</th>
                         <th>邀请日期</th>
+                        <th>状态</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,6 +23,7 @@
                         <td>{{++index}}</td>
                         <td>{{item.inviteCode}}</td>
                         <td>{{fmtDate(item.dateTime)}}</td>
+                        <td>{{item.status == 1 ? '已使用' : '未使用'}}</td>
                     </tr>
                     </tbody>
                 </table>

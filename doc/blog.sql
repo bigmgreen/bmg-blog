@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50549
 File Encoding         : 65001
 
-Date: 2017-09-26 22:07:44
+Date: 2017-10-17 22:31:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -133,7 +133,23 @@ INSERT INTO `content` VALUES ('3', '星球大战', '星球大战星球大战星�
 INSERT INTO `content` VALUES ('4', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=4', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
 INSERT INTO `content` VALUES ('5', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '1', null, 'html5', 'detail.html?id=5', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
 INSERT INTO `content` VALUES ('6', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=6', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
-INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '12', null, 'html5', 'detail.html?id=7', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '4');
+INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '16', null, 'html5', 'detail.html?id=7', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '4');
+
+-- ----------------------------
+-- Table structure for `from_count`
+-- ----------------------------
+DROP TABLE IF EXISTS `from_count`;
+CREATE TABLE `from_count` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dateTime` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of from_count
+-- ----------------------------
+INSERT INTO `from_count` VALUES ('1', '127.0.0.1', '1506437961593');
 
 -- ----------------------------
 -- Table structure for `invitecode`
@@ -143,14 +159,24 @@ CREATE TABLE `invitecode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `inviteCode` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` int(11) NOT NULL,
+  `dateTime` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of invitecode
 -- ----------------------------
-INSERT INTO `invitecode` VALUES ('1', '123456', '1');
-INSERT INTO `invitecode` VALUES ('2', '111111', '1');
+INSERT INTO `invitecode` VALUES ('1', '123456', '1', '1506437961593');
+INSERT INTO `invitecode` VALUES ('2', '111111', '1', '1506437961593');
+INSERT INTO `invitecode` VALUES ('3', '222', '0', '1507768377195');
+INSERT INTO `invitecode` VALUES ('4', '377752', '0', '1507768515940');
+INSERT INTO `invitecode` VALUES ('5', '864608', '0', '1507768648157');
+INSERT INTO `invitecode` VALUES ('6', '86fc60', '0', '1507768649352');
+INSERT INTO `invitecode` VALUES ('7', '876dbf', '0', '1507768650095');
+INSERT INTO `invitecode` VALUES ('8', 'a277e6', '0', '1507768695460');
+INSERT INTO `invitecode` VALUES ('9', 'a34d10', '0', '1507768696857');
+INSERT INTO `invitecode` VALUES ('10', 'bea6e6', '0', '1508247202101');
+INSERT INTO `invitecode` VALUES ('11', 'bf4019', '1', '1508247203105');
 
 -- ----------------------------
 -- Table structure for `nav`
@@ -171,6 +197,25 @@ INSERT INTO `nav` VALUES ('index', '首页', 'index.html?type=index', '1');
 INSERT INTO `nav` VALUES ('html5', 'html5', 'index.html?type=html5', '2');
 INSERT INTO `nav` VALUES ('angular', 'angular', 'index.html?type=angular', '3');
 INSERT INTO `nav` VALUES ('react', 'react', 'index.html?type=react', '4');
+
+-- ----------------------------
+-- Table structure for `share`
+-- ----------------------------
+DROP TABLE IF EXISTS `share`;
+CREATE TABLE `share` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `contentId` bigint(20) NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `userId` bigint(20) NOT NULL,
+  `userName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dateTime` bigint(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of share
+-- ----------------------------
+INSERT INTO `share` VALUES ('1', '1', 'h', '1', 'zx', '1497075762689');
 
 -- ----------------------------
 -- Table structure for `types`
@@ -205,7 +250,7 @@ CREATE TABLE `user` (
   `pwd` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of user
@@ -217,6 +262,7 @@ INSERT INTO `user` VALUES ('zxx', '4', '111111', '1@qq.com');
 INSERT INTO `user` VALUES ('zzz', '5', '111111', '2@qq.com');
 INSERT INTO `user` VALUES ('zzzz', '6', '111111', '11@qq.com');
 INSERT INTO `user` VALUES ('qq', '7', '111111', '2@q.com');
+INSERT INTO `user` VALUES ('lzy', '8', '111111', 'zx@qq.com');
 
 -- ----------------------------
 -- Table structure for `user_email_code`
@@ -241,7 +287,7 @@ CREATE TABLE `user_verify_code` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user_verify_code
@@ -279,6 +325,7 @@ INSERT INTO `user_verify_code` VALUES ('30', '4099');
 INSERT INTO `user_verify_code` VALUES ('31', '6860');
 INSERT INTO `user_verify_code` VALUES ('32', '1207');
 INSERT INTO `user_verify_code` VALUES ('33', '6732');
+INSERT INTO `user_verify_code` VALUES ('34', '6147');
 
 -- ----------------------------
 -- Table structure for `visit_count`
@@ -291,7 +338,7 @@ CREATE TABLE `visit_count` (
   `dateTime` bigint(20) NOT NULL,
   `userName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of visit_count
@@ -299,3 +346,4 @@ CREATE TABLE `visit_count` (
 INSERT INTO `visit_count` VALUES ('1', '1', '127.0.0.1', '1506343947226', 'zx');
 INSERT INTO `visit_count` VALUES ('2', '1', 'http://localhost:8081', '1506433192957', 'zx');
 INSERT INTO `visit_count` VALUES ('3', '1', 'http://localhost:8081', '1506433399524', 'zx');
+INSERT INTO `visit_count` VALUES ('4', '1', 'http://localhost:8081', '1508247518711', 'zx');

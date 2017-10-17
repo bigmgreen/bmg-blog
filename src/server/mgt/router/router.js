@@ -8,6 +8,8 @@ const visitorRouter = require('./_router/visitorRouter');
 const markRouter = require('./_router/markRouter');
 const fromRouter = require('./_router/fromRouter');
 const inviteRouter = require('./_router/inviteRouter');
+const commentRouter = require('./_router/commentRouter');
+const shareRouter = require('./_router/shareRouter');
 
 /**
  * 简单打印访问时间
@@ -43,5 +45,7 @@ router.use('/api', visitorRouter);
 router.use('/api', markRouter);
 router.use('/api', fromRouter);
 router.use('/api', inviteRouter);
+router.use('/api', commentRouter);
+router.use('/api', shareRouter);
 
 module.exports = router;

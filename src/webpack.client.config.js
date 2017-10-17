@@ -98,6 +98,7 @@ module.exports = {
     devServer: {
         inline: true,
         contentBase: BUILD_PATH,
+        port: 8081,
         openPage: 'index.html',
         hot: true,  // 让 dev-server 开启 HMR
         open: true
