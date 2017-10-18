@@ -102,6 +102,7 @@ module.exports.Url = Url = {
     INDEX: BASE_URL + '/index',
     INDEX_ARTICLE: BASE_URL + '/article',
     DETAIL: BASE_URL + '/detail',
+    SHARE_DETAIL_COUNT: BASE_URL + '/shareCount',
     MARK: BASE_URL + '/api/mark',
     GET_COMMENT: BASE_URL + '/getComment',
     COMMENT: BASE_URL + '/comment',

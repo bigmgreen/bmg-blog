@@ -90,6 +90,38 @@ class App extends Component {
         (document.getElementsByTagName('head')[0] || document.body)
             .appendChild(document.createElement('script'))
             .src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5);
+
+        /*   分享统计   start   */
+        document.addEventListener('click', (e)=> {
+
+            if (this.state.header.userName) {
+                try {
+                    const targets = e.target.parentNode.parentNode.parentNode.classList;
+                    if ([].indexOf.call(targets,'bdshare-slide-list') > -1) {
+                        const data = {
+                            userName: this.state.header.userName,
+                            contentId: this.state.content.contentId,
+                            title: this.state.content.title
+                        };
+
+                        bmgFetch.post(Url.SHARE_DETAIL_COUNT, data)
+                            .then((res)=> {
+                                return res.json();
+                            })
+                            .catch((err)=> {
+                                if (err) {
+                                    console.log(err);
+                                }
+                            });
+
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+
+        });
+        /*   分享统计   end   */
     }
 
     render() {

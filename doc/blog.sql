@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local
-Source Server Version : 50549
+Source Server         : 本地数据库
+Source Server Version : 50533
 Source Host           : localhost:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 50549
+Target Server Version : 50533
 File Encoding         : 65001
 
-Date: 2017-10-17 22:31:30
+Date: 2017-10-18 10:40:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `admin`
+-- Table structure for admin
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` VALUES ('admin', '123', '0');
 
 -- ----------------------------
--- Table structure for `author`
+-- Table structure for author
 -- ----------------------------
 DROP TABLE IF EXISTS `author`;
 CREATE TABLE `author` (
@@ -52,7 +52,7 @@ INSERT INTO `author` VALUES ('4', '邮箱', '1@163.com');
 INSERT INTO `author` VALUES ('5', '简介', '除了帅气以外再也没有拿得出手的技术了');
 
 -- ----------------------------
--- Table structure for `banner`
+-- Table structure for banner
 -- ----------------------------
 DROP TABLE IF EXISTS `banner`;
 CREATE TABLE `banner` (
@@ -68,7 +68,7 @@ CREATE TABLE `banner` (
 INSERT INTO `banner` VALUES ('1', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'https://www.baidu.com/');
 
 -- ----------------------------
--- Table structure for `comment`
+-- Table structure for comment
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -105,7 +105,7 @@ INSERT INTO `comment` VALUES ('17', '7', 'zx', '1497075762689', '0', '1', null);
 INSERT INTO `comment` VALUES ('18', '7', 'zx', '1497075762689', '0', '1', null);
 
 -- ----------------------------
--- Table structure for `content`
+-- Table structure for content
 -- ----------------------------
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
@@ -133,10 +133,10 @@ INSERT INTO `content` VALUES ('3', '星球大战', '星球大战星球大战星�
 INSERT INTO `content` VALUES ('4', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=4', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
 INSERT INTO `content` VALUES ('5', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '1', null, 'html5', 'detail.html?id=5', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
 INSERT INTO `content` VALUES ('6', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '2', null, 'html5', 'detail.html?id=6', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '0');
-INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '16', null, 'html5', 'detail.html?id=7', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '4');
+INSERT INTO `content` VALUES ('7', '星球大战', '星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战星球大战', '1497075762689', '0', '42', null, 'html5', 'detail.html?id=7', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', null, '4');
 
 -- ----------------------------
--- Table structure for `from_count`
+-- Table structure for from_count
 -- ----------------------------
 DROP TABLE IF EXISTS `from_count`;
 CREATE TABLE `from_count` (
@@ -152,7 +152,7 @@ CREATE TABLE `from_count` (
 INSERT INTO `from_count` VALUES ('1', '127.0.0.1', '1506437961593');
 
 -- ----------------------------
--- Table structure for `invitecode`
+-- Table structure for invitecode
 -- ----------------------------
 DROP TABLE IF EXISTS `invitecode`;
 CREATE TABLE `invitecode` (
@@ -179,7 +179,7 @@ INSERT INTO `invitecode` VALUES ('10', 'bea6e6', '0', '1508247202101');
 INSERT INTO `invitecode` VALUES ('11', 'bf4019', '1', '1508247203105');
 
 -- ----------------------------
--- Table structure for `nav`
+-- Table structure for nav
 -- ----------------------------
 DROP TABLE IF EXISTS `nav`;
 CREATE TABLE `nav` (
@@ -199,7 +199,7 @@ INSERT INTO `nav` VALUES ('angular', 'angular', 'index.html?type=angular', '3');
 INSERT INTO `nav` VALUES ('react', 'react', 'index.html?type=react', '4');
 
 -- ----------------------------
--- Table structure for `share`
+-- Table structure for share
 -- ----------------------------
 DROP TABLE IF EXISTS `share`;
 CREATE TABLE `share` (
@@ -210,15 +210,19 @@ CREATE TABLE `share` (
   `userName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `dateTime` bigint(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of share
 -- ----------------------------
 INSERT INTO `share` VALUES ('1', '1', 'h', '1', 'zx', '1497075762689');
+INSERT INTO `share` VALUES ('2', '7', '星球大战', '1', 'zx', '1508294334277');
+INSERT INTO `share` VALUES ('3', '7', '星球大战', '1', 'zx', '1508294334277');
+INSERT INTO `share` VALUES ('4', '7', '1508294260868', '1', 'zx', '1508294334277');
+INSERT INTO `share` VALUES ('5', '7', '星球大战', '1', 'zx', '1508294334277');
 
 -- ----------------------------
--- Table structure for `types`
+-- Table structure for types
 -- ----------------------------
 DROP TABLE IF EXISTS `types`;
 CREATE TABLE `types` (
@@ -241,7 +245,7 @@ INSERT INTO `types` VALUES ('5', '面试题', '面试题', '2017', 'index.html?t
 INSERT INTO `types` VALUES ('6', '其他', '其他', '2017', 'index.html?type=其他');
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -265,7 +269,7 @@ INSERT INTO `user` VALUES ('qq', '7', '111111', '2@q.com');
 INSERT INTO `user` VALUES ('lzy', '8', '111111', 'zx@qq.com');
 
 -- ----------------------------
--- Table structure for `user_email_code`
+-- Table structure for user_email_code
 -- ----------------------------
 DROP TABLE IF EXISTS `user_email_code`;
 CREATE TABLE `user_email_code` (
@@ -280,7 +284,7 @@ CREATE TABLE `user_email_code` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `user_verify_code`
+-- Table structure for user_verify_code
 -- ----------------------------
 DROP TABLE IF EXISTS `user_verify_code`;
 CREATE TABLE `user_verify_code` (
@@ -328,7 +332,7 @@ INSERT INTO `user_verify_code` VALUES ('33', '6732');
 INSERT INTO `user_verify_code` VALUES ('34', '6147');
 
 -- ----------------------------
--- Table structure for `visit_count`
+-- Table structure for visit_count
 -- ----------------------------
 DROP TABLE IF EXISTS `visit_count`;
 CREATE TABLE `visit_count` (
@@ -338,7 +342,7 @@ CREATE TABLE `visit_count` (
   `dateTime` bigint(20) NOT NULL,
   `userName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of visit_count
@@ -347,3 +351,9 @@ INSERT INTO `visit_count` VALUES ('1', '1', '127.0.0.1', '1506343947226', 'zx');
 INSERT INTO `visit_count` VALUES ('2', '1', 'http://localhost:8081', '1506433192957', 'zx');
 INSERT INTO `visit_count` VALUES ('3', '1', 'http://localhost:8081', '1506433399524', 'zx');
 INSERT INTO `visit_count` VALUES ('4', '1', 'http://localhost:8081', '1508247518711', 'zx');
+INSERT INTO `visit_count` VALUES ('5', '1', 'http://localhost:8081', '1508292379553', 'zx');
+INSERT INTO `visit_count` VALUES ('6', '1', 'http://localhost:8081', '1508293005927', 'zx');
+INSERT INTO `visit_count` VALUES ('7', '1', 'http://localhost:8081', '1508293909837', 'zx');
+INSERT INTO `visit_count` VALUES ('8', '1', 'http://localhost:8081', '1508294179552', 'zx');
+INSERT INTO `visit_count` VALUES ('9', '1', 'http://localhost:8081', '1508294253806', 'zx');
+INSERT INTO `visit_count` VALUES ('10', '1', 'http://localhost:8081', '1508294326841', 'zx');

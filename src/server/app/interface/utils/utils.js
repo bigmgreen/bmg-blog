@@ -526,6 +526,37 @@ module.exports = {
 
     },
     /**
+     * 文章分享统计
+     * @param userId
+     * @param contentId
+     * @param userName
+     * @param title
+     * @param callBack
+     */
+    shareCount: function (userId, contentId, userName, title, callBack) {
+
+        let sql = `
+            INSERT INTO share(userId, contentId, userName, title, dateTime) 
+            VALUES 
+            (
+                ${pool.escape(userId)},
+                ${pool.escape(contentId)},
+                ${pool.escape(userName)},
+                ${pool.escape(title)},
+                ${new Date().getTime()}
+            )
+        `;
+
+        excute(sql, (err)=> {
+            if (err) {
+                console.log(err, '分享统计异常', userId, contentId, userName, title);
+                return;
+            }
+            callBack(err, 'ok');
+        });
+
+    },
+    /**
      * 获取详情页评论
      * @param contentId
      * @param currentPage
@@ -666,7 +697,7 @@ module.exports = {
 
                 let sql = `
                 UPDATE content
-                SET commentCount=${commentCount+contentCommentCount}
+                SET commentCount=${commentCount + contentCommentCount}
                 WHERE 
                 contentId=${pool.escape(contentId)}
             `;

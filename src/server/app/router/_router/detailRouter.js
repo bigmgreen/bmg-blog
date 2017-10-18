@@ -37,6 +37,25 @@ router.post('/mark', function (req, res) {
 
 });
 
+router.post('/shareCount', function (req, res) {
+
+    Detail.shareCount(Utils.getUserId(req), req.body, (err)=> {
+        if (err) {
+            console.log(err);
+            res.json({
+                code: 0,
+                error: '服务器正在维护...'
+            });
+            return;
+        }
+        res.json({
+            code: 1,
+            msg: '统计成功'
+        });
+    });
+
+});
+
 router.get('/getComment', function (req, res) {
 
     Detail.getComment(req.query, (err, comments)=>{

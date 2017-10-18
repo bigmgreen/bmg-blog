@@ -121,6 +121,19 @@ exports.mark = function (userId, {contentId, checked}, callBack) {
 };
 
 /**
+ * 文章分享统计
+ * @param userId
+ * @param userName
+ * @param contentId
+ * @param title
+ * @param callBack
+ */
+exports.shareCount = function (userId, {userName, contentId, title}, callBack) {
+
+    Utils.shareCount(userId, contentId, userName, title, callBack);
+};
+
+/**
  * 获取详情页评论
  * @param contentId
  * @param currentPage
