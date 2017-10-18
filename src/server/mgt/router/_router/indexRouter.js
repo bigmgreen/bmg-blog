@@ -16,4 +16,21 @@ router.get('/index', function (req, res) {
     });
 });
 
+router.post('/delete', function (req, res) {
+    Index.deleteArticle(req.body.contentId, (err)=>{
+        if (err) {
+            console.log(err);
+            res.json({
+                code: 0,
+                error: '服务器正在维护...'
+            });
+            return;
+        }
+        res.json({
+            code:'0',
+            msg:'删除成功'
+        });
+    });
+});
+
 module.exports = router;

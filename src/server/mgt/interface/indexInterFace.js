@@ -29,3 +29,24 @@ exports.getArticle = function ({type, currentPage}, callBack) {
 
     });
 };
+
+/**
+ * 删除文章
+ * @param contentId
+ * @param callBack
+ * @returns {boolean}
+ */
+exports.deleteArticle = function (contentId, callBack) {
+
+    Utils.deleteArticle(contentId, (err)=> {
+        "use strict";
+
+        if (err) {
+            callBack(err);
+            return;
+        }
+
+        callBack(null);
+
+    });
+};

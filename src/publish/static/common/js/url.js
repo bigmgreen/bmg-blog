@@ -11,6 +11,7 @@ window.Url = {
     GET_INVITE: BASE_URL + '/getInviteCode',
     COMMENT: BASE_URL + '/comment',
     SHARE: BASE_URL + '/share',
+    DELETE: BASE_URL + '/delete',
 };
 
 window.Url.LOGIN= 'http://127.0.0.1:3001' + '/login';

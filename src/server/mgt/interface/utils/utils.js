@@ -280,6 +280,21 @@ module.exports = {
 
     },
     /**
+     * 删除文章
+     * @param contentId
+     * @param callback
+     */
+    deleteArticle: function (contentId, callback) {
+        let sql = `DELETE FROM content where contentId=${pool.escape(contentId)}`;
+        excute(sql, (err)=> {
+            if (err) {
+                callback(err);
+            } else {
+                callback(false);
+            }
+        });
+    },
+    /**
      * 获取访客列表数据
      * @param currentPage
      * @param callback
