@@ -21,6 +21,7 @@ exports.getArticle = function ({type, currentPage}, callBack) {
 
         let article = {
             items:rows[0],
+            types:rows[1],
             PAGE_COUNT: PAGE_COUNT,
             PAGE_SIZE: Utils.PAGE_SIZE
         };

@@ -46,7 +46,7 @@
         </div>
         <div v-if="isShowAddModal" class="modal">
             <div class="modal-content">
-                <form>
+                <form id="addForm" enctype="multipart/form-data">
                     <div class="input">
                         <label for="title">标题</label>
                         <input type="text" id="title" name="title" maxlength="50">
@@ -54,12 +54,12 @@
                     <div class="input">
                         <label for="type">类型</label>
                         <select id="type" name="type">
-                            <option>JavaScript</option>
-                            <option>css</option>
-                            <option>html5</option>
-                            <option>nodeJs</option>
-                            <option>面试题</option>
-                            <option>其他</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="css">css</option>
+                            <option value="html5">html5</option>
+                            <option value="nodeJs">nodeJs</option>
+                            <option value="面试题">面试题</option>
+                            <option value="其他">其他</option>
                         </select>
                     </div>
                     <div class="input">
@@ -77,9 +77,10 @@
                 </form>
             </div>
         </div>
-        <div v-if="isShowEditModal" class="modal">
+        <div v-show="isShowEditModal" class="modal">
             <div class="modal-content">
-                <form>
+                <form id="editForm" enctype="multipart/form-data">
+                    <input type="hidden" name="contentId">
                     <div class="input">
                         <label for="edit_title">标题</label>
                         <input type="text" id="edit_title" name="title" maxlength="50">
@@ -87,12 +88,12 @@
                     <div class="input">
                         <label for="edit_type">类型</label>
                         <select id="edit_type" name="type">
-                            <option>JavaScript</option>
-                            <option>css</option>
-                            <option>html5</option>
-                            <option>nodeJs</option>
-                            <option>面试题</option>
-                            <option>其他</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="css">css</option>
+                            <option value="html5">html5</option>
+                            <option value="nodeJs">nodeJs</option>
+                            <option value="面试题">面试题</option>
+                            <option value="其他">其他</option>
                         </select>
                     </div>
                     <div class="input">
@@ -120,6 +121,7 @@
         data () {
             return {
                 articles: [],
+                types: [],
                 pageCount: 0,
                 isShowDelModal: false,
                 isShowAddModal: false,
@@ -144,12 +146,69 @@
             showEditModal (contentId) {
                 this.isShowEditModal = true;
                 this.contentId = contentId;
+
+                let form = document.querySelector('#editForm');
+                // 给弹框赋值
+                this.articles.forEach((value,key)=>{
+
+                    if (contentId == value.contentId) {
+                        form.title.value = value.title;
+                        form.type.value = value.type;
+                        form.content.value = value.content;
+                    }
+
+                });
+            },
+            _getErrorNode (msg,target) {
+                let _span = document.createElement('span');
+                _span.innerHTML=msg;
+                _span.classList.add('error');
+                target.parentNode.appendChild(_span);
+            },
+            validate({title, imgSrc, content}) {
+
+                if (title.value === '') {
+                    this._getErrorNode('标题不能为空', title);
+                    return false;
+                }
+
+                const files = imgSrc.files;
+                if (files.length === 0 || (files.length > 0 && (files[0].type !== 'image/png' && files[0].type !== 'image/jpg'))) {
+                    this._getErrorNode('图片为空或者格式不对，只支持png和jpg', imgSrc);
+                    return false;
+                }
+
+                if (content.value === '') {
+                    this._getErrorNode('内容不能为空', content);
+                    return false;
+                }
+
+                return true;
+
+            },
+            _submit(data, url, modalName, form) {
+
+                if (this.validate(form)) {
+                    $.post(url, data, this, {
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+                        }
+                    }).then(()=> {
+                        this.onPage();
+                        this[modalName] = false;
+                    });
+                }
+
             },
             addArticle () {
-                alert('保存')
+                let form = document.querySelector('#addForm');
+                this._submit(new FormData(form), Url.ADD, 'isShowAddModal', form);
             },
             editArticle () {
-                alert('编辑')
+
+                let form = document.querySelector('#editForm');
+                form.contentId = this.contentId;
+                this._submit(new FormData(form), Url.EDIT, 'isShowEditModal', form);
             },
             deleteArticle () {
                 $.post(Url.DELETE, {
@@ -241,6 +300,7 @@
         line-height: 40px;
         text-align: left;
         padding: 1em;
+        position: relative;
     }
 
     .modal input[type=text],

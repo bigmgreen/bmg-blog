@@ -260,6 +260,15 @@ module.exports = {
                 }
             });
         });
+        let types = new Promise((resolve, reject)=> {
+            excute('SELECT * FROM types', (err, result)=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
         let count = new Promise((resolve, reject)=> {
             excute('SELECT count(1) as count FROM content', (err, result)=> {
                 if (err) {
@@ -270,7 +279,7 @@ module.exports = {
             });
         });
 
-        Promise.all([article, count])
+        Promise.all([article,types, count])
             .then((results)=> {
                 callback(false, results);
             })

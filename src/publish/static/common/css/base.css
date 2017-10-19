@@ -160,3 +160,11 @@ td {
 }
 
 /*   字长   end   */
+
+.error {
+    color: rgba(255, 0, 0, 0.5);
+    font-size: 12px;
+    position: absolute;
+    bottom: -20px;
+    left: 14px;
+}

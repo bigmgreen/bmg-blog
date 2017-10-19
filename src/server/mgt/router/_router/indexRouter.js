@@ -33,4 +33,18 @@ router.post('/delete', function (req, res) {
     });
 });
 
+router.post('/add', function (req, res) {
+    res.json({
+        code:'0',
+        msg:'删除成功'
+    });
+});
+
+router.post('/edit', function (req, res) {
+    res.json({
+        code:'0',
+        msg:'删除成功'
+    });
+});
+
 module.exports = router;

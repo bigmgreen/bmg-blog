@@ -47,9 +47,17 @@ window.$ = {
         }, config);
 
         if (typeof data === 'object') {
-            option = Object.assign(option, {
-                body: JSON.stringify(data)
-            });
+
+            if (data instanceof FormData) {
+                option = Object.assign(option, {
+                    body: data
+                });
+            } else {
+                option = Object.assign(option, {
+                    body: JSON.stringify(data)
+                });
+            }
+
         }
 
         return _fetch(url, data, target, option);

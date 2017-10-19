@@ -12,6 +12,8 @@ window.Url = {
     COMMENT: BASE_URL + '/comment',
     SHARE: BASE_URL + '/share',
     DELETE: BASE_URL + '/delete',
+    ADD: BASE_URL + '/add',
+    EDIT: BASE_URL + '/edit',
 };
 
 window.Url.LOGIN= 'http://127.0.0.1:3001' + '/login';
