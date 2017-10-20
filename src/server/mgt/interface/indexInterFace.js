@@ -51,3 +51,51 @@ exports.deleteArticle = function (contentId, callBack) {
 
     });
 };
+
+/**
+ * 编辑文章
+ * @param imgSrc
+ * @param title
+ * @param content
+ * @param contentId
+ * @param type
+ * @param callBack
+ */
+exports.edit = function ({imgSrc, title, content, contentId, type}, callBack) {
+
+    Utils.edit({imgSrc, title, content, contentId, type}, (err)=> {
+        "use strict";
+
+        if (err) {
+            callBack(err);
+            return;
+        }
+
+        callBack(null);
+
+    });
+};
+
+/**
+ * 增加文章
+ * @param imgSrc
+ * @param title
+ * @param content
+ * @param contentId
+ * @param type
+ * @param callBack
+ */
+exports.add = function ({imgSrc, title, content, contentId, type}, callBack) {
+
+    Utils.add({imgSrc, title, content, type}, (err)=> {
+        "use strict";
+
+        if (err) {
+            callBack(err);
+            return;
+        }
+
+        callBack(null);
+
+    });
+};

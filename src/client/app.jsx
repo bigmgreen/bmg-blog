@@ -103,7 +103,7 @@ module.exports.Url = Url = {
     INDEX_ARTICLE: BASE_URL + '/article',
     DETAIL: BASE_URL + '/detail',
     SHARE_DETAIL_COUNT: BASE_URL + '/shareCount',
-    MARK: BASE_URL + '/api/mark',
+    MARK: BASE_URL + '/mark',
     GET_COMMENT: BASE_URL + '/getComment',
     COMMENT: BASE_URL + '/comment',
     COMMENT_MARK: BASE_URL + '/commentMark',
@@ -116,6 +116,9 @@ module.exports.Url = Url = {
     PAGE_INFO: BASE_URL + '/pageInfo',
     GET_EMAIL_CODE: BASE_URL + '/getEmailCode'
 };
+
+/*   图片请求地址   */
+window.BASE_URL_IMG = 'http://127.0.0.1:3000/';
 
 /*   请求方法封装   */
 module.exports.bmgFetch = bmgFetch = {

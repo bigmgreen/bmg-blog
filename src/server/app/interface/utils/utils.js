@@ -628,7 +628,7 @@ module.exports = {
      */
     comment: function (contentId, critics, dateStr, content, callback) {
         let sql = `
-            INSERT INTO comment(contentId,critics,dateStr,content) 
+            INSERT INTO comment(contentId,critics,dateTime,content) 
             VALUES 
             (
                 ${pool.escape(contentId)},

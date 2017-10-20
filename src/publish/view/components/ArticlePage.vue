@@ -54,12 +54,7 @@
                     <div class="input">
                         <label for="type">类型</label>
                         <select id="type" name="type">
-                            <option value="JavaScript">JavaScript</option>
-                            <option value="css">css</option>
-                            <option value="html5">html5</option>
-                            <option value="nodeJs">nodeJs</option>
-                            <option value="面试题">面试题</option>
-                            <option value="其他">其他</option>
+                            <option v-for="option in types" :value="option.type">{{option.name}}</option>
                         </select>
                     </div>
                     <div class="input">
@@ -88,12 +83,7 @@
                     <div class="input">
                         <label for="edit_type">类型</label>
                         <select id="edit_type" name="type">
-                            <option value="JavaScript">JavaScript</option>
-                            <option value="css">css</option>
-                            <option value="html5">html5</option>
-                            <option value="nodeJs">nodeJs</option>
-                            <option value="面试题">面试题</option>
-                            <option value="其他">其他</option>
+                            <option v-for="option in types" :value="option.type">{{option.name}}</option>
                         </select>
                     </div>
                     <div class="input">
@@ -149,19 +139,20 @@
 
                 let form = document.querySelector('#editForm');
                 // 给弹框赋值
-                this.articles.forEach((value,key)=>{
+                this.articles.forEach((value, key)=> {
 
                     if (contentId == value.contentId) {
                         form.title.value = value.title;
                         form.type.value = value.type;
                         form.content.value = value.content;
+                        form.contentId.value = this.contentId;
                     }
 
                 });
             },
-            _getErrorNode (msg,target) {
+            _getErrorNode (msg, target) {
                 let _span = document.createElement('span');
-                _span.innerHTML=msg;
+                _span.innerHTML = msg;
                 _span.classList.add('error');
                 target.parentNode.appendChild(_span);
             },
@@ -189,11 +180,7 @@
             _submit(data, url, modalName, form) {
 
                 if (this.validate(form)) {
-                    $.post(url, data, this, {
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-                        }
-                    }).then(()=> {
+                    $.post(url, data, this, false).then(()=> {
                         this.onPage();
                         this[modalName] = false;
                     });
@@ -207,7 +194,6 @@
             editArticle () {
 
                 let form = document.querySelector('#editForm');
-                form.contentId = this.contentId;
                 this._submit(new FormData(form), Url.EDIT, 'isShowEditModal', form);
             },
             deleteArticle () {
@@ -225,6 +211,7 @@
                     currentPage: currentPage
                 }, this).then(data=> {
                     this.articles = data.items;
+                    this.types = data.types;
                     this.pageCount = data.PAGE_COUNT;
                 });
             }

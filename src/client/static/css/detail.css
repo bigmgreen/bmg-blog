@@ -3,17 +3,23 @@
     margin: 0 auto;
 }
 
-.main .left{
+.main .left {
     display: inline-block;
     width: 840px;
     vertical-align: top;
     background-color: #fff;
 }
-.main .right{
+
+.main .right {
     vertical-align: top;
     background-color: #fff;
     display: inline-block;
     width: 350px;
     margin-left: 10px;
     font-size: 14px;
+}
+
+.main .detail-img {
+    margin: 1em auto;
+    display: block;
 }

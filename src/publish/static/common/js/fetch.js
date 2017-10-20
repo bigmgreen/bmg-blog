@@ -46,6 +46,10 @@ window.$ = {
             },
         }, config);
 
+        if (config === false) {
+            delete option.headers;
+        }
+
         if (typeof data === 'object') {
 
             if (data instanceof FormData) {

@@ -27,14 +27,20 @@ export default class Content extends Component {
 
     render() {
         const con = this.state;
+
+        if (con.content === '') {
+            return null;
+        }
+
         return (
             <article className={this.props.anchorClassName}>
                 <h3>{con.title}</h3>
                 <div>
+                    <img className="detail-img" src={BASE_URL_IMG + con.src}/>
                     <p>{con.content}</p>
                 </div>
                 <footer>
-                    <span><Text fmt={con.dateTime} /></span>
+                    <span><Text fmt={con.dateTime}/></span>
                     <span>
                         <Mark
                             bmgFetch={this.props.bmgFetch}

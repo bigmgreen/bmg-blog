@@ -52,6 +52,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.5",
     "lodash": "^4.17.4",
+    "multiparty": "^4.1.3",
     "mysql": "^2.14.1",
     "nodejs-md5": "^1.0.2",
     "nodemailer": "^4.0.1",

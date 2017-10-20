@@ -28,7 +28,7 @@ export default class Article extends Component {
         const props = this.props;
         return items.map((article, index)=> {
             return (
-                <a key={index} href={article.href} className={props.anchorClassName}>
+                <a key={index} href={'detail.html?id='+article.contentId} className={props.anchorClassName}>
                     <Figure
                         anchorClassName={props.figureClassName}
                         type={article.type}
@@ -127,7 +127,7 @@ class Figure extends Component {
             <div className={this.props.anchorClassName}>
                 <h4><span>{figure.type}</span>{figure.title}</h4>
                 <div>
-                    <img src={figure.src} alt={figure.alt}/>
+                    <img src={BASE_URL_IMG+figure.src} alt={figure.alt}/>
                 </div>
             </div>
         );
