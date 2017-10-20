@@ -154,7 +154,6 @@ module.exports = {
      * @param imgSrc
      * @param title
      * @param content
-     * @param contentId
      * @param type
      * @param callback
      */
@@ -168,6 +167,27 @@ module.exports = {
                 ${pool.escape(type)},
                 ${pool.escape(imgSrc)} 
             )
+        `;
+        excute(sql, (err)=> {
+            if (err) {
+                callback(err);
+            } else {
+                callback(false);
+            }
+        });
+    },
+    /**
+     * banner更新
+     * @param imgSrc
+     * @param href
+     * @param callback
+     */
+    banner: function ({imgSrc, href},callback) {
+        let sql = `
+            UPDATE banner set
+                href=${pool.escape(href)},
+                src=${pool.escape(imgSrc)}
+            WHERE id=1
         `;
         excute(sql, (err)=> {
             if (err) {

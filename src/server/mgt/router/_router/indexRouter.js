@@ -109,4 +109,37 @@ router.post('/edit', function (req, res) {
 
 });
 
+router.post('/banner', function (req, res) {
+
+    //生成multiparty对象，并配置上传目标路径
+    var form = new multiparty.Form({uploadDir: BASE_PATH});
+    //上传完成后处理
+    form.parse(req, function (err, fields, files) {
+
+        if (err) {
+            console.log('parse error: ' + err);
+        } else {
+
+            let imgSrc = files['imgSrc'][0].path;
+            if (path.sep === '\\') {
+                imgSrc = imgSrc.split('\\').pop();
+            }
+            let href = fields['href'][0];
+
+            Index.banner({imgSrc, href}, (err)=> {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json({
+                        code: '0',
+                        msg: 'banner更新成功'
+                    });
+                }
+            });
+        }
+
+    });
+
+});
+
 module.exports = router;

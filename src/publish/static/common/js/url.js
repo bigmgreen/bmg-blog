@@ -14,6 +14,7 @@ window.Url = {
     DELETE: BASE_URL + '/delete',
     ADD: BASE_URL + '/add',
     EDIT: BASE_URL + '/edit',
+    BANNER: BASE_URL + '/banner',
 };
 
 window.Url.LOGIN= 'http://127.0.0.1:3001' + '/login';

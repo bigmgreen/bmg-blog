@@ -99,3 +99,24 @@ exports.add = function ({imgSrc, title, content, contentId, type}, callBack) {
 
     });
 };
+
+/**
+ * banner更新
+ * @param imgSrc
+ * @param href
+ * @param callBack
+ */
+exports.banner = function ({imgSrc, href}, callBack) {
+
+    Utils.banner({imgSrc, href}, (err)=> {
+        "use strict";
+
+        if (err) {
+            callBack(err);
+            return;
+        }
+
+        callBack(null);
+
+    });
+};

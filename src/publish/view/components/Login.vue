@@ -155,12 +155,13 @@
 
                 $.post(Url.LOGIN, {
                     userName: this.userName,
-                    pwd:this.pwd
+                    pwd: this.pwd
                 }, this).then(data=> {
 
                     if (Url.CODE.OK === data.code) {
                         this.$router.push('/');
                         this.$emit('event', data.userName);
+                        document.title = '管理页面';
                     } else {
                         this.error = data.error
                     }

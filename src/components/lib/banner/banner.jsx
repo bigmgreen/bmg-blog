@@ -2,15 +2,20 @@ import './banner.css';
 import React, {Component} from 'react';
 
 export default class Banner extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
     }
 
-    render () {
+    render() {
         const banner = this.props;
+
+        if (banner.src === '') {
+            return null;
+        }
+
         return (
             <div className={banner.anchorClassName}>
-                <a href={banner.href}><img src={banner.src} alt={banner.alt}/></a>
+                <a href={banner.href}><img src={BASE_URL_IMG + banner.src} alt={banner.alt}/></a>
             </div>
         );
     }

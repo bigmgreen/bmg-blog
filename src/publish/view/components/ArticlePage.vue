@@ -1,6 +1,7 @@
 <template>
     <article>
         <header class="text-right">
+            <button class="btn" @click="isShowBannerModal=true" type="button">banner管理</button>
             <button class="btn" @click="isShowAddModal=true" type="button">增加文章</button>
         </header>
         <div class="table-wrap">
@@ -72,6 +73,25 @@
                 </form>
             </div>
         </div>
+        <div v-show="isShowBannerModal" class="modal">
+            <div class="modal-content">
+                <form id="bannerForm" enctype="multipart/form-data">
+                    <div class="input">
+                        <label for="imgSrc">banner</label>
+                        <input type="file" id="banner" name="imgSrc">
+                    </div>
+                    <div class="input">
+                        <label for="href">链接地址</label>
+                        <input type="text" id="href" name="href" maxlength="500">
+                    </div>
+                    <div>
+                        <button type="button" @click="banner" class="modal-btn modal-btn-save">保存</button>
+                        <button type="button" @click="isShowBannerModal=false" class="modal-btn modal-btn-no">取消
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div v-show="isShowEditModal" class="modal">
             <div class="modal-content">
                 <form id="editForm" enctype="multipart/form-data">
@@ -116,6 +136,7 @@
                 isShowDelModal: false,
                 isShowAddModal: false,
                 isShowEditModal: false,
+                isShowBannerModal: false,
                 contentId: -1
             }
         },
@@ -164,7 +185,7 @@
                 }
 
                 const files = imgSrc.files;
-                if (files.length === 0 || (files.length > 0 && (files[0].type !== 'image/png' && files[0].type !== 'image/jpg'))) {
+                if (files.length === 0 || (files.length > 0 && (files[0].type !== 'image/png' && files[0].type !== 'image/jpeg'))) {
                     this._getErrorNode('图片为空或者格式不对，只支持png和jpg', imgSrc);
                     return false;
                 }
@@ -214,6 +235,26 @@
                     this.types = data.types;
                     this.pageCount = data.PAGE_COUNT;
                 });
+            },
+            banner() {
+
+                let form = document.querySelector('#bannerForm');
+
+                const files = form.imgSrc.files;
+                if (files.length === 0 || (files.length > 0 && (files[0].type !== 'image/png' && files[0].type !== 'image/jpeg'))) {
+                    this._getErrorNode('图片为空或者格式不对，只支持png和jpg', form.imgSrc);
+                    return false;
+                }
+
+                if (form.href.value === '') {
+                    this._getErrorNode('标题不能为空', form.href);
+                    return false;
+                }
+
+                $.post(Url.BANNER, new FormData(form), this, false).then(()=> {
+                    this.isShowBannerModal = false;
+                });
+
             }
         }
     }
@@ -249,7 +290,7 @@
         border-radius: 10px;
         top: 30px;
         left: 50%;
-        margin-left: -300px;
+        transform: translateX(-50%);
         padding-bottom: 1em;
     }
 
