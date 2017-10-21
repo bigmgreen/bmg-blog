@@ -22,4 +22,9 @@
 .main .detail-img {
     margin: 1em auto;
     display: block;
+    width: 100%;
+}
+
+.main .content-wrap {
+    overflow: auto;
 }

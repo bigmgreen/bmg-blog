@@ -148,7 +148,8 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    width: 8em;
+    width: 200px;
+    text-align: left;
 }
 
 .em-4 {

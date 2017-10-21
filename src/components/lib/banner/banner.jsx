@@ -15,7 +15,7 @@ export default class Banner extends Component {
 
         return (
             <div className={banner.anchorClassName}>
-                <a href={banner.href}><img src={BASE_URL_IMG + banner.src} alt={banner.alt}/></a>
+                <a href={banner.href} target="_blank"><img src={BASE_URL_IMG + banner.src} alt={banner.alt}/></a>
             </div>
         );
     }

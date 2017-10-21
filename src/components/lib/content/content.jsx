@@ -35,9 +35,9 @@ export default class Content extends Component {
         return (
             <article className={this.props.anchorClassName}>
                 <h3>{con.title}</h3>
-                <div>
+                <div className="content-wrap">
                     <img className="detail-img" src={BASE_URL_IMG + con.src}/>
-                    <p>{con.content}</p>
+                    <pre>{con.content}</pre>
                 </div>
                 <footer>
                     <span><Text fmt={con.dateTime}/></span>
@@ -54,8 +54,8 @@ export default class Content extends Component {
                     </span>
                     <span>({con.browserCount})浏览</span>
                     <ul>
-                        <li><a href={con.prev}>上一篇：{con.prevTitle}</a></li>
-                        <li><a href={con.next}>下一篇：{con.nextTitle}</a></li>
+                        <li title={con.prevTitle}><a href={con.prev}>上一篇：{con.prevTitle}</a></li>
+                        <li title={con.nextTitle}><a href={con.next}>下一篇：{con.nextTitle}</a></li>
                     </ul>
                 </footer>
             </article>

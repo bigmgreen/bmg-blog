@@ -98,7 +98,7 @@ module.exports = {
             });
         });
 
-        Promise.all([article,types, count])
+        Promise.all([article, types, count])
             .then((results)=> {
                 callback(false, results);
             })
@@ -113,14 +113,42 @@ module.exports = {
      * @param callback
      */
     deleteArticle: function (contentId, callback) {
-        let sql = `DELETE FROM content where contentId=${pool.escape(contentId)}`;
-        excute(sql, (err)=> {
+
+        excute(`SELECT type FROM content where contentId=${pool.escape(contentId)}`, (err, result)=> {
+
             if (err) {
                 callback(err);
             } else {
-                callback(false);
+
+                let type = result[0]['type'];
+
+                excute(`SELECT count FROM types WHERE type=${pool.escape(type)}`, (err, result)=> {
+                    if (err) {
+                        callback(err);
+                    } else {
+
+                        let count = parseInt(result[0]['count']);
+
+                        excute(`UPDATE types SET count=${--count} WHERE type=${pool.escape(type)}`, (err, result)=> {
+                            if (err) {
+                                callback(err);
+                            } else {
+                                let sql = `DELETE FROM content where contentId=${pool.escape(contentId)}`;
+                                excute(sql, (err)=> {
+                                    if (err) {
+                                        callback(err);
+                                    } else {
+                                        callback(false);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             }
+
         });
+
     },
     /**
      * 编辑文章
@@ -132,20 +160,82 @@ module.exports = {
      * @param callback
      */
     edit: function ({imgSrc, title, content, contentId, type}, callback) {
-        let sql = `
-            UPDATE content set
-                title=${pool.escape(title)},
-                content=${pool.escape(content)},
-                dateTime=${pool.escape(new Date().getTime())},
-                type=${pool.escape(type)},
-                src=${pool.escape(imgSrc)}
-            WHERE contentId=${pool.escape(contentId)}
-        `;
-        excute(sql, (err)=> {
+
+        excute(`SELECT type FROM content where contentId=${pool.escape(contentId)}`, (err, result)=> {
+
             if (err) {
                 callback(err);
             } else {
-                callback(false);
+
+                let _type = result[0]['type'];
+
+                // 类型没有改变
+                if (_type === type) {
+                    let sql = `
+                        UPDATE content set
+                            title=${pool.escape(title)},
+                            content=${pool.escape(content)},
+                            dateTime=${pool.escape(new Date().getTime())},
+                            src=${pool.escape(imgSrc)}
+                        WHERE contentId=${pool.escape(contentId)}
+                    `;
+                    excute(sql, (err)=> {
+                        if (err) {
+                            callback(err);
+                        } else {
+                            callback(false);
+                        }
+                    });
+                } else {
+                    // 类型改变
+                    let sql = `
+                        UPDATE content set
+                            title=${pool.escape(title)},
+                            content=${pool.escape(content)},
+                            dateTime=${pool.escape(new Date().getTime())},
+                            type=${pool.escape(type)},
+                            src=${pool.escape(imgSrc)}
+                        WHERE contentId=${pool.escape(contentId)}
+                    `;
+                    excute(sql, (err)=> {
+                        if (err) {
+                            callback(err);
+                        } else {
+                            callback(false);
+                        }
+                    });
+
+                    excute(`SELECT count FROM types WHERE type=${pool.escape(_type)}`, (err, result)=> {
+                        if (err) {
+                            callback(err);
+                        } else {
+
+                            let count = parseInt(result[0]['count']);
+
+                            excute(`UPDATE types SET count=${--count} WHERE type=${pool.escape(_type)}`, (err, result)=> {
+                                if (err) {
+                                    callback(err);
+                                }
+                            });
+                        }
+                    });
+
+                    excute(`SELECT count FROM types WHERE type=${pool.escape(type)}`, (err, result)=> {
+                        if (err) {
+                            callback(err);
+                        } else {
+
+                            let count = parseInt(result[0]['count']);
+
+                            excute(`UPDATE types SET count=${++count} WHERE type=${pool.escape(type)}`, (err, result)=> {
+                                if (err) {
+                                    callback(err);
+                                }
+                            });
+                        }
+                    });
+                }
+
             }
         });
     },
@@ -172,9 +262,25 @@ module.exports = {
             if (err) {
                 callback(err);
             } else {
-                callback(false);
+                excute(`SELECT count FROM types WHERE type=${pool.escape(type)}`, (err, result)=> {
+                    if (err) {
+                        callback(err);
+                    } else {
+
+                        let count = parseInt(result[0]['count']);
+
+                        excute(`UPDATE types SET count=${++count} WHERE type=${pool.escape(type)}`, (err, result)=> {
+                            if (err) {
+                                callback(err);
+                            } else {
+                                callback(false);
+                            }
+                        });
+                    }
+                });
             }
         });
+
     },
     /**
      * banner更新
@@ -182,7 +288,7 @@ module.exports = {
      * @param href
      * @param callback
      */
-    banner: function ({imgSrc, href},callback) {
+    banner: function ({imgSrc, href}, callback) {
         let sql = `
             UPDATE banner set
                 href=${pool.escape(href)},

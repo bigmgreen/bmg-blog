@@ -125,7 +125,7 @@ class Figure extends Component {
         const figure = this.props;
         return (
             <div className={this.props.anchorClassName}>
-                <h4><span>{figure.type}</span>{figure.title}</h4>
+                <h4 title={figure.title}><span>{figure.type}</span>{figure.title}</h4>
                 <div>
                     <img src={BASE_URL_IMG+figure.src} alt={figure.alt}/>
                 </div>

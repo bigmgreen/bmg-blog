@@ -28,6 +28,9 @@ a.article-style:hover {
 .article-style h4 {
     line-height: 2;
     font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .article-style h4 span {
